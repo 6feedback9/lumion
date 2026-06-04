@@ -15,13 +15,17 @@ const crypto = require('crypto');
 const path = require('path');
 
 const app = express();
-// Serve widget.js
-app.get('/widget.js', (req, res) => {
-  res.setHeader('Content-Type', 'application/javascript');
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.sendFile(path.join(__dirname, 'public', 'widget.js'));
-});
 const upload = multer({ storage: multer.memoryStorage(), limits: { fileSize: 15 * 1024 * 1024 } });
+
+// ── Serve widget.js statically ───────────────────────────────
+app.use(express.static(path.join(__dirname, 'public'), {
+  setHeaders: (res, filePath) => {
+    if (filePath.endsWith('.js')) {
+      res.setHeader('Content-Type', 'application/javascript');
+      res.setHeader('Access-Control-Allow-Origin', '*');
+    }
+  }
+}));
 
 // ── ENV ──────────────────────────────────────────────────────
 const {
@@ -376,3 +380,190 @@ app.listen(PORT, () => {
 });
 
 module.exports = app;
+
+// ══════════════════════════════════════════════════════════════
+// AUTH ROUTES
+// ══════════════════════════════════════════════════════════════
+const crypto2 = require('crypto');
+
+function hashPassword(password) {
+  return crypto2.createHash('sha256').update(password + process.env.PASSWORD_SALT || 'lumion_salt').digest('hex');
+}
+
+// POST /api/auth/login
+// Body: { username, password }
+app.post('/api/auth/login', express.json(), async (req, res) => {
+  const { username, password } = req.body;
+  if (!username || !password) return res.status(400).json({ error: 'username and password required' });
+
+  const { data: login } = await supabase
+    .from('brand_logins')
+    .select('brand_id, password_hash')
+    .eq('username', username.toLowerCase().trim())
+    .single();
+
+  if (!login || login.password_hash !== hashPassword(password)) {
+    return res.status(401).json({ error: 'Невірний логін або пароль' });
+  }
+
+  // Create session
+  const { data: session } = await supabase
+    .from('brand_sessions')
+    .insert({ brand_id: login.brand_id })
+    .select('token')
+    .single();
+
+  res.json({ token: session.token });
+});
+
+// POST /api/auth/logout
+app.post('/api/auth/logout', async (req, res) => {
+  const token = req.headers['x-session-token'];
+  if (token) await supabase.from('brand_sessions').delete().eq('token', token);
+  res.json({ ok: true });
+});
+
+// GET /api/auth/me
+app.get('/api/auth/me', async (req, res) => {
+  const token = req.headers['x-session-token'];
+  if (!token) return res.status(401).json({ error: 'No token' });
+
+  const { data: session } = await supabase
+    .from('brand_sessions')
+    .select('brand_id, expires_at')
+    .eq('token', token)
+    .single();
+
+  if (!session || new Date(session.expires_at) < new Date()) {
+    return res.status(401).json({ error: 'Session expired' });
+  }
+
+  const { data: brand } = await supabase
+    .from('brands')
+    .select('slug, name, logo_url, plan, monthly_quota, widget_lang, widget_color, shop_url')
+    .eq('id', session.brand_id)
+    .single();
+
+  res.json(brand);
+});
+
+// ── AUTH HELPER ──────────────────────────────────────────────
+async function requireAuth(req, res) {
+  const token = req.headers['x-session-token'];
+  if (!token) { res.status(401).json({ error: 'Unauthorized' }); return null; }
+
+  const { data: session } = await supabase
+    .from('brand_sessions')
+    .select('brand_id, expires_at')
+    .eq('token', token)
+    .single();
+
+  if (!session || new Date(session.expires_at) < new Date()) {
+    res.status(401).json({ error: 'Session expired' }); return null;
+  }
+
+  const { data: brand } = await supabase
+    .from('brands')
+    .select('*')
+    .eq('id', session.brand_id)
+    .single();
+
+  return brand;
+}
+
+// ── STATS (session-based) ─────────────────────────────────────
+app.get('/api/dashboard/stats', async (req, res) => {
+  const brand = await requireAuth(req, res);
+  if (!brand) return;
+
+  const days = req.query.period === '7d' ? 7 : 30;
+  const since = new Date(Date.now() - days * 86400000).toISOString();
+
+  const { data: tryons } = await supabase
+    .from('tryons')
+    .select('id, product_id, product_name, status, created_at, result_url, person_photo_url')
+    .eq('brand_id', brand.id)
+    .gte('created_at', since)
+    .order('created_at', { ascending: false });
+
+  const { count: orders } = await supabase
+    .from('order_pings')
+    .select('id', { count: 'exact', head: true })
+    .eq('brand_id', brand.id)
+    .gte('created_at', since);
+
+  const byDay = {};
+  (tryons || []).forEach(t => {
+    const d = t.created_at.slice(0, 10);
+    byDay[d] = (byDay[d] || 0) + 1;
+  });
+
+  const productCounts = {};
+  (tryons || []).forEach(t => {
+    const k = t.product_name || t.product_id || 'Невідомий товар';
+    productCounts[k] = (productCounts[k] || 0) + 1;
+  });
+  const topProducts = Object.entries(productCounts)
+    .sort((a, b) => b[1] - a[1]).slice(0, 5)
+    .map(([name, count]) => ({ name, count }));
+
+  res.json({
+    total: (tryons || []).length,
+    orders: orders || 0,
+    conversion: (tryons || []).length > 0 ? (((orders || 0) / (tryons || []).length) * 100).toFixed(1) : '0',
+    unique_users: new Set((tryons || []).map(t => t.session_id)).size,
+    quota: brand.monthly_quota,
+    by_day: byDay,
+    top_products: topProducts,
+    recent: (tryons || []).slice(0, 20),
+  });
+});
+
+// ── HISTORY (session-based) ────────────────────────────────────
+app.get('/api/dashboard/history', async (req, res) => {
+  const brand = await requireAuth(req, res);
+  if (!brand) return;
+
+  const page = parseInt(req.query.page) || 1;
+  const limit = Math.min(parseInt(req.query.limit) || 20, 100);
+  const from = (page - 1) * limit;
+
+  const { data, count } = await supabase
+    .from('tryons')
+    .select('*', { count: 'exact' })
+    .eq('brand_id', brand.id)
+    .order('created_at', { ascending: false })
+    .range(from, from + limit - 1);
+
+  res.json({ items: data || [], total: count || 0, page, limit });
+});
+
+// ══════════════════════════════════════════════════════════════
+// ADMIN: Create brand login (only you call this)
+// POST /api/admin/create-login
+// Header: x-admin-key: YOUR_ADMIN_SECRET
+// Body: { brand_slug, username, password }
+// ══════════════════════════════════════════════════════════════
+app.post('/api/admin/create-login', express.json(), async (req, res) => {
+  if (req.headers['x-admin-key'] !== process.env.ADMIN_SECRET) {
+    return res.status(403).json({ error: 'Forbidden' });
+  }
+
+  const { brand_slug, username, password } = req.body;
+  if (!brand_slug || !username || !password) {
+    return res.status(400).json({ error: 'brand_slug, username, password required' });
+  }
+
+  const { data: brand } = await supabase
+    .from('brands').select('id').eq('slug', brand_slug).single();
+  if (!brand) return res.status(404).json({ error: 'Brand not found' });
+
+  const { error } = await supabase.from('brand_logins').insert({
+    brand_id: brand.id,
+    username: username.toLowerCase().trim(),
+    password_hash: hashPassword(password),
+  });
+
+  if (error) return res.status(400).json({ error: error.message });
+  res.json({ ok: true, message: `Login created for ${brand_slug}: ${username}` });
+});
