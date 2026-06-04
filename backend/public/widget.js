@@ -129,237 +129,101 @@
   // ── Inject CSS ──────────────────────────────────────────────
   const style = document.createElement('style');
   style.textContent = `
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap');
+
     .tryon-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 12px 20px;
-      background: ${CONFIG.accentColor};
-      color: #fff;
-      border: none;
-      border-radius: 8px;
-      font-size: 15px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: opacity 0.15s, transform 0.15s;
-      width: 100%;
-      justify-content: center;
-      margin: 8px 0;
-      font-family: inherit;
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      padding: 13px 20px; background: transparent; color: ${CONFIG.accentColor};
+      border: 1px solid ${CONFIG.accentColor}; border-radius: 0;
+      font-size: 12px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase;
+      cursor: pointer; transition: background 0.2s, color 0.2s;
+      width: 100%; margin: 8px 0; font-family: 'Inter', sans-serif;
     }
-    .tryon-btn:hover { opacity: 0.88; transform: translateY(-1px); }
-    .tryon-btn:active { transform: translateY(0); }
+    .tryon-btn:hover { background: ${CONFIG.accentColor}; color: #fff; }
 
     .tryon-overlay {
       position: fixed; inset: 0; z-index: 999999;
-      background: rgba(0,0,0,0.7);
+      background: rgba(0,0,0,0.5); backdrop-filter: blur(3px);
       display: flex; align-items: center; justify-content: center;
       animation: tryonFadeIn 0.2s ease;
     }
     @keyframes tryonFadeIn { from { opacity: 0; } to { opacity: 1; } }
 
     .tryon-modal {
-      background: #fff;
-      border-radius: 20px;
-      width: min(520px, 96vw);
-      max-height: 92vh;
-      overflow-y: auto;
-      box-shadow: 0 24px 80px rgba(0,0,0,0.35);
-      animation: tryonSlideUp 0.25s ease;
-      scrollbar-width: thin;
+      background: #fff; border-radius: 0;
+      width: min(460px, 96vw); max-height: 94vh; overflow-y: auto;
+      animation: tryonSlideUp 0.3s cubic-bezier(0.16,1,0.3,1);
+      scrollbar-width: none; font-family: 'Inter', sans-serif;
     }
-    @keyframes tryonSlideUp { from { transform: translateY(30px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+    .tryon-modal::-webkit-scrollbar { display: none; }
+    @keyframes tryonSlideUp { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
 
     .tryon-modal-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 20px 24px 0;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 22px 26px 0;
     }
-    .tryon-modal-title { font-size: 18px; font-weight: 700; color: #111; margin: 0; }
-    .tryon-close {
-      width: 36px; height: 36px; border-radius: 50%;
-      background: #f2f2f2; border: none; cursor: pointer;
-      font-size: 18px; display: flex; align-items: center; justify-content: center;
-      color: #555; transition: background 0.15s;
-    }
-    .tryon-close:hover { background: #e0e0e0; }
+    .tryon-modal-title { font-size: 11px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: #111; margin: 0; }
+    .tryon-close { width: 28px; height: 28px; background: none; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; color: #bbb; transition: color 0.15s; font-size: 18px; padding: 0; }
+    .tryon-close:hover { color: #111; }
 
-    .tryon-steps {
-      display: flex;
-      gap: 0;
-      padding: 16px 24px 0;
-    }
-    .tryon-step-item {
-      flex: 1;
-      text-align: center;
-      position: relative;
-    }
-    .tryon-step-item:not(:last-child)::after {
-      content: '';
-      position: absolute;
-      top: 14px;
-      right: -50%;
-      width: 100%;
-      height: 2px;
-      background: #e8e8e8;
-      z-index: 0;
-    }
-    .tryon-step-item.done::after { background: ${CONFIG.accentColor}; }
-    .tryon-step-dot {
-      width: 28px; height: 28px; border-radius: 50%;
-      background: #e8e8e8; color: #999;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 12px; font-weight: 700;
-      margin: 0 auto 4px;
-      position: relative; z-index: 1;
-      transition: all 0.2s;
-    }
-    .tryon-step-item.active .tryon-step-dot { background: ${CONFIG.accentColor}; color: #fff; }
-    .tryon-step-item.done .tryon-step-dot { background: ${CONFIG.accentColor}; color: #fff; }
-    .tryon-step-label { font-size: 11px; color: #999; }
-    .tryon-step-item.active .tryon-step-label { color: ${CONFIG.accentColor}; font-weight: 600; }
+    .tryon-steps { display: flex; align-items: center; padding: 18px 26px 0; }
+    .tryon-step-item { display: flex; align-items: center; }
+    .tryon-step-item:not(:last-child) { flex: 1; }
+    .tryon-step-item:not(:last-child)::after { content: ''; flex: 1; height: 1px; background: #e8e8e8; margin: 0 10px; }
+    .tryon-step-item.done::after { background: #111; }
+    .tryon-step-dot { width: 22px; height: 22px; border: 1px solid #e0e0e0; background: #fff; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 500; color: #ccc; flex-shrink: 0; transition: all 0.2s; }
+    .tryon-step-item.active .tryon-step-dot { border-color: #111; color: #111; }
+    .tryon-step-item.done .tryon-step-dot { background: #111; border-color: #111; color: #fff; }
+    .tryon-step-label { display: none; }
 
-    .tryon-body { padding: 20px 24px 24px; }
+    .tryon-body { padding: 18px 26px 26px; }
 
-    .tryon-product-strip {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      background: #f8f8f8;
-      border-radius: 12px;
-      padding: 12px;
-      margin-bottom: 20px;
-    }
-    .tryon-product-thumb {
-      width: 56px; height: 56px;
-      border-radius: 8px;
-      object-fit: cover;
-      background: #e8e8e8;
-      flex-shrink: 0;
-    }
-    .tryon-product-name { font-size: 14px; font-weight: 600; color: #111; }
-    .tryon-product-price { font-size: 13px; color: #888; margin-top: 2px; }
+    .tryon-product-strip { display: flex; align-items: center; gap: 12px; padding: 12px 0; margin-bottom: 18px; border-bottom: 1px solid #f0f0f0; }
+    .tryon-product-thumb { width: 44px; height: 56px; object-fit: cover; background: #f5f5f5; flex-shrink: 0; }
+    .tryon-product-name { font-size: 11px; font-weight: 500; color: #111; letter-spacing: 0.04em; line-height: 1.5; }
+    .tryon-product-price { font-size: 11px; color: #aaa; margin-top: 2px; }
 
-    .tryon-upload-area {
-      border: 2px dashed #d0d0d0;
-      border-radius: 16px;
-      padding: 32px 20px;
-      text-align: center;
-      cursor: pointer;
-      transition: border-color 0.2s, background 0.2s;
-      position: relative;
-      overflow: hidden;
-    }
-    .tryon-upload-area:hover { border-color: ${CONFIG.accentColor}; background: #fafafa; }
-    .tryon-upload-area.has-file { border-style: solid; border-color: ${CONFIG.accentColor}; }
-    .tryon-upload-icon { font-size: 36px; margin-bottom: 8px; }
-    .tryon-upload-text { font-size: 15px; font-weight: 600; color: #111; margin: 0 0 4px; }
-    .tryon-upload-hint { font-size: 13px; color: #888; margin: 0; }
-    .tryon-upload-preview {
-      width: 100%; max-height: 200px;
-      object-fit: contain;
-      border-radius: 8px;
-      display: none;
-      margin: 0 auto;
-    }
+    .tryon-upload-area { border: 1px dashed #d8d8d8; padding: 36px 20px; text-align: center; cursor: pointer; transition: border-color 0.2s, background 0.2s; position: relative; overflow: hidden; background: #fafafa; }
+    .tryon-upload-area:hover { border-color: #888; background: #f5f5f5; }
+    .tryon-upload-area.has-file { border-style: solid; border-color: #111; background: #fff; }
+    .tryon-upload-icon { font-size: 24px; margin-bottom: 10px; opacity: 0.35; }
+    .tryon-upload-text { font-size: 12px; font-weight: 500; color: #111; margin: 0 0 4px; letter-spacing: 0.04em; }
+    .tryon-upload-hint { font-size: 11px; color: #bbb; margin: 0; }
+    .tryon-upload-preview { width: 100%; max-height: 220px; object-fit: contain; display: none; margin: 0 auto; }
     .tryon-upload-area.has-file .tryon-upload-preview { display: block; }
     .tryon-upload-area.has-file .tryon-upload-placeholder { display: none; }
-    input[type=file].tryon-file-input {
-      position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%;
-    }
+    input[type=file].tryon-file-input { position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%; }
 
-    .tryon-privacy {
-      display: flex; align-items: center; gap: 6px;
-      font-size: 12px; color: #aaa; margin-top: 12px; justify-content: center;
-    }
+    .tryon-privacy { display: flex; align-items: center; gap: 5px; font-size: 10px; color: #ccc; margin-top: 10px; justify-content: center; letter-spacing: 0.04em; }
 
-    .tryon-action-btn {
-      width: 100%;
-      padding: 14px;
-      border-radius: 12px;
-      border: none;
-      font-size: 16px;
-      font-weight: 700;
-      cursor: pointer;
-      margin-top: 16px;
-      transition: opacity 0.15s, transform 0.1s;
-      font-family: inherit;
-    }
-    .tryon-action-btn:active { transform: scale(0.99); }
-    .tryon-action-btn.primary { background: ${CONFIG.accentColor}; color: #fff; }
-    .tryon-action-btn.primary:hover { opacity: 0.88; }
-    .tryon-action-btn.secondary { background: #f2f2f2; color: #111; }
-    .tryon-action-btn.secondary:hover { background: #e8e8e8; }
-    .tryon-action-btn.buy-btn { background: #16a34a; color: #fff; font-size: 17px; }
-    .tryon-action-btn.buy-btn:hover { background: #15803d; }
+    .tryon-action-btn { width: 100%; padding: 13px; border: 1px solid #111; border-radius: 0; font-size: 11px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; cursor: pointer; margin-top: 12px; transition: all 0.2s; font-family: 'Inter', sans-serif; }
+    .tryon-action-btn.primary { background: #111; color: #fff; }
+    .tryon-action-btn.primary:hover { background: #333; }
+    .tryon-action-btn.secondary { background: #fff; color: #111; border-color: #e0e0e0; }
+    .tryon-action-btn.secondary:hover { border-color: #111; }
+    .tryon-action-btn.buy-btn { background: #111; color: #fff; border-color: #111; font-size: 11px; }
+    .tryon-action-btn.buy-btn:hover { background: #333; }
 
-    .tryon-generating {
-      text-align: center;
-      padding: 32px 0;
-    }
-    .tryon-spinner {
-      width: 52px; height: 52px;
-      border: 3px solid #f0f0f0;
-      border-top-color: ${CONFIG.accentColor};
-      border-radius: 50%;
-      animation: tryonSpin 0.8s linear infinite;
-      margin: 0 auto 16px;
-    }
+    .tryon-generating { text-align: center; padding: 48px 0 40px; }
+    .tryon-spinner { width: 36px; height: 36px; border: 1px solid #eee; border-top-color: #111; border-radius: 50%; animation: tryonSpin 0.9s linear infinite; margin: 0 auto 20px; }
     @keyframes tryonSpin { to { transform: rotate(360deg); } }
-    .tryon-gen-title { font-size: 18px; font-weight: 700; color: #111; margin: 0 0 6px; }
-    .tryon-gen-sub { font-size: 14px; color: #888; margin: 0; }
-    .tryon-progress { height: 4px; background: #f0f0f0; border-radius: 2px; margin: 20px 0 0; overflow: hidden; }
-    .tryon-progress-bar { height: 100%; background: ${CONFIG.accentColor}; border-radius: 2px; width: 0; transition: width 1.5s ease; }
+    .tryon-gen-title { font-size: 12px; font-weight: 500; color: #111; margin: 0 0 6px; letter-spacing: 0.06em; text-transform: uppercase; }
+    .tryon-gen-sub { font-size: 11px; color: #bbb; margin: 0; }
+    .tryon-progress { height: 1px; background: #f0f0f0; margin: 24px 0 0; overflow: hidden; }
+    .tryon-progress-bar { height: 100%; background: #111; width: 0; transition: width 1.5s ease; }
 
-    .tryon-result { }
-    .tryon-result-img {
-      width: 100%;
-      border-radius: 16px;
-      display: block;
-      max-height: 400px;
-      object-fit: contain;
-      background: #f8f8f8;
-    }
-    .tryon-result-actions { display: flex; gap: 10px; margin-top: 12px; }
-    .tryon-result-actions button {
-      flex: 1; padding: 10px; border-radius: 10px;
-      border: 1.5px solid #e0e0e0; background: #fff;
-      font-size: 13px; cursor: pointer; color: #444;
-      font-family: inherit;
-      transition: background 0.15s;
-    }
-    .tryon-result-actions button:hover { background: #f5f5f5; }
+    .tryon-result-img { width: 100%; display: block; max-height: 420px; object-fit: contain; background: #f8f8f8; }
+    .tryon-result-actions { display: flex; gap: 6px; margin-top: 10px; }
+    .tryon-result-actions button { flex: 1; padding: 9px 6px; border: 1px solid #e8e8e8; background: #fff; font-size: 10px; font-weight: 500; letter-spacing: 0.08em; cursor: pointer; color: #888; font-family: 'Inter', sans-serif; text-transform: uppercase; transition: border-color 0.15s, color 0.15s; }
+    .tryon-result-actions button:hover { border-color: #111; color: #111; }
 
-    .tryon-utm-badge {
-      display: inline-block;
-      background: #f0fdf4;
-      color: #16a34a;
-      font-size: 11px;
-      padding: 3px 10px;
-      border-radius: 20px;
-      margin: 8px 0;
-      font-family: monospace;
-    }
+    .tryon-utm-badge { display: none; }
 
-    .tryon-powered {
-      text-align: center;
-      padding: 12px 24px 20px;
-      font-size: 11px;
-      color: #ccc;
-    }
-    .tryon-powered a { color: #bbb; text-decoration: none; }
-    .tryon-powered a:hover { color: #888; }
+    .tryon-powered { text-align: center; padding: 14px 26px 20px; font-size: 10px; color: #ddd; letter-spacing: 0.08em; text-transform: uppercase; }
+    .tryon-powered a { color: #ccc; text-decoration: none; }
+    .tryon-powered a:hover { color: #999; }
 
-    .tryon-error {
-      background: #fef2f2;
-      color: #dc2626;
-      border-radius: 10px;
-      padding: 12px 16px;
-      font-size: 13px;
-      margin-top: 12px;
-      display: none;
-    }
+    .tryon-error { background: #fff; color: #cc0000; padding: 10px 14px; font-size: 11px; margin-top: 10px; display: none; border-left: 2px solid #cc0000; }
   `;
   document.head.appendChild(style);
 
