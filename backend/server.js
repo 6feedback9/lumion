@@ -15,6 +15,12 @@ const crypto = require('crypto');
 const path = require('path');
 
 const app = express();
+// Serve widget.js
+app.get('/widget.js', (req, res) => {
+  res.setHeader('Content-Type', 'application/javascript');
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.sendFile(path.join(__dirname, 'public', 'widget.js'));
+});
 const upload = multer({ storage: multer.memoryStorage(), limits: { fileSize: 15 * 1024 * 1024 } });
 
 // ── ENV ──────────────────────────────────────────────────────
