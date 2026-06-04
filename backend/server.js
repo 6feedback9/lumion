@@ -374,13 +374,6 @@ app.get('/api/brand/:slug/config', async (req, res) => {
 });
 
 
-// ── START ────────────────────────────────────────────────────
-app.listen(PORT, () => {
-  console.log(`LumiOn backend running on port ${PORT}`);
-});
-
-module.exports = app;
-
 // ══════════════════════════════════════════════════════════════
 // AUTH ROUTES
 // ══════════════════════════════════════════════════════════════
@@ -567,3 +560,10 @@ app.post('/api/admin/create-login', express.json(), async (req, res) => {
   if (error) return res.status(400).json({ error: error.message });
   res.json({ ok: true, message: `Login created for ${brand_slug}: ${username}` });
 });
+
+// ── START ──────────────────────────────────────────────────
+app.listen(PORT, () => {
+  console.log(`LumiOn backend running on port ${PORT}`);
+});
+
+module.exports = app;
