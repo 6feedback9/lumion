@@ -1,495 +1,577 @@
 /**
- * LumiOn Widget v3
- * Embed: <script src="..." data-brand="slug" data-api-url="..." data-lang="uk"></script>
+ * LumiOn Widget v4
+ * ─────────────────────────────────────────────────────────────
+ * USAGE (auto-inject):
+ *   <script src="..." data-brand="slug" data-api-url="..." data-lang="uk"></script>
+ *
+ * USAGE (manual button — brand controls placement & style):
+ *   <button data-lumion="try-on"
+ *           data-image="https://...product.jpg"
+ *           data-id="product-123"
+ *           data-name="Назва товару"
+ *           data-url="https://...product-page">
+ *     Приміряти
+ *   </button>
  */
 (function () {
   'use strict';
 
+  // ── CONFIG ──────────────────────────────────────────────────
   const scriptTag = document.currentScript || (function () {
-    const scripts = document.querySelectorAll('script[data-brand]');
-    return scripts[scripts.length - 1];
+    const ss = document.querySelectorAll('script[data-brand]');
+    return ss[ss.length - 1];
   })();
 
-  const CONFIG = {
-    brand: scriptTag.getAttribute('data-brand') || '',
-    apiUrl: scriptTag.getAttribute('data-api-url') || 'https://api.lumion.lumiwebagency.com',
-    lang: scriptTag.getAttribute('data-lang') || 'uk',
-    utmCampaign: scriptTag.getAttribute('data-utm-campaign') || scriptTag.getAttribute('data-brand') || '',
-    accentColor: scriptTag.getAttribute('data-color') || '#1a1a1a',
-    cartButtonSelector: scriptTag.getAttribute('data-cart-button') || '.add-to-cart, [name="add"], .btn-cart, .product-form__submit, [data-testid="add-to-cart"]',
+  const CFG = {
+    brand:    scriptTag.getAttribute('data-brand') || '',
+    apiUrl:   (scriptTag.getAttribute('data-api-url') || 'https://lumion.onrender.com').replace(/\/$/, ''),
+    lang:     scriptTag.getAttribute('data-lang') || 'uk',
+    color:    scriptTag.getAttribute('data-color') || '#111111',
+    utm:      scriptTag.getAttribute('data-utm-campaign') || scriptTag.getAttribute('data-brand') || '',
+    autoInject: scriptTag.getAttribute('data-auto-inject') !== 'false',
+    cartSel:  scriptTag.getAttribute('data-cart-button') || '.add-to-cart,[name="add"],.btn-cart,.product-form__submit',
   };
 
-  const T = {
-    uk: { btn: 'Приміряти', title: 'Віртуальна примірка', upload: 'Завантажити фото', hint: 'Фото в повний зріст, чіткий фон', generate: 'Приміряти', buy: 'Купити', retry: 'Спробувати ще', save: 'Зберегти', share: 'Поділитись', close: '×', privacy: 'Фото видаляються після примірки', error: 'Не вдалось. Спробуйте ще раз.', steps: ['Фото', 'Генерація', 'Результат'], generating: 'Генеруємо...', genSub: 'ШІ приміряє одяг — зазвичай 15-30 сек' },
-    ru: { btn: 'Примерить', title: 'Виртуальная примерка', upload: 'Загрузить фото', hint: 'Фото в полный рост, чёткий фон', generate: 'Примерить', buy: 'Купить', retry: 'Попробовать ещё', save: 'Сохранить', share: 'Поделиться', close: '×', privacy: 'Фото удаляются после примерки', error: 'Не удалось. Попробуйте ещё раз.', steps: ['Фото', 'Генерация', 'Результат'], generating: 'Генерируем...', genSub: 'ИИ примеряет одежду — обычно 15-30 сек' },
-    en: { btn: 'Try On', title: 'Virtual Try-On', upload: 'Upload photo', hint: 'Full-body photo, clear background', generate: 'Try On', buy: 'Buy Now', retry: 'Try Again', save: 'Save', share: 'Share', close: '×', privacy: 'Photos deleted after try-on', error: 'Failed. Please try again.', steps: ['Photo', 'Generate', 'Result'], generating: 'Generating...', genSub: 'AI is fitting the clothes — usually 15-30 sec' },
+  // ── TRANSLATIONS ────────────────────────────────────────────
+  const I18N = {
+    uk: {
+      title: 'Віртуальна примірка',
+      head: 'Завантаж своє фото',
+      desc: 'Фото в повний зріст, природне освітлення, простий фон — так результат буде точнішим.',
+      upload: 'Завантажити фото',
+      generate: 'Приміряти',
+      buy: 'Додати до кошика',
+      retry: 'Спробувати ще раз',
+      save: 'Зберегти',
+      share: 'Поділитись',
+      close: '✕',
+      privacy: 'Завантажуючи фото, ви приймаєте умови та політику конфіденційності.',
+      generating: 'Генеруємо...',
+      genSub: 'ШІ приміряє одяг — зазвичай 15–30 сек',
+      genMsgs: ['Аналіз силуету...', 'Накладання одягу...', 'Фінальні деталі...'],
+      errUpload: 'Не вдалося завантажити фото. Спробуйте інше.',
+      errGen: 'Щось пішло не так. Спробуйте ще раз.',
+      steps: ['Фото', 'Генерація', 'Результат'],
+      aiNote: 'Зображення створюється за допомогою AI. Результат може відрізнятися.',
+    },
+    ru: {
+      title: 'Виртуальная примерка',
+      head: 'Загрузи своё фото',
+      desc: 'Фото в полный рост, естественное освещение, простой фон — так результат будет точнее.',
+      upload: 'Загрузить фото',
+      generate: 'Примерить',
+      buy: 'Добавить в корзину',
+      retry: 'Попробовать ещё раз',
+      save: 'Сохранить',
+      share: 'Поделиться',
+      close: '✕',
+      privacy: 'Загружая фото, вы принимаете условия и политику конфиденциальности.',
+      generating: 'Генерируем...',
+      genSub: 'ИИ примеряет одежду — обычно 15–30 сек',
+      genMsgs: ['Анализ силуэта...', 'Наложение одежды...', 'Финальные детали...'],
+      errUpload: 'Не удалось загрузить фото. Попробуйте другое.',
+      errGen: 'Что-то пошло не так. Попробуйте ещё раз.',
+      steps: ['Фото', 'Генерация', 'Результат'],
+      aiNote: 'Изображение создаётся с помощью AI. Результат может отличаться.',
+    },
+    en: {
+      title: 'Virtual Try-On',
+      head: 'Upload your photo',
+      desc: 'Full-body photo with natural lighting and a simple background for the best result.',
+      upload: 'Upload photo',
+      generate: 'Try On',
+      buy: 'Add to cart',
+      retry: 'Try Again',
+      save: 'Save',
+      share: 'Share',
+      close: '✕',
+      privacy: 'By uploading a photo, you accept our Terms and Privacy Policy.',
+      generating: 'Generating...',
+      genSub: 'AI is fitting the clothes — usually 15–30 sec',
+      genMsgs: ['Analysing body...', 'Fitting garment...', 'Final details...'],
+      errUpload: "We couldn't upload this photo. Please try another one.",
+      errGen: 'Something went wrong. Please try again.',
+      steps: ['Photo', 'Generate', 'Result'],
+      aiNote: 'This image is generated using AI. Results may vary.',
+    },
   };
-  const t = T[CONFIG.lang] || T.uk;
+  const T = I18N[CFG.lang] || I18N.uk;
 
-  const sessionId = (function () {
+  // ── SESSION ─────────────────────────────────────────────────
+  const SID = (function () {
     let id = sessionStorage.getItem('lumion_sid');
     if (!id) { id = Math.random().toString(36).slice(2) + Date.now().toString(36); sessionStorage.setItem('lumion_sid', id); }
     return id;
   })();
 
-  function getProductInfo() {
-    const ogImage = document.querySelector('meta[property="og:image"]');
-    const h1 = document.querySelector('h1');
-    const price = document.querySelector('.price, .product-price, [class*="price"]');
-    return {
-      imageUrl: ogImage ? ogImage.content : null,
-      name: h1 ? h1.textContent.trim().slice(0, 80) : document.title.slice(0, 80),
-      price: price ? price.textContent.trim().slice(0, 20) : '',
-      url: window.location.href,
-      id: window.location.pathname.split('/').filter(Boolean).pop(),
-    };
-  }
+  // ── SVG PERSON SILHOUETTES ───────────────────────────────────
+  const SVG1 = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 160" style="width:100%;height:100%;display:block">
+    <rect width="100" height="160" fill="#f0ebe3"/>
+    <ellipse cx="50" cy="26" rx="16" ry="17" fill="#d9cfc3"/>
+    <path d="M26 50 Q50 44 74 50 L70 95 Q50 100 30 95Z" fill="#cec4b8"/>
+    <rect x="16" y="52" width="12" height="40" rx="6" fill="#cec4b8"/>
+    <rect x="72" y="52" width="12" height="40" rx="6" fill="#cec4b8"/>
+    <rect x="30" y="93" width="14" height="50" rx="7" fill="#c4b9ac"/>
+    <rect x="56" y="93" width="14" height="50" rx="7" fill="#c4b9ac"/>
+  </svg>`;
 
-  // ── STYLES ──────────────────────────────────────────────────
-  const style = document.createElement('style');
-  style.textContent = `
+  const SVG2 = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 160" style="width:100%;height:100%;display:block">
+    <rect width="100" height="160" fill="#e8e3dc"/>
+    <ellipse cx="50" cy="25" rx="15" ry="16" fill="#ccc0b2"/>
+    <path d="M24 48 Q50 42 76 48 L72 90 Q50 96 28 90Z" fill="#bfb3a5"/>
+    <path d="M18 54 Q10 70 12 92" stroke="#bfb3a5" stroke-width="12" stroke-linecap="round" fill="none"/>
+    <path d="M82 54 Q90 70 88 92" stroke="#bfb3a5" stroke-width="12" stroke-linecap="round" fill="none"/>
+    <path d="M30 90 Q34 92 34 143" stroke="#b5a898" stroke-width="14" stroke-linecap="round" fill="none"/>
+    <path d="M70 90 Q66 92 66 143" stroke="#b5a898" stroke-width="14" stroke-linecap="round" fill="none"/>
+  </svg>`;
+
+  // ── STYLES ───────────────────────────────────────────────────
+  const CSS = `
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
 
-    .lo-btn {
-      display: flex; align-items: center; justify-content: center; gap: 8px;
-      width: 100%; padding: 14px 20px; margin: 10px 0;
-      background: transparent; color: ${CONFIG.accentColor};
-      border: 1px solid ${CONFIG.accentColor};
-      font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 500;
-      letter-spacing: 0.06em; text-transform: uppercase;
-      cursor: pointer; transition: all 0.18s;
+    .lo-trigger {
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      padding: 13px 22px; width: 100%; margin: 8px 0;
+      background: transparent; color: ${CFG.color};
+      border: 1px solid ${CFG.color}; border-radius: 0;
+      font-family: inherit; font-size: 13px; font-weight: 500;
+      letter-spacing: 0.05em; cursor: pointer;
+      transition: background .18s, color .18s;
     }
-    .lo-btn:hover { background: ${CONFIG.accentColor}; color: #fff; }
+    .lo-trigger:hover { background: ${CFG.color}; color: #fff; }
 
-    .lo-overlay {
+    .lo-backdrop {
       position: fixed; inset: 0; z-index: 2147483647;
-      background: rgba(10,10,10,0.6);
-      display: flex; align-items: center; justify-content: center;
-      padding: 16px;
-      animation: loFadeIn 0.22s ease;
+      background: rgba(0,0,0,0.55);
+      display: flex; align-items: flex-end; justify-content: center;
+      animation: loFade .22s ease;
     }
-    @keyframes loFadeIn { from { opacity: 0; } to { opacity: 1; } }
+    @media(min-width:560px){
+      .lo-backdrop { align-items: center; padding: 20px; }
+    }
+    @keyframes loFade { from{opacity:0} to{opacity:1} }
 
     .lo-modal {
-      background: #fff; border-radius: 20px;
-      width: 100%; max-width: 620px;
-      max-height: 96vh; overflow-y: auto;
-      box-shadow: 0 32px 80px rgba(0,0,0,0.28);
-      animation: loSlideUp 0.28s cubic-bezier(0.34,1.56,0.64,1);
-      font-family: 'Inter', sans-serif;
-      scrollbar-width: none;
+      background: #fff; border-radius: 24px 24px 0 0;
+      width: 100%; max-width: 500px;
+      max-height: 92vh; overflow-y: auto;
+      box-shadow: 0 -8px 60px rgba(0,0,0,.2);
+      animation: loUp .3s cubic-bezier(.34,1.4,.64,1);
+      font-family: 'Inter', sans-serif; scrollbar-width: none;
+    }
+    @media(min-width:560px){
+      .lo-modal { border-radius: 24px; box-shadow: 0 32px 80px rgba(0,0,0,.25); animation: loScale .28s cubic-bezier(.34,1.4,.64,1); }
     }
     .lo-modal::-webkit-scrollbar { display: none; }
-    @keyframes loSlideUp { from { transform: translateY(32px) scale(0.97); opacity: 0; } to { transform: translateY(0) scale(1); opacity: 1; } }
+    @keyframes loUp   { from{transform:translateY(40px);opacity:0} to{transform:translateY(0);opacity:1} }
+    @keyframes loScale{ from{transform:scale(.95);opacity:0} to{transform:scale(1);opacity:1} }
 
     .lo-header {
+      position: sticky; top: 0; z-index: 2;
+      background: #fff; border-radius: 24px 24px 0 0;
+      padding: 18px 20px 14px;
       display: flex; align-items: center; justify-content: space-between;
-      padding: 22px 28px 18px;
+      border-bottom: 1px solid #f0f0f0;
     }
-    .lo-title { font-size: 15px; font-weight: 600; color: #111; margin: 0; }
-    .lo-brand-tag {
-      font-size: 10px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase;
-      color: #bbb; margin-left: 8px;
-    }
+    @media(min-width:560px){ .lo-header { border-radius: 24px 24px 0 0; } }
+    .lo-header-left { display: flex; align-items: center; gap: 10px; }
+    .lo-logo { font-size: 13px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: #111; }
     .lo-close {
-      width: 34px; height: 34px; border-radius: 50%;
-      background: #f4f4f4; border: none; cursor: pointer;
-      font-size: 16px; color: #777; line-height: 1;
-      display: flex; align-items: center; justify-content: center;
-      transition: background 0.15s, color 0.15s; flex-shrink: 0;
+      width: 32px; height: 32px; border-radius: 50%;
+      background: #f2f2f2; border: none; cursor: pointer;
+      font-size: 14px; color: #777; display: flex; align-items: center; justify-content: center;
+      transition: background .15s, color .15s; flex-shrink: 0;
     }
-    .lo-close:hover { background: #eaeaea; color: #111; }
+    .lo-close:hover { background: #e5e5e5; color: #111; }
 
     .lo-steps {
-      display: flex; align-items: center;
-      padding: 0 28px 18px; gap: 0;
+      display: flex; align-items: center; padding: 14px 20px;
+      border-bottom: 1px solid #f5f5f5;
     }
     .lo-step { display: flex; align-items: center; gap: 6px; flex-shrink: 0; }
-    .lo-step-sep { flex: 1; height: 1px; background: #e8e8e8; margin: 0 4px; min-width: 16px; transition: background 0.3s; }
-    .lo-step-sep.done { background: #111; }
-    .lo-step-num {
-      width: 24px; height: 24px; border-radius: 50%;
-      border: 1.5px solid #e0e0e0; background: #fff;
+    .lo-sep { flex: 1; height: 1px; background: #e8e8e8; margin: 0 6px; min-width: 14px; transition: background .3s; }
+    .lo-sep.active { background: #111; }
+    .lo-snum {
+      width: 24px; height: 24px; border-radius: 50%; border: 1.5px solid #ddd;
       font-size: 11px; font-weight: 600; color: #ccc;
-      display: flex; align-items: center; justify-content: center;
-      transition: all 0.22s; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center; transition: all .22s;
     }
-    .lo-step-lbl { font-size: 11px; color: #ccc; transition: color 0.22s; white-space: nowrap; }
-    .lo-step.active .lo-step-num { border-color: #111; color: #111; }
-    .lo-step.active .lo-step-lbl { color: #111; font-weight: 500; }
-    .lo-step.done .lo-step-num { background: #111; border-color: #111; color: #fff; font-size: 10px; }
+    .lo-slbl { font-size: 11px; color: #ccc; white-space: nowrap; transition: color .22s; }
+    .lo-step.is-active .lo-snum { border-color: #111; color: #111; }
+    .lo-step.is-active .lo-slbl { color: #111; font-weight: 500; }
+    .lo-step.is-done .lo-snum { background: #111; border-color: #111; color: #fff; }
+    .lo-step.is-done .lo-slbl { color: #aaa; }
 
-    .lo-divider { height: 1px; background: #f2f2f2; margin: 0 28px; }
-
-    .lo-body { padding: 22px 28px 26px; }
+    .lo-body { padding: 18px 20px 24px; }
 
     .lo-product {
       display: flex; gap: 12px; align-items: center;
-      padding: 12px; background: #f8f8f8; border-radius: 12px;
+      background: #f8f8f8; border-radius: 14px; padding: 12px;
       margin-bottom: 18px;
     }
-    .lo-product-img { width: 50px; height: 62px; object-fit: cover; border-radius: 8px; background: #eee; flex-shrink: 0; }
-    .lo-product-name { font-size: 12px; font-weight: 500; color: #111; line-height: 1.45; }
-    .lo-product-price { font-size: 12px; color: #999; margin-top: 2px; }
+    .lo-pimg { width: 52px; height: 68px; object-fit: cover; border-radius: 10px; background: #eee; flex-shrink: 0; }
+    .lo-pname { font-size: 12px; font-weight: 500; color: #111; line-height: 1.45; }
+    .lo-pprice { font-size: 12px; color: #999; margin-top: 2px; }
 
-    .lo-upload-zone {
-      border: 1.5px dashed #d8d8d8; border-radius: 14px;
-      padding: 0; text-align: center; cursor: pointer;
-      background: #fafafa; position: relative; overflow: hidden;
-      transition: border-color 0.2s, background 0.2s;
-      min-height: 340px; display: flex; flex-direction: column;
-      align-items: center; justify-content: center;
+    .lo-upload-head { font-size: 20px; font-weight: 600; color: #111; margin-bottom: 6px; letter-spacing: -.02em; }
+    .lo-upload-sub { font-size: 13px; color: #999; line-height: 1.6; margin-bottom: 18px; }
+
+    .lo-zone {
+      border: 1.5px dashed #ddd; border-radius: 16px;
+      background: #fafafa; cursor: pointer;
+      position: relative; overflow: hidden;
+      transition: border-color .2s, background .2s;
+      min-height: 260px; display: flex; align-items: center; justify-content: center;
     }
-    .lo-upload-zone:hover { border-color: #aaa; background: #f5f5f5; }
-    .lo-upload-zone.has-photo { border-style: solid; border-color: #111; background: #fff; min-height: unset; }
-    .lo-file-input { position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%; }
-    .lo-upload-preview { width: 100%; max-height: 300px; object-fit: contain; display: none; border-radius: 12px; }
-    .lo-upload-zone.has-photo .lo-upload-preview { display: block; }
-    .lo-upload-zone.has-photo .lo-upload-placeholder { display: none; }
+    .lo-zone:hover { border-color: #999; background: #f5f5f5; }
+    .lo-zone.has-photo { border-style: solid; border-color: #111; min-height: unset; background: #fff; }
+    .lo-finput { position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%; }
+    .lo-preview { width: 100%; max-height: 320px; object-fit: contain; border-radius: 14px; display: none; }
+    .lo-zone.has-photo .lo-preview { display: block; }
+    .lo-zone.has-photo .lo-placeholder { display: none; }
 
-    .lo-upload-placeholder { padding: 40px 28px 34px; width: 100%; }
-    .lo-photos-row { display: flex; gap: 12px; justify-content: center; margin-bottom: 16px; }
-
-    .lo-photo-card {
-      width: 130px; height: 190px; border-radius: 10px;
-      overflow: hidden; flex-shrink: 0;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-      position: relative;
+    .lo-placeholder { padding: 30px 20px 26px; text-align: center; width: 100%; }
+    .lo-silhouettes { display: flex; gap: 14px; justify-content: center; margin-bottom: 18px; }
+    .lo-sil {
+      width: 100px; height: 150px; border-radius: 12px; overflow: hidden; flex-shrink: 0;
+      box-shadow: 0 6px 18px rgba(0,0,0,.1);
     }
-    .lo-photo-card:first-child { transform: rotate(-4deg) translateY(4px); }
-    .lo-photo-card:last-child { transform: rotate(3deg) translateY(2px); }
-    .lo-photo-card img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .lo-sil:first-child { transform: rotate(-4deg) translateY(6px); }
+    .lo-sil:last-child  { transform: rotate(3deg)  translateY(3px); }
+    .lo-upload-btn-text { font-size: 14px; font-weight: 600; color: #111; margin-bottom: 4px; }
+    .lo-upload-hint { font-size: 12px; color: #bbb; }
 
-    .lo-upload-title { font-size: 14px; font-weight: 600; color: #111; margin-bottom: 4px; }
-    .lo-upload-hint { font-size: 12px; color: #aaa; }
-
-    .lo-privacy { font-size: 11px; color: #c0c0c0; text-align: center; margin-top: 10px; display: flex; align-items: center; justify-content: center; gap: 4px; }
-
+    .lo-privacy { font-size: 11px; color: #c0c0c0; text-align: center; margin-top: 10px; line-height: 1.5; }
     .lo-error { background: #fff2f2; color: #d00; border-radius: 10px; padding: 10px 14px; font-size: 12px; margin-top: 10px; display: none; }
 
-    .lo-main-btn {
-      width: 100%; padding: 15px; background: #111; color: #fff;
-      border: none; border-radius: 12px; font-size: 13px; font-weight: 600;
-      letter-spacing: 0.04em; cursor: pointer; margin-top: 14px;
-      transition: background 0.18s; font-family: 'Inter', sans-serif;
+    .lo-btn {
+      width: 100%; padding: 16px; border: none; border-radius: 14px;
+      font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 600;
+      cursor: pointer; margin-top: 14px; transition: background .18s, transform .1s;
     }
-    .lo-main-btn:hover { background: #2a2a2a; }
-    .lo-buy-btn { background: #111; margin-top: 10px; }
+    .lo-btn:active { transform: scale(.99); }
+    .lo-btn-primary { background: #111; color: #fff; }
+    .lo-btn-primary:hover { background: #2a2a2a; }
+    .lo-btn-buy { background: #111; color: #fff; margin-top: 10px; }
+    .lo-btn-buy:hover { background: #2a2a2a; }
 
-    .lo-generating { text-align: center; padding: 70px 20px 60px; }
-    .lo-spinner {
-      width: 44px; height: 44px; margin: 0 auto 20px;
-      border: 2.5px solid #f0f0f0; border-top-color: #111;
-      border-radius: 50%; animation: loSpin 0.8s linear infinite;
-    }
-    @keyframes loSpin { to { transform: rotate(360deg); } }
+    .lo-generating { text-align: center; padding: 60px 20px 52px; }
+    .lo-spinner { width: 42px; height: 42px; margin: 0 auto 22px; border: 2.5px solid #eee; border-top-color: #111; border-radius: 50%; animation: loSpin .8s linear infinite; }
+    @keyframes loSpin { to{transform:rotate(360deg)} }
     .lo-gen-title { font-size: 15px; font-weight: 600; color: #111; margin-bottom: 6px; }
     .lo-gen-sub { font-size: 12px; color: #aaa; line-height: 1.6; }
-    .lo-progress { height: 3px; background: #f0f0f0; border-radius: 2px; margin: 24px 0 0; overflow: hidden; }
-    .lo-progress-bar { height: 100%; background: #111; width: 0; border-radius: 2px; transition: width 1.4s ease; }
+    .lo-progress { height: 3px; background: #f0f0f0; border-radius: 2px; margin: 28px 0 0; overflow: hidden; }
+    .lo-pbar { height: 100%; background: #111; border-radius: 2px; width: 0; transition: width 1.4s ease; }
 
-    .lo-result-img { width: 100%; display: block; max-height: 420px; object-fit: contain; border-radius: 12px; background: #f8f8f8; }
-    .lo-result-btns { display: flex; gap: 8px; margin-top: 10px; }
-    .lo-result-btns button {
-      flex: 1; padding: 10px 8px; border: 1px solid #e8e8e8; border-radius: 10px;
-      background: #fff; font-size: 11px; font-weight: 500; letter-spacing: 0.04em;
-      cursor: pointer; color: #777; font-family: 'Inter', sans-serif;
-      text-transform: uppercase; transition: border-color 0.15s, color 0.15s;
+    .lo-result-img { width: 100%; border-radius: 14px; display: block; max-height: 420px; object-fit: contain; background: #f8f8f8; }
+    .lo-ai-note { font-size: 11px; color: #bbb; text-align: center; margin-top: 8px; line-height: 1.5; }
+    .lo-actions { display: flex; gap: 8px; margin-top: 10px; }
+    .lo-actions button {
+      flex: 1; padding: 11px 8px; border: 1px solid #e8e8e8; border-radius: 10px;
+      background: #fff; font-size: 11px; font-weight: 500; letter-spacing: .04em;
+      cursor: pointer; color: #777; font-family: 'Inter', sans-serif; text-transform: uppercase;
+      transition: border-color .15s, color .15s;
     }
-    .lo-result-btns button:hover { border-color: #111; color: #111; }
+    .lo-actions button:hover { border-color: #111; color: #111; }
 
-    .lo-footer { text-align: center; padding: 14px 28px 20px; font-size: 10px; color: #ddd; letter-spacing: 0.08em; text-transform: uppercase; }
+    .lo-footer { text-align: center; padding: 14px 20px 22px; font-size: 10px; color: #ddd; letter-spacing: .08em; text-transform: uppercase; border-top: 1px solid #f5f5f5; margin-top: 4px; }
     .lo-footer a { color: #ccc; text-decoration: none; }
     .lo-footer a:hover { color: #888; }
   `;
-  document.head.appendChild(style);
+
+  const styleEl = document.createElement('style');
+  styleEl.textContent = CSS;
+  document.head.appendChild(styleEl);
 
   // ── STATE ────────────────────────────────────────────────────
-  let overlay = null, personFile = null, resultUrl = null, tryonId = null, utmUrl = null;
+  let backdrop = null, personFile = null, resultUrl = null, tryonId = null, utmUrl = null;
 
-  // ── EXAMPLE PERSON PHOTOS (base64 SVG data URIs) ─────────────
-  const PERSON_1 = "data:image/svg+xml," + encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 88 120"><rect width="88" height="120" fill="#f0ebe4"/><ellipse cx="44" cy="22" rx="12" ry="13" fill="#d4c4b0"/><rect x="30" y="34" width="28" height="36" rx="4" fill="#c8b89a"/><rect x="22" y="36" width="10" height="30" rx="5" fill="#c8b89a"/><rect x="56" y="36" width="10" height="30" rx="5" fill="#c8b89a"/><rect x="31" y="68" width="11" height="38" rx="5" fill="#bfae9a"/><rect x="46" y="68" width="11" height="38" rx="5" fill="#bfae9a"/></svg>`);
-  const PERSON_2 = "data:image/svg+xml," + encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 88 120"><rect width="88" height="120" fill="#e8e4df"/><ellipse cx="44" cy="21" rx="11" ry="12" fill="#c4b5a0"/><path d="M28 35 Q44 32 60 35 L58 70 Q44 74 30 70Z" fill="#bba890"/><rect x="21" y="36" width="9" height="28" rx="4" fill="#bba890"/><rect x="58" y="36" width="9" height="28" rx="4" fill="#bba890"/><path d="M31 70 Q36 68 38 106" stroke="#b0a090" stroke-width="10" stroke-linecap="round" fill="none"/><path d="M57 70 Q52 68 50 106" stroke="#b0a090" stroke-width="10" stroke-linecap="round" fill="none"/></svg>`);
+  // ── OPEN WIDGET ──────────────────────────────────────────────
+  function open(product) {
+    if (backdrop) return;
 
-  // ── CREATE MODAL ──────────────────────────────────────────────
-  function createModal(product) {
-    overlay = document.createElement('div');
-    overlay.className = 'lo-overlay';
-    overlay.innerHTML = `
-      <div class="lo-modal" role="dialog" aria-modal="true" aria-label="${t.title}">
+    backdrop = document.createElement('div');
+    backdrop.className = 'lo-backdrop';
+    backdrop.innerHTML = `
+      <div class="lo-modal" role="dialog" aria-modal="true" aria-label="${T.title}">
+
         <div class="lo-header">
-          <div style="display:flex;align-items:baseline;gap:0">
-            <h2 class="lo-title">${t.title}</h2>
+          <div class="lo-header-left">
+            <span class="lo-logo">⊙ LumiOn</span>
           </div>
-          <button class="lo-close" aria-label="${t.close}">${t.close}</button>
+          <button class="lo-close" aria-label="${T.close}">${T.close}</button>
         </div>
 
         <div class="lo-steps">
-          ${t.steps.map((s, i) => `
-            <div class="lo-step ${i === 0 ? 'active' : ''}" id="lo-step-${i+1}">
-              <div class="lo-step-num"><span>${i+1}</span></div>
-              <div class="lo-step-lbl">${s}</div>
+          ${T.steps.map((s, i) => `
+            <div class="lo-step ${i===0?'is-active':''}" id="lo-s${i+1}">
+              <div class="lo-snum">${i+1}</div>
+              <div class="lo-slbl">${s}</div>
             </div>
-            ${i < t.steps.length - 1 ? `<div class="lo-step-sep" id="lo-sep-${i+1}"></div>` : ''}
+            ${i < T.steps.length-1 ? `<div class="lo-sep" id="lo-sep${i+1}"></div>` : ''}
           `).join('')}
         </div>
 
-        <div class="lo-divider"></div>
-
         <div class="lo-body">
-          ${product.name ? `
-            <div class="lo-product">
-              ${product.imageUrl ? `<img class="lo-product-img" src="${product.imageUrl}" alt="" onerror="this.style.display='none'">` : ''}
-              <div>
-                <div class="lo-product-name">${product.name}</div>
-                ${product.price ? `<div class="lo-product-price">${product.price}</div>` : ''}
-              </div>
-            </div>
-          ` : ''}
 
-          <!-- Step 1 -->
-          <div id="lo-panel-1">
-            <div class="lo-upload-zone" id="lo-zone">
-              <input type="file" accept="image/jpeg,image/png,image/webp,image/heic" class="lo-file-input" id="lo-file">
-              <img class="lo-upload-preview" id="lo-preview" alt="">
-              <div class="lo-upload-placeholder">
-                <div class="lo-photos-row">
-                  <div class="lo-photo-card"><img src="${PERSON_1}" alt=""></div>
-                  <div class="lo-photo-card"><img src="${PERSON_2}" alt=""></div>
+          ${product.name ? `
+          <div class="lo-product">
+            ${product.image ? `<img class="lo-pimg" src="${product.image}" alt="" onerror="this.style.display='none'">` : ''}
+            <div>
+              <div class="lo-pname">${product.name}</div>
+              ${product.price ? `<div class="lo-pprice">${product.price}</div>` : ''}
+            </div>
+          </div>` : ''}
+
+          <!-- Step 1: Upload -->
+          <div id="lo-p1">
+            <div class="lo-upload-head">${T.head}</div>
+            <div class="lo-upload-sub">${T.desc}</div>
+            <div class="lo-zone" id="lo-zone">
+              <input type="file" accept="image/jpeg,image/png,image/webp,image/heic" class="lo-finput" id="lo-finput">
+              <img class="lo-preview" id="lo-preview" alt="">
+              <div class="lo-placeholder">
+                <div class="lo-silhouettes">
+                  <div class="lo-sil">${SVG1}</div>
+                  <div class="lo-sil">${SVG2}</div>
                 </div>
-                <div class="lo-upload-title">${t.upload}</div>
-                <div class="lo-upload-hint">${t.hint}</div>
+                <div class="lo-upload-btn-text">${T.upload}</div>
+                <div class="lo-upload-hint">JPG · PNG · до 10 МБ</div>
               </div>
             </div>
-            <div class="lo-privacy">🔒 ${t.privacy}</div>
-            <div class="lo-error" id="lo-err1">${t.error}</div>
-            <button class="lo-main-btn" id="lo-gen-btn">${t.generate}</button>
+            <div class="lo-privacy">${T.privacy}</div>
+            <div class="lo-error" id="lo-e1"></div>
+            <button class="lo-btn lo-btn-primary" id="lo-gbtn">${T.generate}</button>
           </div>
 
-          <!-- Step 2 -->
-          <div id="lo-panel-2" style="display:none">
+          <!-- Step 2: Generating -->
+          <div id="lo-p2" style="display:none">
             <div class="lo-generating">
               <div class="lo-spinner"></div>
-              <div class="lo-gen-title" id="lo-gen-status">${t.generating}</div>
-              <div class="lo-gen-sub">${t.genSub}</div>
-              <div class="lo-progress"><div class="lo-progress-bar" id="lo-bar"></div></div>
+              <div class="lo-gen-title" id="lo-gstat">${T.generating}</div>
+              <div class="lo-gen-sub">${T.genSub}</div>
+              <div class="lo-progress"><div class="lo-pbar" id="lo-pbar"></div></div>
             </div>
           </div>
 
-          <!-- Step 3 -->
-          <div id="lo-panel-3" style="display:none">
-            <img class="lo-result-img" id="lo-result-img" alt="">
-            <div class="lo-result-btns">
-              <button id="lo-save">⬇ ${t.save}</button>
-              <button id="lo-share">↗ ${t.share}</button>
-              <button id="lo-retry">↺ ${t.retry}</button>
+          <!-- Step 3: Result -->
+          <div id="lo-p3" style="display:none">
+            <img class="lo-result-img" id="lo-rimg" alt="Try-on result">
+            <div class="lo-ai-note">${T.aiNote}</div>
+            <div class="lo-actions">
+              <button id="lo-save">⬇ ${T.save}</button>
+              <button id="lo-share">↗ ${T.share}</button>
+              <button id="lo-retry">↺ ${T.retry}</button>
             </div>
-            <div class="lo-error" id="lo-err3"></div>
-            <button class="lo-main-btn lo-buy-btn" id="lo-buy">${t.buy}</button>
+            <div class="lo-error" id="lo-e3"></div>
+            <button class="lo-btn lo-btn-buy" id="lo-buy">${T.buy}</button>
           </div>
+
         </div>
-
         <div class="lo-footer"><a href="https://lumiwebagency.com" target="_blank" rel="noopener">LumiOn · Lumi Web Agency</a></div>
       </div>
     `;
 
-    document.body.appendChild(overlay);
+    document.body.appendChild(backdrop);
     document.body.style.overflow = 'hidden';
 
-    overlay.querySelector('.lo-close').addEventListener('click', close);
-    overlay.addEventListener('click', e => { if (e.target === overlay) close(); });
-    document.addEventListener('keydown', onKey);
+    // Events
+    backdrop.querySelector('.lo-close').addEventListener('click', close);
+    backdrop.addEventListener('click', e => { if (e.target === backdrop) close(); });
+    document.addEventListener('keydown', onEsc);
 
-    const fileInput = overlay.querySelector('#lo-file');
-    const zone = overlay.querySelector('#lo-zone');
+    const zone    = backdrop.querySelector('#lo-zone');
+    const finput  = backdrop.querySelector('#lo-finput');
 
-    fileInput.addEventListener('change', e => {
-      const f = e.target.files[0];
-      if (f) handleFile(f);
-    });
-
-    zone.addEventListener('dragover', e => { e.preventDefault(); zone.style.borderColor = '#111'; });
+    finput.addEventListener('change', e => { const f = e.target.files[0]; if (f) loadFile(f); });
+    zone.addEventListener('dragover',  e => { e.preventDefault(); zone.style.borderColor = '#111'; });
     zone.addEventListener('dragleave', () => { zone.style.borderColor = ''; });
-    zone.addEventListener('drop', e => {
-      e.preventDefault();
-      const f = e.dataTransfer?.files?.[0];
-      if (f) handleFile(f);
-    });
-
-    overlay.querySelector('#lo-gen-btn').addEventListener('click', () => generate(product));
+    zone.addEventListener('drop', e => { e.preventDefault(); const f = e.dataTransfer?.files?.[0]; if (f) loadFile(f); });
+    backdrop.querySelector('#lo-gbtn').addEventListener('click', () => generate(product));
   }
 
-  function handleFile(file) {
+  function loadFile(file) {
     if (!file || !file.type.match(/^image\//)) return;
     personFile = file;
     const reader = new FileReader();
     reader.onload = e => {
-      const preview = overlay.querySelector('#lo-preview');
-      const zone = overlay.querySelector('#lo-zone');
-      preview.src = e.target.result;
+      const zone = backdrop.querySelector('#lo-zone');
+      backdrop.querySelector('#lo-preview').src = e.target.result;
       zone.classList.add('has-photo');
     };
     reader.readAsDataURL(file);
   }
 
   async function generate(product) {
-    if (!personFile) {
-      const err = overlay.querySelector('#lo-err1');
-      err.textContent = t.error;
-      err.style.display = 'block';
-      return;
-    }
-    overlay.querySelector('#lo-err1').style.display = 'none';
+    const errEl = backdrop.querySelector('#lo-e1');
+    if (!personFile) { errEl.textContent = T.errUpload; errEl.style.display = 'block'; return; }
+    errEl.style.display = 'none';
     setStep(2);
 
-    const bar = overlay.querySelector('#lo-bar');
-    const status = overlay.querySelector('#lo-gen-status');
-    const msgs = CONFIG.lang === 'uk'
-      ? ['Аналіз силуету...', 'Накладання одягу...', 'Фінальні деталі...']
-      : CONFIG.lang === 'ru'
-      ? ['Анализ силуэта...', 'Наложение одежды...', 'Финальные детали...']
-      : ['Analysing body...', 'Fitting garment...', 'Final details...'];
-
+    const pbar   = backdrop.querySelector('#lo-pbar');
+    const gstat  = backdrop.querySelector('#lo-gstat');
     let prog = 0, mi = 0;
+    const msgs = T.genMsgs;
     const iv = setInterval(() => {
-      prog = Math.min(prog + Math.random() * 4, 90);
-      bar.style.width = prog + '%';
-      if (mi < msgs.length && prog > [20, 50, 75][mi]) { status.textContent = msgs[mi++]; }
-    }, 600);
+      prog = Math.min(prog + Math.random() * 3.5, 90);
+      pbar.style.width = prog + '%';
+      if (mi < msgs.length && prog > [18, 48, 72][mi]) gstat.textContent = msgs[mi++];
+    }, 700);
 
     try {
       const fd = new FormData();
       fd.append('person_photo', personFile, personFile.name);
-      fd.append('brand', CONFIG.brand);
-      fd.append('session_id', sessionId);
-      fd.append('product_id', product.id || '');
-      fd.append('product_name', product.name || '');
-      fd.append('product_url', product.url || '');
-      if (product.imageUrl) fd.append('garment_url', product.imageUrl);
+      fd.append('brand',       CFG.brand);
+      fd.append('session_id',  SID);
+      fd.append('product_id',  product.id   || '');
+      fd.append('product_name',product.name || '');
+      fd.append('product_url', product.url  || '');
+      if (product.image) fd.append('garment_url', product.image);
 
-      const res = await fetch(`${CONFIG.apiUrl}/api/tryon`, {
-        method: 'POST',
-        body: fd,
-      });
+      const res = await fetch(`${CFG.apiUrl}/api/tryon`, { method: 'POST', body: fd });
+      clearInterval(iv); pbar.style.width = '100%';
 
-      clearInterval(iv);
-      bar.style.width = '100%';
-
-      if (!res.ok) throw new Error('API error ' + res.status);
-
+      if (!res.ok) throw new Error('api ' + res.status);
       const data = await res.json();
       resultUrl = data.result_url;
-      tryonId = data.tryon_id;
-      utmUrl = data.utm_url;
+      tryonId   = data.tryon_id;
+      utmUrl    = data.utm_url;
 
       await new Promise(r => setTimeout(r, 300));
       showResult(product);
-
     } catch (err) {
       clearInterval(iv);
       setStep(1);
-      const errEl = overlay.querySelector('#lo-err1');
-      errEl.textContent = t.error;
-      errEl.style.display = 'block';
+      const e = backdrop.querySelector('#lo-e1');
+      e.textContent = T.errGen; e.style.display = 'block';
       console.error('[LumiOn]', err);
     }
   }
 
   function showResult(product) {
     setStep(3);
-    overlay.querySelector('#lo-result-img').src = resultUrl;
+    backdrop.querySelector('#lo-rimg').src = resultUrl;
 
-    overlay.querySelector('#lo-buy').addEventListener('click', () => {
-      fetch(`${CONFIG.apiUrl}/api/order-ping`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ brand_slug: CONFIG.brand, tryon_id: tryonId, product_id: product.id }),
+    backdrop.querySelector('#lo-buy').addEventListener('click', () => {
+      fetch(`${CFG.apiUrl}/api/order-ping`, {
+        method: 'POST', headers: {'Content-Type':'application/json'},
+        body: JSON.stringify({ brand_slug: CFG.brand, tryon_id: tryonId, product_id: product.id }),
       }).catch(() => {});
       window.location.href = utmUrl || product.url;
     });
 
-    overlay.querySelector('#lo-save').addEventListener('click', () => {
+    backdrop.querySelector('#lo-save').addEventListener('click', () => {
       const a = document.createElement('a');
-      a.href = resultUrl;
-      a.download = `lumion_${Date.now()}.jpg`;
-      a.click();
+      a.href = resultUrl; a.download = `lumion_${Date.now()}.jpg`; a.click();
     });
 
-    overlay.querySelector('#lo-share').addEventListener('click', async () => {
-      if (navigator.share) {
-        await navigator.share({ title: product.name, url: utmUrl || product.url }).catch(() => {});
-      } else {
-        await navigator.clipboard.writeText(utmUrl || product.url).catch(() => {});
-        const btn = overlay.querySelector('#lo-share');
-        const orig = btn.textContent;
-        btn.textContent = '✓';
-        setTimeout(() => { btn.textContent = orig; }, 2000);
+    backdrop.querySelector('#lo-share').addEventListener('click', async () => {
+      const link = utmUrl || product.url;
+      if (navigator.share) { await navigator.share({ title: product.name, url: link }).catch(() => {}); }
+      else {
+        await navigator.clipboard.writeText(link).catch(() => {});
+        const btn = backdrop.querySelector('#lo-share');
+        const orig = btn.textContent; btn.textContent = '✓'; setTimeout(() => btn.textContent = orig, 2000);
       }
     });
 
-    overlay.querySelector('#lo-retry').addEventListener('click', () => {
-      personFile = null; resultUrl = null; tryonId = null;
-      overlay.querySelector('#lo-zone').classList.remove('has-photo');
+    backdrop.querySelector('#lo-retry').addEventListener('click', () => {
+      personFile = null; resultUrl = null;
+      backdrop.querySelector('#lo-zone').classList.remove('has-photo');
       setStep(1);
     });
   }
 
   function setStep(n) {
-    [1, 2, 3].forEach(i => {
-      const panel = overlay.querySelector(`#lo-panel-${i}`);
-      const step = overlay.querySelector(`#lo-step-${i}`);
-      if (panel) panel.style.display = i === n ? 'block' : 'none';
-      if (step) {
-        step.classList.toggle('active', i === n);
-        step.classList.toggle('done', i < n);
-        const numEl = step.querySelector('.lo-step-num span');
-        if (i < n && numEl) numEl.textContent = '✓';
-      }
-      const sep = overlay.querySelector(`#lo-sep-${i}`);
-      if (sep) sep.classList.toggle('done', i < n);
+    [1,2,3].forEach(i => {
+      backdrop.querySelector(`#lo-p${i}`).style.display = i===n ? 'block' : 'none';
+      const s = backdrop.querySelector(`#lo-s${i}`);
+      s.classList.toggle('is-active', i===n);
+      s.classList.toggle('is-done',   i<n);
+      const sep = backdrop.querySelector(`#lo-sep${i}`);
+      if (sep) sep.classList.toggle('active', i<n+1);
     });
   }
 
   function close() {
-    if (!overlay) return;
-    document.removeEventListener('keydown', onKey);
-    overlay.style.opacity = '0';
-    overlay.style.transition = 'opacity 0.18s';
-    setTimeout(() => {
-      if (overlay) { overlay.remove(); overlay = null; }
-      document.body.style.overflow = '';
-      personFile = null; resultUrl = null;
-    }, 180);
+    if (!backdrop) return;
+    document.removeEventListener('keydown', onEsc);
+    backdrop.style.opacity = '0'; backdrop.style.transition = 'opacity .18s';
+    setTimeout(() => { backdrop && backdrop.remove(); backdrop = null; document.body.style.overflow = ''; personFile = null; resultUrl = null; }, 180);
+  }
+  function onEsc(e) { if (e.key === 'Escape') close(); }
+
+  // ── AUTO PAGE INFO ───────────────────────────────────────────
+  function pageProduct() {
+    const og = document.querySelector('meta[property="og:image"]');
+    const h1 = document.querySelector('h1');
+    const pr = document.querySelector('.price,.product-price,[class*="price"]');
+    return {
+      image: og ? og.content : null,
+      name:  h1 ? h1.textContent.trim().slice(0,80) : document.title.slice(0,80),
+      price: pr ? pr.textContent.trim().slice(0,24) : '',
+      url:   window.location.href,
+      id:    window.location.pathname.split('/').filter(Boolean).pop(),
+    };
   }
 
-  function onKey(e) { if (e.key === 'Escape') close(); }
+  // ── BIND MANUAL [data-lumion] BUTTONS ────────────────────────
+  function bindManualButtons() {
+    document.querySelectorAll('[data-lumion="try-on"]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        open({
+          image: btn.dataset.image || null,
+          id:    btn.dataset.id   || '',
+          name:  btn.dataset.name || '',
+          price: btn.dataset.price || '',
+          url:   btn.dataset.url  || window.location.href,
+        });
+      });
+    });
+  }
 
-  // ── INJECT BUTTON ─────────────────────────────────────────────
-  function injectButton() {
-    const product = getProductInfo();
-    if (!product.imageUrl && !window.location.pathname.match(/product|item|goods|tovar/i)) return;
+  // ── AUTO-INJECT TRIGGER BUTTON ───────────────────────────────
+  function autoInject() {
+    const p = pageProduct();
+    if (!p.image && !window.location.pathname.match(/product|item|goods|tovar/i)) return;
 
     const btn = document.createElement('button');
-    btn.className = 'lo-btn';
-    btn.innerHTML = `<span style="font-size:15px">◎</span> ${t.btn}`;
-    btn.addEventListener('click', () => createModal(product));
+    btn.className = 'lo-trigger';
+    btn.innerHTML = `<span style="font-size:16px;line-height:1">◎</span> ${T.generate}`;
+    btn.addEventListener('click', () => open(p));
 
-    const cartBtn = document.querySelector(CONFIG.cartButtonSelector);
-    if (cartBtn) {
-      cartBtn.parentNode.insertBefore(btn, cartBtn.nextSibling);
-    } else {
+    const cartBtn = document.querySelector(CFG.cartSel);
+    if (cartBtn) cartBtn.parentNode.insertBefore(btn, cartBtn.nextSibling);
+    else {
       const h1 = document.querySelector('h1');
-      if (h1) (h1.closest('section,article,div') || h1.parentNode).appendChild(btn);
-      else document.body.appendChild(btn);
+      if (h1) (h1.closest('section,article,[class*="product"]') || h1.parentNode).appendChild(btn);
     }
   }
 
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', injectButton);
-  } else {
-    injectButton();
+  // ── INIT ─────────────────────────────────────────────────────
+  function init() {
+    bindManualButtons();
+    if (CFG.autoInject) autoInject();
   }
 
-  window.LumiOn = { open: () => { const p = getProductInfo(); createModal(p); }, close };
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+  else init();
+
+  // ── PUBLIC API ───────────────────────────────────────────────
+  window.lumiOnWidget = {
+    init: (opts) => { if (opts) Object.assign(CFG, opts); return window.lumiOnWidget; },
+    open: (product) => open(product || pageProduct()),
+    close,
+    getInstance: () => ({ open, close }),
+    eventService: {
+      onOpen:      (fn) => document.addEventListener('lumion:open',      e => fn(e.detail)),
+      onClose:     (fn) => document.addEventListener('lumion:close',     e => fn(e.detail)),
+      onGenerate:  (fn) => document.addEventListener('lumion:generate',  e => fn(e.detail)),
+      onGenerated: (fn) => document.addEventListener('lumion:generated', e => fn(e.detail)),
+      onError:     (fn) => document.addEventListener('lumion:error',     e => fn(e.detail)),
+    },
+  };
+
+  document.dispatchEvent(new CustomEvent('LumiOnLoaded'));
 
 })();
