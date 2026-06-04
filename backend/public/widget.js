@@ -134,8 +134,8 @@
     .tryon-btn {
       display: inline-flex; align-items: center; justify-content: center; gap: 8px;
       padding: 13px 20px; background: transparent; color: ${CONFIG.accentColor};
-      border: 1px solid ${CONFIG.accentColor}; border-radius: 0;
-      font-size: 12px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase;
+      border: 1.5px solid ${CONFIG.accentColor}; border-radius: 0;
+      font-size: 11px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase;
       cursor: pointer; transition: background 0.2s, color 0.2s;
       width: 100%; margin: 8px 0; font-family: 'Inter', sans-serif;
     }
@@ -143,87 +143,133 @@
 
     .tryon-overlay {
       position: fixed; inset: 0; z-index: 999999;
-      background: rgba(0,0,0,0.5); backdrop-filter: blur(3px);
-      display: flex; align-items: center; justify-content: center;
+      background: rgba(0,0,0,0.4);
+      display: flex; align-items: stretch; justify-content: flex-start;
       animation: tryonFadeIn 0.2s ease;
     }
     @keyframes tryonFadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-    .tryon-modal {
-      background: #fff; border-radius: 0;
-      width: min(460px, 96vw); max-height: 94vh; overflow-y: auto;
-      animation: tryonSlideUp 0.3s cubic-bezier(0.16,1,0.3,1);
-      scrollbar-width: none; font-family: 'Inter', sans-serif;
+    .tryon-panel {
+      background: #fff;
+      width: min(400px, 92vw);
+      height: 100vh;
+      overflow-y: auto;
+      display: flex; flex-direction: column;
+      animation: tryonSlideIn 0.32s cubic-bezier(0.16,1,0.3,1);
+      scrollbar-width: none;
+      font-family: 'Inter', sans-serif;
     }
-    .tryon-modal::-webkit-scrollbar { display: none; }
-    @keyframes tryonSlideUp { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+    .tryon-panel::-webkit-scrollbar { display: none; }
+    @keyframes tryonSlideIn { from { transform: translateX(-100%); } to { transform: translateX(0); } }
 
-    .tryon-modal-header {
+    .tryon-panel-header {
       display: flex; align-items: center; justify-content: space-between;
-      padding: 22px 26px 0;
+      padding: 20px 24px 16px;
+      border-bottom: 1px solid #f0f0f0;
+      position: sticky; top: 0; background: #fff; z-index: 2;
     }
-    .tryon-modal-title { font-size: 11px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: #111; margin: 0; }
-    .tryon-close { width: 28px; height: 28px; background: none; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; color: #bbb; transition: color 0.15s; font-size: 18px; padding: 0; }
+    .tryon-panel-logo {
+      font-size: 13px; font-weight: 600; letter-spacing: 0.08em;
+      color: #111; text-transform: uppercase;
+    }
+    .tryon-close {
+      width: 30px; height: 30px; background: none; border: none;
+      cursor: pointer; color: #aaa; font-size: 16px;
+      display: flex; align-items: center; justify-content: center;
+      transition: color 0.15s; padding: 0;
+    }
     .tryon-close:hover { color: #111; }
 
-    .tryon-steps { display: flex; align-items: center; padding: 18px 26px 0; }
-    .tryon-step-item { display: flex; align-items: center; }
-    .tryon-step-item:not(:last-child) { flex: 1; }
-    .tryon-step-item:not(:last-child)::after { content: ''; flex: 1; height: 1px; background: #e8e8e8; margin: 0 10px; }
-    .tryon-step-item.done::after { background: #111; }
-    .tryon-step-dot { width: 22px; height: 22px; border: 1px solid #e0e0e0; background: #fff; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 500; color: #ccc; flex-shrink: 0; transition: all 0.2s; }
+    .tryon-panel-steps {
+      display: flex; align-items: center;
+      padding: 14px 24px;
+      border-bottom: 1px solid #f5f5f5;
+    }
+    .tryon-step-item { display: flex; align-items: center; gap: 6px; }
+    .tryon-step-line { flex: 1; height: 1px; background: #e8e8e8; margin: 0 6px; min-width: 20px; }
+    .tryon-step-dot {
+      width: 20px; height: 20px; border: 1px solid #ddd;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 10px; font-weight: 500; color: #bbb; flex-shrink: 0;
+      transition: all 0.2s;
+    }
+    .tryon-step-label { font-size: 10px; color: #bbb; letter-spacing: 0.06em; white-space: nowrap; }
     .tryon-step-item.active .tryon-step-dot { border-color: #111; color: #111; }
+    .tryon-step-item.active .tryon-step-label { color: #111; font-weight: 500; }
     .tryon-step-item.done .tryon-step-dot { background: #111; border-color: #111; color: #fff; }
-    .tryon-step-label { display: none; }
+    .tryon-step-item.done .tryon-step-label { color: #999; }
 
-    .tryon-body { padding: 18px 26px 26px; }
+    .tryon-panel-body { padding: 20px 24px; flex: 1; }
 
-    .tryon-product-strip { display: flex; align-items: center; gap: 12px; padding: 12px 0; margin-bottom: 18px; border-bottom: 1px solid #f0f0f0; }
-    .tryon-product-thumb { width: 44px; height: 56px; object-fit: cover; background: #f5f5f5; flex-shrink: 0; }
-    .tryon-product-name { font-size: 11px; font-weight: 500; color: #111; letter-spacing: 0.04em; line-height: 1.5; }
-    .tryon-product-price { font-size: 11px; color: #aaa; margin-top: 2px; }
+    .tryon-product-row {
+      display: flex; gap: 12px; align-items: flex-start;
+      margin-bottom: 20px; padding-bottom: 18px;
+      border-bottom: 1px solid #f5f5f5;
+    }
+    .tryon-product-thumb { width: 52px; height: 66px; object-fit: cover; background: #f5f5f5; flex-shrink: 0; }
+    .tryon-product-name { font-size: 11px; font-weight: 500; color: #111; line-height: 1.5; letter-spacing: 0.02em; }
+    .tryon-product-price { font-size: 11px; color: #aaa; margin-top: 3px; }
 
-    .tryon-upload-area { border: 1px dashed #d8d8d8; padding: 36px 20px; text-align: center; cursor: pointer; transition: border-color 0.2s, background 0.2s; position: relative; overflow: hidden; background: #fafafa; }
-    .tryon-upload-area:hover { border-color: #888; background: #f5f5f5; }
-    .tryon-upload-area.has-file { border-style: solid; border-color: #111; background: #fff; }
-    .tryon-upload-icon { font-size: 24px; margin-bottom: 10px; opacity: 0.35; }
-    .tryon-upload-text { font-size: 12px; font-weight: 500; color: #111; margin: 0 0 4px; letter-spacing: 0.04em; }
-    .tryon-upload-hint { font-size: 11px; color: #bbb; margin: 0; }
-    .tryon-upload-preview { width: 100%; max-height: 220px; object-fit: contain; display: none; margin: 0 auto; }
-    .tryon-upload-area.has-file .tryon-upload-preview { display: block; }
-    .tryon-upload-area.has-file .tryon-upload-placeholder { display: none; }
+    .tryon-upload-label { font-size: 14px; font-weight: 600; color: #111; margin-bottom: 6px; letter-spacing: -0.01em; }
+    .tryon-upload-desc { font-size: 12px; color: #999; line-height: 1.6; margin: 0 0 16px; }
+
+    .tryon-drop-zone {
+      border: 1px dashed #d5d5d5; background: #fafafa;
+      padding: 28px 20px; text-align: center; cursor: pointer;
+      transition: border-color 0.2s, background 0.2s;
+      position: relative; overflow: hidden; margin-bottom: 4px;
+    }
+    .tryon-drop-zone:hover { border-color: #999; background: #f5f5f5; }
+    .tryon-drop-zone.has-file { border-style: solid; border-color: #111; background: #fff; }
+    .tryon-upload-preview { width: 100%; max-height: 260px; object-fit: contain; display: none; }
+    .tryon-drop-zone.has-file .tryon-upload-preview { display: block; }
+    .tryon-drop-zone.has-file .tryon-upload-placeholder { display: none; }
     input[type=file].tryon-file-input { position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%; }
 
-    .tryon-privacy { display: flex; align-items: center; gap: 5px; font-size: 10px; color: #ccc; margin-top: 10px; justify-content: center; letter-spacing: 0.04em; }
+    .tryon-upload-examples { display: flex; gap: 8px; justify-content: center; margin-bottom: 14px; }
+    .tryon-example-photo {
+      width: 72px; height: 96px; background: #ede9e3;
+      position: relative; overflow: hidden;
+    }
+    .tryon-example-photo::after {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(160deg, #d4ccc4 0%, #c8bfb5 100%);
+    }
+    .tryon-example-1 { transform: rotate(-3deg) translateX(-4px); }
+    .tryon-example-2 { transform: rotate(2deg) translateX(4px); }
+    .tryon-upload-cta { font-size: 12px; font-weight: 500; color: #555; letter-spacing: 0.04em; }
 
-    .tryon-action-btn { width: 100%; padding: 13px; border: 1px solid #111; border-radius: 0; font-size: 11px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; cursor: pointer; margin-top: 12px; transition: all 0.2s; font-family: 'Inter', sans-serif; }
-    .tryon-action-btn.primary { background: #111; color: #fff; }
-    .tryon-action-btn.primary:hover { background: #333; }
-    .tryon-action-btn.secondary { background: #fff; color: #111; border-color: #e0e0e0; }
-    .tryon-action-btn.secondary:hover { border-color: #111; }
-    .tryon-action-btn.buy-btn { background: #111; color: #fff; border-color: #111; font-size: 11px; }
-    .tryon-action-btn.buy-btn:hover { background: #333; }
+    .tryon-main-btn {
+      width: 100%; padding: 14px; background: #111; color: #fff;
+      border: none; border-radius: 0; font-size: 11px; font-weight: 500;
+      letter-spacing: 0.12em; text-transform: uppercase; cursor: pointer;
+      margin-top: 14px; transition: background 0.2s;
+      font-family: 'Inter', sans-serif;
+    }
+    .tryon-main-btn:hover { background: #333; }
+    .tryon-buy-btn { background: #111; margin-top: 12px; }
 
-    .tryon-generating { text-align: center; padding: 48px 0 40px; }
-    .tryon-spinner { width: 36px; height: 36px; border: 1px solid #eee; border-top-color: #111; border-radius: 50%; animation: tryonSpin 0.9s linear infinite; margin: 0 auto 20px; }
+    .tryon-privacy { font-size: 10px; color: #c0c0c0; text-align: center; margin-top: 12px; letter-spacing: 0.03em; }
+
+    .tryon-generating { text-align: center; padding: 60px 0 50px; }
+    .tryon-spinner { width: 32px; height: 32px; border: 1px solid #eee; border-top-color: #111; border-radius: 50%; animation: tryonSpin 0.9s linear infinite; margin: 0 auto 18px; }
     @keyframes tryonSpin { to { transform: rotate(360deg); } }
-    .tryon-gen-title { font-size: 12px; font-weight: 500; color: #111; margin: 0 0 6px; letter-spacing: 0.06em; text-transform: uppercase; }
-    .tryon-gen-sub { font-size: 11px; color: #bbb; margin: 0; }
+    .tryon-gen-title { font-size: 12px; font-weight: 500; color: #111; margin-bottom: 6px; letter-spacing: 0.06em; text-transform: uppercase; }
+    .tryon-gen-sub { font-size: 11px; color: #bbb; }
     .tryon-progress { height: 1px; background: #f0f0f0; margin: 24px 0 0; overflow: hidden; }
     .tryon-progress-bar { height: 100%; background: #111; width: 0; transition: width 1.5s ease; }
 
-    .tryon-result-img { width: 100%; display: block; max-height: 420px; object-fit: contain; background: #f8f8f8; }
+    .tryon-result-img { width: 100%; display: block; max-height: 380px; object-fit: contain; background: #f8f8f8; }
     .tryon-result-actions { display: flex; gap: 6px; margin-top: 10px; }
-    .tryon-result-actions button { flex: 1; padding: 9px 6px; border: 1px solid #e8e8e8; background: #fff; font-size: 10px; font-weight: 500; letter-spacing: 0.08em; cursor: pointer; color: #888; font-family: 'Inter', sans-serif; text-transform: uppercase; transition: border-color 0.15s, color 0.15s; }
+    .tryon-result-actions button { flex: 1; padding: 9px 6px; border: 1px solid #e8e8e8; background: #fff; font-size: 10px; font-weight: 500; letter-spacing: 0.08em; cursor: pointer; color: #777; font-family: 'Inter', sans-serif; text-transform: uppercase; transition: border-color 0.15s, color 0.15s; }
     .tryon-result-actions button:hover { border-color: #111; color: #111; }
 
+    .tryon-panel-footer { padding: 16px 24px 24px; text-align: center; font-size: 10px; color: #ddd; letter-spacing: 0.08em; text-transform: uppercase; margin-top: auto; }
+    .tryon-panel-footer a { color: #ccc; text-decoration: none; }
+    .tryon-panel-footer a:hover { color: #888; }
+
+    .tryon-error { color: #c00; font-size: 11px; margin-top: 8px; display: none; padding: 8px 0 0; border-top: 1px solid #fee; }
     .tryon-utm-badge { display: none; }
-
-    .tryon-powered { text-align: center; padding: 14px 26px 20px; font-size: 10px; color: #ddd; letter-spacing: 0.08em; text-transform: uppercase; }
-    .tryon-powered a { color: #ccc; text-decoration: none; }
-    .tryon-powered a:hover { color: #999; }
-
-    .tryon-error { background: #fff; color: #cc0000; padding: 10px 14px; font-size: 11px; margin-top: 10px; display: none; border-left: 2px solid #cc0000; }
   `;
   document.head.appendChild(style);
 
@@ -235,60 +281,67 @@
   let tryonId = null;
   let utmUrl = null;
 
-  // ── Create overlay HTML ──────────────────────────────────────
+  // ── Create overlay HTML (side panel layout) ────────────────
   function createOverlay(product) {
     overlay = document.createElement('div');
     overlay.className = 'tryon-overlay';
     overlay.innerHTML = `
-      <div class="tryon-modal" role="dialog" aria-modal="true" aria-label="${t.btn}">
-        <div class="tryon-modal-header">
-          <h2 class="tryon-modal-title">${t.btn}</h2>
-          <button class="tryon-close" aria-label="${t.close}">${t.close}</button>
+      <div class="tryon-panel" role="dialog" aria-modal="true">
+
+        <div class="tryon-panel-header">
+          <div class="tryon-panel-logo">⊙ LumiOn</div>
+          <button class="tryon-close" aria-label="${t.close}">&#x2715;</button>
         </div>
 
-        <div class="tryon-steps">
+        <div class="tryon-panel-steps">
           ${t.steps.map((s, i) => `
             <div class="tryon-step-item ${i === 0 ? 'active' : ''}" id="tryon-step-${i + 1}">
-              <div class="tryon-step-dot">${i + 1}</div>
+              <div class="tryon-step-dot"><span>${i + 1}</span></div>
               <div class="tryon-step-label">${s}</div>
             </div>
-          `).join('')}
+          `).join('<div class="tryon-step-line"></div>')}
         </div>
 
-        <div class="tryon-body">
-          ${product.imageUrl || product.name ? `
-            <div class="tryon-product-strip">
+        <div class="tryon-panel-body">
+
+          <!-- Step 1: Upload -->
+          <div id="tryon-panel-1">
+            <div class="tryon-product-row">
               ${product.imageUrl ? `<img src="${product.imageUrl}" class="tryon-product-thumb" alt="${product.name}" onerror="this.style.display='none'">` : ''}
-              <div>
+              <div class="tryon-product-info">
                 <div class="tryon-product-name">${product.name}</div>
                 ${product.price ? `<div class="tryon-product-price">${product.price}</div>` : ''}
               </div>
             </div>
-          ` : ''}
 
-          <!-- Step 1: Upload -->
-          <div id="tryon-panel-1">
-            <p style="font-size:14px;color:#888;margin:0 0 12px;">${t.step1desc}</p>
-            <div class="tryon-upload-area" id="tryon-drop-zone">
+            <div class="tryon-upload-label">${t.step1}</div>
+            <p class="tryon-upload-desc">${t.step1desc}</p>
+
+            <div class="tryon-drop-zone" id="tryon-drop-zone">
               <input type="file" accept="image/jpeg,image/png,image/webp" class="tryon-file-input" id="tryon-file-input">
-              <img class="tryon-upload-preview" id="tryon-preview" alt="Your photo preview">
+              <img class="tryon-upload-preview" id="tryon-preview" alt="preview">
               <div class="tryon-upload-placeholder">
-                <div class="tryon-upload-icon">📸</div>
-                <p class="tryon-upload-text">${t.upload}</p>
-                <p class="tryon-upload-hint">${t.uploadHint}</p>
+                <div class="tryon-upload-examples">
+                  <div class="tryon-example-photo tryon-example-1"></div>
+                  <div class="tryon-example-photo tryon-example-2"></div>
+                </div>
+                <div class="tryon-upload-cta">${t.upload}</div>
               </div>
             </div>
-            <div class="tryon-privacy">🔒 ${t.privacy}</div>
+
             <div class="tryon-error" id="tryon-error-1">${t.errorUpload}</div>
-            <button class="tryon-action-btn primary" id="tryon-generate-btn">${t.generate}</button>
+
+            <button class="tryon-main-btn" id="tryon-generate-btn">${t.generate}</button>
+
+            <div class="tryon-privacy">🔒 ${t.privacy}</div>
           </div>
 
           <!-- Step 2: Generating -->
           <div id="tryon-panel-2" style="display:none;">
             <div class="tryon-generating">
               <div class="tryon-spinner"></div>
-              <p class="tryon-gen-title" id="tryon-gen-status">${t.step2}</p>
-              <p class="tryon-gen-sub">${t.step2desc}</p>
+              <div class="tryon-gen-title" id="tryon-gen-status">${t.step2}</div>
+              <div class="tryon-gen-sub">${t.step2desc}</div>
               <div class="tryon-progress"><div class="tryon-progress-bar" id="tryon-progress"></div></div>
             </div>
           </div>
@@ -296,44 +349,39 @@
           <!-- Step 3: Result -->
           <div id="tryon-panel-3" style="display:none;">
             <img class="tryon-result-img" id="tryon-result-img" alt="Try-on result">
-            <div style="text-align:center;margin:8px 0;">
-              <span class="tryon-utm-badge" id="tryon-utm-display">utm_source=tryon</span>
-            </div>
             <div class="tryon-result-actions">
-              <button id="tryon-save-btn">💾 ${t.save}</button>
-              <button id="tryon-share-btn">📤 ${t.share}</button>
-              <button id="tryon-retry-btn">🔄 ${t.retry}</button>
+              <button id="tryon-save-btn">&#8595; ${t.save}</button>
+              <button id="tryon-share-btn">&#8599; ${t.share}</button>
+              <button id="tryon-retry-btn">&#8635; ${t.retry}</button>
             </div>
             <div class="tryon-error" id="tryon-error-3"></div>
-            <button class="tryon-action-btn buy-btn" id="tryon-buy-btn">${t.buy}</button>
+            <button class="tryon-main-btn tryon-buy-btn" id="tryon-buy-btn">${t.buy}</button>
           </div>
+
         </div>
 
-        <div class="tryon-powered">
-          <a href="https://lumiwebagency.com" target="_blank" rel="noopener">${t.poweredBy}</a>
+        <div class="tryon-panel-footer">
+          <a href="https://lumiwebagency.com" target="_blank" rel="noopener">LumiOn · Lumi Web Agency</a>
         </div>
+
       </div>
     `;
 
     document.body.appendChild(overlay);
     document.body.style.overflow = 'hidden';
-
     bindOverlayEvents(product);
   }
 
   function bindOverlayEvents(product) {
-    // Close
     overlay.querySelector('.tryon-close').addEventListener('click', closeOverlay);
     overlay.addEventListener('click', e => { if (e.target === overlay) closeOverlay(); });
     document.addEventListener('keydown', onKeyDown);
 
-    // File input
     const fileInput = overlay.querySelector('#tryon-file-input');
     fileInput.addEventListener('change', e => handleFile(e.target.files[0]));
 
-    // Drag & drop
     const dropZone = overlay.querySelector('#tryon-drop-zone');
-    dropZone.addEventListener('dragover', e => { e.preventDefault(); dropZone.style.borderColor = CONFIG.accentColor; });
+    dropZone.addEventListener('dragover', e => { e.preventDefault(); dropZone.style.borderColor = '#111'; });
     dropZone.addEventListener('dragleave', () => { dropZone.style.borderColor = ''; });
     dropZone.addEventListener('drop', e => {
       e.preventDefault();
@@ -341,171 +389,10 @@
       if (f) handleFile(f);
     });
 
-    // Generate
     overlay.querySelector('#tryon-generate-btn').addEventListener('click', handleGenerate.bind(null, product));
-
-    // Result actions (added after result renders)
   }
 
-  function handleFile(file) {
-    if (!file || !file.type.startsWith('image/')) return;
-    personFile = file;
-    const reader = new FileReader();
-    reader.onload = e => {
-      const preview = overlay.querySelector('#tryon-preview');
-      const dropZone = overlay.querySelector('#tryon-drop-zone');
-      preview.src = e.target.result;
-      dropZone.classList.add('has-file');
-    };
-    reader.readAsDataURL(file);
-  }
-
-  async function handleGenerate(product) {
-    if (!personFile) {
-      overlay.querySelector('#tryon-error-1').style.display = 'block';
-      return;
-    }
-    overlay.querySelector('#tryon-error-1').style.display = 'none';
-
-    // Switch to step 2
-    setStep(2);
-
-    // Animate progress bar
-    const bar = overlay.querySelector('#tryon-progress');
-    const statusEl = overlay.querySelector('#tryon-gen-status');
-    let prog = 0;
-    const progMessages = [
-      [10, t.step2],
-      [35, CONFIG.lang === 'uk' ? 'Аналіз силуету...' : CONFIG.lang === 'ru' ? 'Анализ силуэта...' : 'Analysing silhouette...'],
-      [65, CONFIG.lang === 'uk' ? 'Накладання одягу...' : CONFIG.lang === 'ru' ? 'Наложение одежды...' : 'Fitting garment...'],
-      [88, CONFIG.lang === 'uk' ? 'Фінальні деталі...' : CONFIG.lang === 'ru' ? 'Финальные детали...' : 'Final details...'],
-    ];
-
-    let msgIdx = 0;
-    const progInterval = setInterval(() => {
-      prog = Math.min(prog + Math.random() * 3, 92);
-      bar.style.width = prog + '%';
-      if (msgIdx < progMessages.length && prog >= progMessages[msgIdx][0]) {
-        statusEl.textContent = progMessages[msgIdx][1];
-        msgIdx++;
-      }
-    }, 600);
-
-    try {
-      const formData = new FormData();
-      formData.append('person_photo', personFile, personFile.name);
-      formData.append('brand', CONFIG.brand);
-      formData.append('session_id', sessionId);
-      formData.append('product_id', product.id || '');
-      formData.append('product_name', product.name || '');
-      formData.append('product_url', product.url || '');
-
-      if (product.imageUrl) {
-        formData.append('garment_url', product.imageUrl);
-      }
-
-      // UTM campaign
-      formData.append('utm_campaign', CONFIG.utmCampaign);
-
-      const res = await fetch(`${CONFIG.apiUrl}/api/tryon`, {
-        method: 'POST',
-        headers: { 'x-brand-key': CONFIG.apiKey || '' }, // injected at embed time
-        body: formData,
-      });
-
-      clearInterval(progInterval);
-      bar.style.width = '100%';
-
-      if (!res.ok) {
-        const err = await res.json().catch(() => ({}));
-        throw new Error(err.error || 'Generation failed');
-      }
-
-      const data = await res.json();
-      resultUrl = data.result_url;
-      tryonId = data.tryon_id;
-      utmUrl = data.utm_url;
-
-      // Short pause for UX
-      await new Promise(r => setTimeout(r, 400));
-      showResult(utmUrl, product);
-
-    } catch (err) {
-      clearInterval(progInterval);
-      setStep(1);
-      overlay.querySelector('#tryon-error-1').textContent = t.errorGenerate;
-      overlay.querySelector('#tryon-error-1').style.display = 'block';
-      console.error('[TryOn widget] Generation error:', err);
-    }
-  }
-
-  function showResult(utmUrl, product) {
-    setStep(3);
-
-    const img = overlay.querySelector('#tryon-result-img');
-    img.src = resultUrl;
-
-    const utmDisplay = overlay.querySelector('#tryon-utm-display');
-    utmDisplay.textContent = `utm_source=tryon · utm_campaign=${CONFIG.utmCampaign}`;
-
-    // Buy button
-    const buyBtn = overlay.querySelector('#tryon-buy-btn');
-    buyBtn.addEventListener('click', () => {
-      // Ping order conversion
-      fetch(`${CONFIG.apiUrl}/api/order-ping`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ brand_slug: CONFIG.brand, tryon_id: tryonId, product_id: product.id }),
-      }).catch(() => {});
-
-      window.location.href = utmUrl || product.url;
-    });
-
-    // Save
-    overlay.querySelector('#tryon-save-btn').addEventListener('click', async () => {
-      try {
-        const a = document.createElement('a');
-        a.href = resultUrl;
-        a.download = `tryon_${CONFIG.brand}_${Date.now()}.jpg`;
-        a.click();
-      } catch (e) { window.open(resultUrl, '_blank'); }
-    });
-
-    // Share
-    overlay.querySelector('#tryon-share-btn').addEventListener('click', async () => {
-      if (navigator.share) {
-        await navigator.share({ title: product.name, url: utmUrl || product.url });
-      } else {
-        await navigator.clipboard.writeText(utmUrl || product.url);
-        overlay.querySelector('#tryon-share-btn').textContent = '✓ Скопійовано';
-      }
-    });
-
-    // Retry
-    overlay.querySelector('#tryon-retry-btn').addEventListener('click', () => {
-      personFile = null;
-      resultUrl = null;
-      tryonId = null;
-      setStep(1);
-      const dropZone = overlay.querySelector('#tryon-drop-zone');
-      dropZone.classList.remove('has-file');
-    });
-  }
-
-  function setStep(n) {
-    currentStep = n;
-    [1, 2, 3].forEach(i => {
-      const panel = overlay.querySelector(`#tryon-panel-${i}`);
-      const stepEl = overlay.querySelector(`#tryon-step-${i}`);
-      if (panel) panel.style.display = i === n ? 'block' : 'none';
-      if (stepEl) {
-        stepEl.classList.toggle('active', i === n);
-        stepEl.classList.toggle('done', i < n);
-      }
-    });
-  }
-
-  function closeOverlay() {
+    function closeOverlay() {
     if (!overlay) return;
     document.removeEventListener('keydown', onKeyDown);
     overlay.style.animation = 'tryonFadeIn 0.15s ease reverse';
