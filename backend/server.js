@@ -386,27 +386,41 @@ function hashPassword(password) {
 // POST /api/auth/login
 // Body: { username, password }
 app.post('/api/auth/login', express.json(), async (req, res) => {
-  const { username, password } = req.body;
-  if (!username || !password) return res.status(400).json({ error: 'username and password required' });
+  try {
+    const { username, password } = req.body || {};
+    if (!username || !password) return res.status(400).json({ error: 'username and password required' });
 
-  const { data: login } = await supabase
-    .from('brand_logins')
-    .select('brand_id, password_hash')
-    .eq('username', username.toLowerCase().trim())
-    .single();
+    const expectedHash = hashPassword(password);
 
-  if (!login || login.password_hash !== hashPassword(password)) {
-    return res.status(401).json({ error: 'Невірний логін або пароль' });
+    const { data: login, error: loginError } = await supabase
+      .from('brand_logins')
+      .select('brand_id, password_hash')
+      .eq('username', username.toLowerCase().trim())
+      .single();
+
+    if (loginError || !login) {
+      return res.status(401).json({ error: 'Невірний логін або пароль', debug: 'user_not_found' });
+    }
+
+    if (login.password_hash !== expectedHash) {
+      return res.status(401).json({ error: 'Невірний логін або пароль', debug: 'wrong_password' });
+    }
+
+    const { data: session, error: sessionError } = await supabase
+      .from('brand_sessions')
+      .insert({ brand_id: login.brand_id })
+      .select('token')
+      .single();
+
+    if (sessionError || !session) {
+      return res.status(500).json({ error: 'Session creation failed', debug: sessionError?.message });
+    }
+
+    res.json({ token: session.token });
+  } catch (err) {
+    console.error('Login error:', err);
+    res.status(500).json({ error: 'Internal error', message: err.message });
   }
-
-  // Create session
-  const { data: session } = await supabase
-    .from('brand_sessions')
-    .insert({ brand_id: login.brand_id })
-    .select('token')
-    .single();
-
-  res.json({ token: session.token });
 });
 
 // POST /api/auth/logout
