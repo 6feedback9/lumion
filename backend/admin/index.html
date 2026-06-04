@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LumiOn — Панель бренду</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --black:#0e0e0f;--white:#fafaf8;
+  --g50:#f7f7f5;--g100:#eeeeeb;--g200:#ddddd9;--g400:#a8a8a4;--g600:#6b6b67;--g800:#2e2e2b;
+  --green:#16a34a;--green-bg:#f0fdf4;--amber:#d97706;--amber-bg:#fffbeb;
+  --red:#dc2626;--blue:#2563eb;
+  --r:12px;--rm:8px;--rl:18px;
+  --font:'Inter',sans-serif;
+  --sidebar:240px;
+}
+body{font-family:var(--font);background:var(--g50);color:var(--black);min-height:100vh;-webkit-font-smoothing:antialiased}
+
+/* ── LOGIN ── */
+.login-page{min-height:100vh;display:flex;align-items:center;justify-content:center;background:var(--g50);padding:20px}
+.login-card{background:#fff;border:0.5px solid var(--g200);border-radius:20px;padding:40px;width:100%;max-width:380px}
+.login-logo{font-size:18px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;margin-bottom:32px;display:flex;align-items:center;gap:8px}
+.login-logo span{width:22px;height:22px;border:2px solid var(--black);border-radius:50%;display:inline-block}
+.login-field{margin-bottom:16px}
+.login-field label{font-size:12px;font-weight:500;color:var(--g600);display:block;margin-bottom:6px;letter-spacing:.04em;text-transform:uppercase}
+.login-field input{width:100%;padding:12px 14px;border:1px solid var(--g200);border-radius:var(--rm);font-size:14px;font-family:var(--font);outline:none;transition:border-color .15s}
+.login-field input:focus{border-color:var(--black)}
+.login-btn{width:100%;padding:14px;background:var(--black);color:#fff;border:none;border-radius:var(--rm);font-size:14px;font-weight:600;cursor:pointer;margin-top:8px;font-family:var(--font);transition:background .15s}
+.login-btn:hover{background:#2a2a2a}
+.login-err{background:#fff2f2;color:var(--red);border-radius:var(--rm);padding:10px 14px;font-size:13px;margin-top:12px;display:none}
+.login-footer{text-align:center;margin-top:20px;font-size:12px;color:var(--g400)}
+
+/* ── APP ── */
+.app{display:flex;min-height:100vh}
+.sidebar{width:var(--sidebar);background:#fff;border-right:0.5px solid var(--g100);position:fixed;top:0;left:0;bottom:0;z-index:100;display:flex;flex-direction:column}
+.sb-logo{padding:24px 20px 18px;border-bottom:0.5px solid var(--g100)}
+.sb-logo-mark{font-size:14px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;display:flex;align-items:center;gap:7px}
+.sb-logo-mark::before{content:'';width:18px;height:18px;border:2px solid var(--black);border-radius:50%;flex-shrink:0}
+.sb-brand{margin-top:10px;display:flex;align-items:center;gap:6px;font-size:12px;color:var(--g600);background:var(--g50);border-radius:20px;padding:4px 10px;border:0.5px solid var(--g100);width:fit-content}
+.sb-dot{width:7px;height:7px;border-radius:50%;background:var(--green);flex-shrink:0}
+.sb-nav{padding:14px 12px;flex:1}
+.sb-section{font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--g400);padding:8px 10px 4px}
+.nav-btn{display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:var(--rm);font-size:13px;color:var(--g600);cursor:pointer;border:none;background:none;width:100%;text-align:left;transition:all .15s;font-family:var(--font)}
+.nav-btn:hover{background:var(--g50);color:var(--black)}
+.nav-btn.active{background:var(--black);color:#fff}
+.nav-icon{font-size:16px;width:20px;text-align:center}
+.sb-plan{padding:14px 16px 20px;border-top:0.5px solid var(--g100)}
+.plan-card{background:var(--black);border-radius:var(--rm);padding:14px;color:#fff}
+.plan-name{font-size:10px;opacity:.5;margin-bottom:2px;letter-spacing:.04em}
+.plan-label{font-size:15px;font-weight:700}
+.plan-bar-wrap{height:3px;background:rgba(255,255,255,.15);border-radius:2px;margin-top:10px}
+.plan-bar{height:3px;background:#fff;border-radius:2px;transition:width .5s}
+.plan-usage{font-size:11px;opacity:.45;margin-top:6px}
+.sb-logout{display:flex;align-items:center;gap:8px;padding:10px 12px;color:var(--g400);cursor:pointer;font-size:13px;border:none;background:none;width:100%;font-family:var(--font);border-top:0.5px solid var(--g100);transition:color .15s}
+.sb-logout:hover{color:var(--red)}
+
+.main{margin-left:var(--sidebar);flex:1;display:flex;flex-direction:column}
+.topbar{background:#fff;border-bottom:0.5px solid var(--g100);padding:0 28px;height:60px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:50}
+.topbar-title{font-size:17px;font-weight:600}
+.topbar-actions{display:flex;align-items:center;gap:8px}
+.period-tabs{display:flex;background:var(--g50);border-radius:var(--rm);padding:3px;gap:2px}
+.ptab{padding:5px 12px;border-radius:6px;font-size:12px;cursor:pointer;border:none;background:none;color:var(--g600);font-family:var(--font);transition:all .15s}
+.ptab.active{background:#fff;color:var(--black);box-shadow:0 1px 3px rgba(0,0,0,.08)}
+.btn{display:inline-flex;align-items:center;gap:6px;padding:8px 14px;border-radius:var(--rm);font-size:12px;font-weight:500;cursor:pointer;border:none;font-family:var(--font);transition:all .15s}
+.btn-outline{background:transparent;color:var(--black);border:0.5px solid var(--g200)}
+.btn-outline:hover{background:var(--g50)}
+.content{padding:28px;flex:1}
+.panel{display:none}.panel.active{display:block}
+
+/* ── STATS GRID ── */
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:20px}
+.stat-card{background:#fff;border:0.5px solid var(--g100);border-radius:var(--r);padding:18px;transition:box-shadow .15s}
+.stat-card:hover{box-shadow:0 4px 20px rgba(0,0,0,.06)}
+.stat-lbl{font-size:11px;color:var(--g400);font-weight:500;text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px}
+.stat-val{font-size:30px;font-weight:700;line-height:1}
+.stat-sub{font-size:12px;margin-top:5px}
+
+/* ── CHART ── */
+.chart-card{background:#fff;border:0.5px solid var(--g100);border-radius:var(--r);padding:22px;margin-bottom:18px}
+.chart-hd{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
+.chart-title{font-size:14px;font-weight:600}
+.chart-legend{display:flex;gap:14px;font-size:11px;color:var(--g400)}
+.ldot{width:8px;height:8px;border-radius:2px;display:inline-block;margin-right:4px}
+.bar-wrap{display:flex;align-items:flex-end;gap:3px;height:120px}
+.bar-col{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:2px}
+.bar-fill{width:100%;border-radius:2px 2px 0 0;min-height:3px;cursor:pointer;transition:opacity .15s}
+.bar-fill:hover{opacity:.7}
+.bar-lbl{font-size:9px;color:var(--g400)}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px}
+
+/* ── PRODUCT BARS ── */
+.prod-row{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:0.5px solid var(--g100)}
+.prod-row:last-child{border-bottom:none}
+.prod-name{font-size:13px;flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.prod-bar-wrap{width:100px;height:4px;background:var(--g100);border-radius:2px;flex-shrink:0}
+.prod-bar{height:4px;background:var(--black);border-radius:2px}
+.prod-count{font-size:12px;color:var(--g400);min-width:28px;text-align:right}
+
+/* ── GALLERY ── */
+.gallery-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px;margin-top:4px}
+.gallery-card{background:#fff;border:0.5px solid var(--g100);border-radius:var(--r);overflow:hidden;cursor:pointer;transition:box-shadow .15s}
+.gallery-card:hover{box-shadow:0 4px 20px rgba(0,0,0,.1)}
+.gallery-imgs{display:grid;grid-template-columns:1fr 1fr;height:160px}
+.gallery-img{width:100%;height:100%;object-fit:cover;background:var(--g50)}
+.gallery-img.single{grid-column:1/-1}
+.gallery-info{padding:10px 12px}
+.gallery-product{font-size:12px;font-weight:500;color:var(--black);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.gallery-date{font-size:11px;color:var(--g400);margin-top:2px}
+.gallery-badge{display:inline-flex;align-items:center;gap:3px;font-size:10px;padding:2px 8px;border-radius:20px;margin-top:4px}
+.gb-green{background:var(--green-bg);color:var(--green)}
+.gb-amber{background:var(--amber-bg);color:var(--amber)}
+
+/* ── LIGHTBOX ── */
+.lightbox{position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,.85);display:flex;align-items:center;justify-content:center;padding:20px;animation:lbFade .2s ease}
+@keyframes lbFade{from{opacity:0}to{opacity:1}}
+.lb-inner{background:#fff;border-radius:16px;max-width:520px;width:100%;overflow:hidden;animation:lbUp .25s ease}
+@keyframes lbUp{from{transform:translateY(20px);opacity:0}to{transform:translateY(0);opacity:1}}
+.lb-header{display:flex;align-items:center;justify-content:space-between;padding:16px 18px;border-bottom:0.5px solid var(--g100)}
+.lb-title{font-size:13px;font-weight:600}
+.lb-close{background:var(--g50);border:none;border-radius:50%;width:30px;height:30px;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;color:var(--g600)}
+.lb-close:hover{background:var(--g100)}
+.lb-imgs{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--g100)}
+.lb-img{width:100%;aspect-ratio:3/4;object-fit:cover;background:var(--g50)}
+.lb-img.single{grid-column:1/-1;aspect-ratio:2/3}
+.lb-meta{padding:14px 18px 18px}
+.lb-row{display:flex;justify-content:space-between;font-size:12px;padding:4px 0;border-bottom:0.5px solid var(--g50)}
+.lb-row:last-child{border:none}
+.lb-key{color:var(--g400)}
+.lb-val{font-weight:500;color:var(--black)}
+
+/* ── TABLE ── */
+.table-card{background:#fff;border:0.5px solid var(--g100);border-radius:var(--r);overflow:hidden}
+.table-toolbar{padding:14px 18px;border-bottom:0.5px solid var(--g100);display:flex;gap:8px;align-items:center}
+.table-search{flex:1;padding:8px 12px;border:1px solid var(--g200);border-radius:var(--rm);font-size:13px;font-family:var(--font);background:var(--g50);outline:none;transition:border-color .15s}
+.table-search:focus{border-color:var(--black);background:#fff}
+.table-filter{padding:8px 12px;border:1px solid var(--g200);border-radius:var(--rm);font-size:12px;font-family:var(--font);background:#fff;outline:none;cursor:pointer}
+table{width:100%;border-collapse:collapse}
+th{font-size:10px;font-weight:600;color:var(--g400);text-transform:uppercase;letter-spacing:.05em;padding:10px 18px;text-align:left;border-bottom:0.5px solid var(--g100);background:var(--g50)}
+td{padding:12px 18px;border-bottom:0.5px solid var(--g100);font-size:12px}
+tr:last-child td{border-bottom:none}
+tr:hover td{background:var(--g50)}
+.ava{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;flex-shrink:0}
+.td-user{display:flex;align-items:center;gap:10px}
+.user-name{font-size:12px;font-weight:500}
+.user-sub{font-size:11px;color:var(--g400);margin-top:1px}
+.badge{display:inline-flex;align-items:center;gap:3px;padding:3px 8px;border-radius:20px;font-size:11px;font-weight:500}
+.b-green{background:var(--green-bg);color:var(--green)}
+.b-amber{background:var(--amber-bg);color:var(--amber)}
+.thumb{width:36px;height:36px;object-fit:cover;border-radius:6px;background:var(--g50);cursor:pointer}
+.table-foot{padding:12px 18px;border-top:0.5px solid var(--g100);display:flex;align-items:center;justify-content:space-between;font-size:12px;color:var(--g400)}
+.pag{display:flex;gap:4px}
+.pag-btn{padding:5px 10px;border:0.5px solid var(--g200);border-radius:6px;background:#fff;cursor:pointer;font-size:12px;font-family:var(--font)}
+.pag-btn.active{background:var(--black);color:#fff;border-color:var(--black)}
+
+/* ── INSTALL ── */
+.install-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.step-card{background:#fff;border:0.5px solid var(--g100);border-radius:var(--r);padding:22px}
+.step-num{width:30px;height:30px;border-radius:50%;background:var(--black);color:#fff;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;margin-bottom:12px}
+.step-title{font-size:15px;font-weight:600;margin-bottom:6px}
+.step-desc{font-size:13px;color:var(--g600);line-height:1.6}
+.code-box{background:var(--black);color:#e0e0e0;border-radius:var(--rm);padding:14px 16px;font-family:monospace;font-size:12px;line-height:1.7;margin-top:12px;word-break:break-all;position:relative}
+.code-kw{color:#c084fc}.code-str{color:#86efac}.code-attr{color:#93c5fd}
+.copy-btn{position:absolute;top:8px;right:8px;background:rgba(255,255,255,.1);border:none;border-radius:6px;color:#fff;font-size:11px;padding:4px 10px;cursor:pointer;font-family:var(--font);transition:background .15s}
+.copy-btn:hover{background:rgba(255,255,255,.2)}
+.utm-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.utm-tag{background:#f0fdf4;color:#15803d;font-family:monospace;font-size:11px;padding:4px 10px;border-radius:6px;border:1px solid #bbf7d0}
+
+/* ── NOTIF ── */
+.notif{position:fixed;bottom:22px;right:22px;background:var(--black);color:#fff;padding:11px 18px;border-radius:var(--rm);font-size:13px;z-index:9999;animation:nIn .2s ease;pointer-events:none}
+@keyframes nIn{from{transform:translateY(8px);opacity:0}to{transform:translateY(0);opacity:1}}
+</style>
+</head>
+<body>
+
+<!-- ══ LOGIN PAGE ══════════════════════════════════════════════ -->
+<div id="login-page" class="login-page">
+  <div class="login-card">
+    <div class="login-logo"><span></span> LumiOn</div>
+    <div class="login-field">
+      <label>Логін</label>
+      <input type="text" id="l-user" placeholder="your-brand" autocomplete="username">
+    </div>
+    <div class="login-field">
+      <label>Пароль</label>
+      <input type="password" id="l-pass" placeholder="••••••••" autocomplete="current-password">
+    </div>
+    <button class="login-btn" id="l-btn" onclick="doLogin()">Увійти</button>
+    <div class="login-err" id="l-err"></div>
+    <div class="login-footer">LumiOn · Lumi Web Agency</div>
+  </div>
+</div>
+
+<!-- ══ APP ═════════════════════════════════════════════════════ -->
+<div id="app" class="app" style="display:none">
+
+  <aside class="sidebar">
+    <div class="sb-logo">
+      <div class="sb-logo-mark">LumiOn</div>
+      <div class="sb-brand"><div class="sb-dot"></div><span id="sb-brand-name">...</span></div>
+    </div>
+    <nav class="sb-nav">
+      <div class="sb-section">Аналітика</div>
+      <button class="nav-btn active" onclick="showPanel('dashboard',this)"><span class="nav-icon">📊</span>Дашборд</button>
+      <button class="nav-btn" onclick="showPanel('gallery',this)"><span class="nav-icon">🖼</span>Фото примірок</button>
+      <button class="nav-btn" onclick="showPanel('history',this)"><span class="nav-icon">📋</span>Всі примірки</button>
+      <div class="sb-section" style="margin-top:14px">Налаштування</div>
+      <button class="nav-btn" onclick="showPanel('install',this)"><span class="nav-icon">⚙️</span>Встановлення</button>
+    </nav>
+    <div class="sb-plan">
+      <div class="plan-card">
+        <div class="plan-name">ПЛАН</div>
+        <div class="plan-label" id="sb-plan">...</div>
+        <div class="plan-bar-wrap"><div class="plan-bar" id="sb-bar" style="width:0%"></div></div>
+        <div class="plan-usage" id="sb-usage">...</div>
+      </div>
+    </div>
+    <button class="sb-logout" onclick="doLogout()">🚪 Вийти</button>
+  </aside>
+
+  <main class="main">
+    <div class="topbar">
+      <div class="topbar-title" id="topbar-title">Дашборд</div>
+      <div class="topbar-actions">
+        <div class="period-tabs" id="period-tabs">
+          <button class="ptab" onclick="setPeriod('7d',this)">7 днів</button>
+          <button class="ptab active" onclick="setPeriod('30d',this)">30 днів</button>
+        </div>
+        <button class="btn btn-outline" onclick="exportCSV()">⬇ CSV</button>
+      </div>
+    </div>
+
+    <div class="content">
+
+      <!-- DASHBOARD -->
+      <div class="panel active" id="panel-dashboard">
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-lbl">Примірок</div>
+            <div class="stat-val" id="s-total">—</div>
+            <div class="stat-sub" style="color:var(--g400)" id="s-total-sub">за період</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-lbl">Заказів</div>
+            <div class="stat-val" id="s-orders" style="color:var(--green)">—</div>
+            <div class="stat-sub" style="color:var(--g400)" id="s-conv">конверсія —%</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-lbl">Унікальних юзерів</div>
+            <div class="stat-val" id="s-users">—</div>
+            <div class="stat-sub" style="color:var(--g400)">сесій</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-lbl">Топ товар</div>
+            <div class="stat-val" style="font-size:16px;line-height:1.3;padding-top:4px" id="s-top">—</div>
+            <div class="stat-sub" style="color:var(--g400)" id="s-top-cnt">—</div>
+          </div>
+        </div>
+
+        <div class="chart-card">
+          <div class="chart-hd">
+            <div class="chart-title">Примірки по днях</div>
+            <div class="chart-legend">
+              <span><span class="ldot" style="background:var(--black)"></span>Примірки</span>
+              <span><span class="ldot" style="background:var(--green)"></span>Закази</span>
+            </div>
+          </div>
+          <div class="bar-wrap" id="bar-chart"></div>
+        </div>
+
+        <div class="two-col">
+          <div class="chart-card" style="margin:0">
+            <div class="chart-title" style="margin-bottom:14px">Топ товари</div>
+            <div id="top-products"></div>
+          </div>
+          <div class="chart-card" style="margin:0">
+            <div class="chart-title" style="margin-bottom:14px">Останні примірки</div>
+            <div id="recent-tryons"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- GALLERY -->
+      <div class="panel" id="panel-gallery">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px">
+          <div style="font-size:14px;color:var(--g600)">Фото клієнтів та результати AI</div>
+          <div style="display:flex;gap:8px">
+            <button class="btn btn-outline" onclick="loadGallery('all')" id="gf-all">Всі</button>
+            <button class="btn btn-outline" onclick="loadGallery('ordered')" id="gf-ord">Замовили</button>
+          </div>
+        </div>
+        <div class="gallery-grid" id="gallery-grid">
+          <div style="grid-column:1/-1;text-align:center;padding:40px;color:var(--g400)">Завантаження...</div>
+        </div>
+      </div>
+
+      <!-- HISTORY -->
+      <div class="panel" id="panel-history">
+        <div class="table-card">
+          <div class="table-toolbar">
+            <input type="text" class="table-search" placeholder="Пошук за товаром..." id="search-inp" oninput="filterTable()">
+            <select class="table-filter" id="status-sel" onchange="filterTable()">
+              <option value="all">Всі</option>
+              <option value="completed">Завершені</option>
+              <option value="failed">Помилки</option>
+            </select>
+          </div>
+          <table>
+            <thead>
+              <tr>
+                <th>Фото</th>
+                <th>Товар</th>
+                <th>Статус</th>
+                <th>Дата</th>
+                <th>Дії</th>
+              </tr>
+            </thead>
+            <tbody id="hist-tbody"><tr><td colspan="5" style="text-align:center;padding:40px;color:var(--g400)">Завантаження...</td></tr></tbody>
+          </table>
+          <div class="table-foot">
+            <span id="tbl-count">0 записів</span>
+            <div class="pag" id="tbl-pag"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- INSTALL -->
+      <div class="panel" id="panel-install">
+        <div style="margin-bottom:20px">
+          <h2 style="font-size:20px;font-weight:700;margin-bottom:6px">Встановлення на сайт</h2>
+          <p style="font-size:13px;color:var(--g600)">Один рядок коду — кнопка "Приміряти" з'явиться на сторінках товарів</p>
+        </div>
+        <div class="install-grid">
+          <div class="step-card">
+            <div class="step-num">1</div>
+            <div class="step-title">Автоматична кнопка</div>
+            <div class="step-desc">Скрипт сам знайде місце і вставить кнопку після кнопки "Купити"</div>
+            <div class="code-box">
+              <span class="code-kw">&lt;script</span><br>
+              &nbsp;&nbsp;<span class="code-attr">src</span>=<span class="code-str">"https://lumion.onrender.com/widget.js"</span><br>
+              &nbsp;&nbsp;<span class="code-attr">data-brand</span>=<span class="code-str" id="ic-brand">"..."</span><br>
+              &nbsp;&nbsp;<span class="code-attr">data-api-url</span>=<span class="code-str">"https://lumion.onrender.com"</span><br>
+              &nbsp;&nbsp;<span class="code-attr">data-lang</span>=<span class="code-str" id="ic-lang">"uk"</span><br>
+              <span class="code-kw">&gt;&lt;/script&gt;</span>
+              <button class="copy-btn" onclick="copyEmbed()">Копіювати</button>
+            </div>
+          </div>
+
+          <div class="step-card">
+            <div class="step-num">2</div>
+            <div class="step-title">Власна кнопка (рекомендовано)</div>
+            <div class="step-desc">Додай атрибути до своєї кнопки — повний контроль над виглядом</div>
+            <div class="code-box" style="font-size:11px">
+<span class="code-kw">&lt;button</span> <span class="code-attr">data-lumion</span>=<span class="code-str">"try-on"</span><br>
+&nbsp;&nbsp;<span class="code-attr">data-image</span>=<span class="code-str">"URL фото товару"</span><br>
+&nbsp;&nbsp;<span class="code-attr">data-id</span>=<span class="code-str">"product-id"</span><br>
+&nbsp;&nbsp;<span class="code-attr">data-name</span>=<span class="code-str">"Назва товару"</span><br>
+&nbsp;&nbsp;<span class="code-attr">data-url</span>=<span class="code-str">"URL сторінки"</span><span class="code-kw">&gt;</span><br>
+&nbsp;&nbsp;Приміряти<br>
+<span class="code-kw">&lt;/button&gt;</span>
+              <button class="copy-btn" onclick="copyManual()">Копіювати</button>
+            </div>
+          </div>
+
+          <div class="step-card">
+            <div class="step-num">3</div>
+            <div class="step-title">UTM-мітки (автоматично)</div>
+            <div class="step-desc">Всі закази через примірку отримають ці параметри</div>
+            <div class="utm-tags" id="utm-tags-list">
+              <span class="utm-tag">utm_source=tryon</span>
+              <span class="utm-tag">utm_medium=widget</span>
+              <span class="utm-tag" id="utmc">utm_campaign=...</span>
+              <span class="utm-tag">utm_content={product_id}</span>
+            </div>
+          </div>
+
+          <div class="step-card">
+            <div class="step-num">4</div>
+            <div class="step-title">Horoshop / OpenCart</div>
+            <div class="step-desc">Вставити в поле "Скрипти перед &lt;/body&gt;" в налаштуваннях сайту</div>
+            <div style="margin-top:12px;padding:12px;background:var(--g50);border-radius:var(--rm);font-size:13px;color:var(--g600);line-height:1.6">
+              Налаштування → Структура сайту → Скрипти → Скрипти перед тегом &lt;/body&gt;
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+</div>
+
+<!-- LIGHTBOX -->
+<div id="lightbox" class="lightbox" style="display:none" onclick="closeLB(event)">
+  <div class="lb-inner">
+    <div class="lb-header">
+      <div class="lb-title" id="lb-title">Примірка</div>
+      <button class="lb-close" onclick="closeLightbox()">✕</button>
+    </div>
+    <div class="lb-imgs" id="lb-imgs"></div>
+    <div class="lb-meta" id="lb-meta"></div>
+  </div>
+</div>
+
+<script>
+// ── CONFIG ────────────────────────────────────────────────────
+const API = 'https://lumion.onrender.com';
+let TOKEN = localStorage.getItem('lumion_token') || '';
+let BRAND = null;
+let allHistory = [];
+let currentPeriod = '30d';
+const PAGE = 15;
+let currentPage = 1;
+
+// ── INIT ──────────────────────────────────────────────────────
+(async function init() {
+  if (!TOKEN) return showLogin();
+  const ok = await loadMe();
+  if (!ok) return showLogin();
+  showApp();
+  loadDashboard();
+})();
+
+function showLogin() {
+  document.getElementById('login-page').style.display = 'flex';
+  document.getElementById('app').style.display = 'none';
+}
+function showApp() {
+  document.getElementById('login-page').style.display = 'none';
+  document.getElementById('app').style.display = 'flex';
+}
+
+// ── AUTH ──────────────────────────────────────────────────────
+async function doLogin() {
+  const user = document.getElementById('l-user').value.trim();
+  const pass = document.getElementById('l-pass').value;
+  const btn  = document.getElementById('l-btn');
+  const err  = document.getElementById('l-err');
+  if (!user || !pass) { showErr('Введіть логін і пароль'); return; }
+
+  btn.textContent = 'Входимо...'; btn.disabled = true;
+  err.style.display = 'none';
+
+  try {
+    const res = await fetch(`${API}/api/auth/login`, {
+      method: 'POST', headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({ username: user, password: pass }),
+    });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error || 'Помилка входу');
+    TOKEN = data.token;
+    localStorage.setItem('lumion_token', TOKEN);
+    await loadMe();
+    showApp();
+    loadDashboard();
+  } catch(e) {
+    showErr(e.message);
+  } finally { btn.textContent = 'Увійти'; btn.disabled = false; }
+}
+
+function showErr(msg) {
+  const e = document.getElementById('l-err');
+  e.textContent = msg; e.style.display = 'block';
+}
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Enter' && document.getElementById('login-page').style.display !== 'none') doLogin();
+});
+
+async function loadMe() {
+  try {
+    const res = await fetch(`${API}/api/auth/me`, { headers: {'x-session-token': TOKEN} });
+    if (!res.ok) { TOKEN = ''; localStorage.removeItem('lumion_token'); return false; }
+    BRAND = await res.json();
+    document.getElementById('sb-brand-name').textContent = BRAND.name || BRAND.slug;
+    document.getElementById('sb-plan').textContent = {starter:'Старт',brand:'Бренд',agency:'Агентство'}[BRAND.plan] || BRAND.plan;
+    document.getElementById('ic-brand').textContent = `"${BRAND.slug}"`;
+    document.getElementById('ic-lang').textContent = `"${BRAND.widget_lang || 'uk'}"`;
+    document.getElementById('utmc').textContent = `utm_campaign=${BRAND.slug}`;
+    return true;
+  } catch { return false; }
+}
+
+async function doLogout() {
+  await fetch(`${API}/api/auth/logout`, { method:'POST', headers:{'x-session-token':TOKEN} }).catch(()=>{});
+  TOKEN = ''; localStorage.removeItem('lumion_token');
+  showLogin();
+}
+
+// ── API ───────────────────────────────────────────────────────
+async function apiFetch(path) {
+  const res = await fetch(`${API}${path}`, { headers: {'x-session-token': TOKEN} });
+  if (res.status === 401) { showLogin(); throw new Error('Unauthorized'); }
+  return res.json();
+}
+
+// ── DASHBOARD ─────────────────────────────────────────────────
+async function loadDashboard() {
+  try {
+    const d = await apiFetch(`/api/dashboard/stats?period=${currentPeriod}`);
+    document.getElementById('s-total').textContent = d.total.toLocaleString();
+    document.getElementById('s-orders').textContent = d.orders.toLocaleString();
+    document.getElementById('s-conv').textContent = `конверсія ${d.conversion}%`;
+    document.getElementById('s-users').textContent = d.unique_users.toLocaleString();
+    const top = d.top_products?.[0];
+    if (top) { document.getElementById('s-top').textContent = top.name; document.getElementById('s-top-cnt').textContent = `${top.count} примірок`; }
+    const pct = Math.min(Math.round((d.total / (d.quota||500)) * 100), 100);
+    document.getElementById('sb-bar').style.width = pct + '%';
+    document.getElementById('sb-usage').textContent = `${d.total} / ${d.quota} примірок`;
+    renderChart(d.by_day);
+    renderTopProducts(d.top_products);
+    renderRecentTryons(d.recent);
+  } catch(e) { console.error(e); }
+}
+
+function renderChart(byDay) {
+  const c = document.getElementById('bar-chart');
+  c.innerHTML = '';
+  const entries = Object.entries(byDay || {}).slice(-30);
+  if (!entries.length) return;
+  const max = Math.max(...entries.map(e => e[1]), 1);
+  entries.forEach(([date, val]) => {
+    const col = document.createElement('div');
+    col.className = 'bar-col';
+    const h = Math.max(Math.round(val/max*100), 3);
+    col.innerHTML = `<div class="bar-fill" style="height:${h}px;background:var(--black)" title="${date}: ${val}"></div><div class="bar-lbl">${new Date(date).getDate()}</div>`;
+    c.appendChild(col);
+  });
+}
+
+function renderTopProducts(products) {
+  const c = document.getElementById('top-products');
+  if (!products?.length) { c.innerHTML = '<div style="color:var(--g400);font-size:13px;padding:12px 0">Немає даних</div>'; return; }
+  const max = products[0].count;
+  c.innerHTML = products.map(p => `
+    <div class="prod-row">
+      <div class="prod-name">${p.name}</div>
+      <div class="prod-bar-wrap"><div class="prod-bar" style="width:${Math.round(p.count/max*100)}%"></div></div>
+      <div class="prod-count">${p.count}</div>
+    </div>`).join('');
+}
+
+function renderRecentTryons(items) {
+  const c = document.getElementById('recent-tryons');
+  if (!items?.length) { c.innerHTML = '<div style="color:var(--g400);font-size:13px;padding:12px 0">Немає примірок</div>'; return; }
+  c.innerHTML = items.slice(0,6).map(t => `
+    <div class="prod-row" style="gap:10px;cursor:pointer" onclick="openLightbox(${JSON.stringify(t).replace(/"/g,'&quot;')})">
+      ${t.result_url ? `<img src="${t.result_url}" style="width:32px;height:40px;object-fit:cover;border-radius:6px;flex-shrink:0">` : '<div style="width:32px;height:40px;background:var(--g100);border-radius:6px;flex-shrink:0"></div>'}
+      <div style="flex:1;min-width:0">
+        <div style="font-size:12px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${t.product_name || 'Товар'}</div>
+        <div style="font-size:11px;color:var(--g400)">${new Date(t.created_at).toLocaleDateString('uk-UA')}</div>
+      </div>
+    </div>`).join('');
+}
+
+// ── GALLERY ───────────────────────────────────────────────────
+async function loadGallery(filter='all') {
+  ['gf-all','gf-ord'].forEach(id => document.getElementById(id).style.background = '');
+  document.getElementById(filter==='all'?'gf-all':'gf-ord').style.background = 'var(--black)';
+  document.getElementById(filter==='all'?'gf-all':'gf-ord').style.color = '#fff';
+
+  const grid = document.getElementById('gallery-grid');
+  grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:40px;color:var(--g400)">Завантаження...</div>';
+
+  try {
+    const d = await apiFetch('/api/dashboard/history?limit=100');
+    let items = d.items || [];
+    if (filter === 'ordered') items = items.filter(t => t.status === 'completed' && t.result_url);
+
+    if (!items.length) {
+      grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:40px;color:var(--g400)">Примірок ще немає</div>';
+      return;
+    }
+
+    grid.innerHTML = items.map(t => `
+      <div class="gallery-card" onclick="openLightbox(${JSON.stringify(t).replace(/"/g,'&quot;')})">
+        <div class="gallery-imgs">
+          ${t.result_url
+            ? `<img class="gallery-img${!t.person_photo_url?' single':''}" src="${t.result_url}" alt="" onerror="this.style.display='none'">`
+            : '<div class="gallery-img" style="background:var(--g100);display:flex;align-items:center;justify-content:center;font-size:24px">🖼</div>'}
+          ${t.person_photo_url ? `<img class="gallery-img" src="${t.person_photo_url}" alt="" onerror="this.style.display='none'">` : ''}
+        </div>
+        <div class="gallery-info">
+          <div class="gallery-product">${t.product_name || 'Товар'}</div>
+          <div class="gallery-date">${new Date(t.created_at).toLocaleDateString('uk-UA', {day:'2-digit',month:'short',year:'numeric'})}</div>
+          <span class="gallery-badge ${t.result_url ? 'gb-green' : 'gb-amber'}">${t.result_url ? '✓ Готово' : '⏳ В процесі'}</span>
+        </div>
+      </div>`).join('');
+  } catch(e) { grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:40px;color:var(--red)">Помилка завантаження</div>'; }
+}
+
+// ── LIGHTBOX ──────────────────────────────────────────────────
+function openLightbox(t) {
+  if (typeof t === 'string') t = JSON.parse(t);
+  document.getElementById('lb-title').textContent = t.product_name || 'Примірка';
+  const imgs = document.getElementById('lb-imgs');
+  imgs.innerHTML = '';
+  if (t.person_photo_url) imgs.innerHTML += `<img class="lb-img" src="${t.person_photo_url}" alt="Клієнт">`;
+  if (t.result_url) imgs.innerHTML += `<img class="lb-img${!t.person_photo_url?' single':''}" src="${t.result_url}" alt="Результат">`;
+  if (!imgs.innerHTML) imgs.innerHTML = '<div style="padding:40px;text-align:center;color:#999">Фото відсутні</div>';
+
+  document.getElementById('lb-meta').innerHTML = `
+    <div class="lb-row"><span class="lb-key">Товар</span><span class="lb-val">${t.product_name || '—'}</span></div>
+    <div class="lb-row"><span class="lb-key">Дата</span><span class="lb-val">${new Date(t.created_at).toLocaleString('uk-UA')}</span></div>
+    <div class="lb-row"><span class="lb-key">Статус</span><span class="lb-val">${t.result_url ? '✅ Готово' : '⏳ В процесі'}</span></div>
+    ${t.utm_url ? `<div class="lb-row"><span class="lb-key">UTM</span><span class="lb-val" style="font-size:11px;font-family:monospace">utm_source=tryon</span></div>` : ''}
+  `;
+  document.getElementById('lightbox').style.display = 'flex';
+}
+
+function closeLightbox() { document.getElementById('lightbox').style.display = 'none'; }
+function closeLB(e) { if (e.target.id === 'lightbox') closeLightbox(); }
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+
+// ── HISTORY TABLE ─────────────────────────────────────────────
+async function loadHistory() {
+  try {
+    const d = await apiFetch('/api/dashboard/history?limit=200');
+    allHistory = d.items || [];
+    renderTable(allHistory, 1);
+  } catch(e) {}
+}
+
+function filterTable() {
+  const q = document.getElementById('search-inp').value.toLowerCase();
+  const st = document.getElementById('status-sel').value;
+  const f = allHistory.filter(r =>
+    (!q || (r.product_name||'').toLowerCase().includes(q)) &&
+    (st === 'all' || r.status === st)
+  );
+  renderTable(f, 1);
+}
+
+function renderTable(rows, page) {
+  currentPage = page;
+  const start = (page-1)*PAGE;
+  const slice = rows.slice(start, start+PAGE);
+  const tbody = document.getElementById('hist-tbody');
+  if (!slice.length) {
+    tbody.innerHTML = '<tr><td colspan="5" style="text-align:center;padding:40px;color:var(--g400)">Нічого не знайдено</td></tr>';
+    document.getElementById('tbl-count').textContent = '0 записів';
+    document.getElementById('tbl-pag').innerHTML = '';
+    return;
+  }
+  tbody.innerHTML = slice.map(r => `
+    <tr>
+      <td>
+        ${r.result_url ? `<img class="thumb" src="${r.result_url}" alt="" onclick="openLightbox(${JSON.stringify(r).replace(/"/g,"'")})">` : '<div style="width:36px;height:36px;background:var(--g100);border-radius:6px"></div>'}
+      </td>
+      <td style="max-width:180px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${r.product_name || '—'}</td>
+      <td><span class="badge ${r.result_url?'b-green':'b-amber'}">${r.result_url?'✓ Готово':'⏳'}</span></td>
+      <td style="color:var(--g400)">${new Date(r.created_at).toLocaleDateString('uk-UA')}</td>
+      <td><button class="btn btn-outline" style="padding:4px 10px;font-size:11px" onclick="openLightbox(${JSON.stringify(r).replace(/"/g,"'")})">Деталі</button></td>
+    </tr>`).join('');
+  document.getElementById('tbl-count').textContent = `${rows.length} записів`;
+  const total = Math.ceil(rows.length/PAGE);
+  document.getElementById('tbl-pag').innerHTML = Array.from({length:Math.min(total,7)},(_,i)=>
+    `<button class="pag-btn${i+1===page?' active':''}" onclick="renderTable(${JSON.stringify(rows)},${i+1})">${i+1}</button>`
+  ).join('');
+}
+
+// ── NAVIGATION ────────────────────────────────────────────────
+function showPanel(name, btn) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('panel-'+name).classList.add('active');
+  btn.classList.add('active');
+  const titles = {dashboard:'Дашборд',gallery:'Фото примірок',history:'Всі примірки',install:'Встановлення'};
+  document.getElementById('topbar-title').textContent = titles[name]||name;
+  document.getElementById('period-tabs').style.display = ['dashboard','history'].includes(name) ? 'flex' : 'none';
+  if (name==='history' && !allHistory.length) loadHistory();
+  if (name==='gallery') loadGallery();
+}
+
+function setPeriod(p, btn) {
+  currentPeriod = p;
+  document.querySelectorAll('.ptab').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  loadDashboard();
+}
+
+// ── HELPERS ───────────────────────────────────────────────────
+function copyEmbed() {
+  const code = `<script src="https://lumion.onrender.com/widget.js" data-brand="${BRAND?.slug||''}" data-api-url="https://lumion.onrender.com" data-lang="${BRAND?.widget_lang||'uk'}"><\/script>`;
+  navigator.clipboard.writeText(code).then(() => notify('Код скопійовано ✓'));
+}
+
+function copyManual() {
+  const code = `<button data-lumion="try-on" data-image="URL_ФОТО" data-id="PRODUCT_ID" data-name="НАЗВА" data-url="URL_СТОРІНКИ">Приміряти</button>`;
+  navigator.clipboard.writeText(code).then(() => notify('Код скопійовано ✓'));
+}
+
+function exportCSV() {
+  if (!allHistory.length) { notify('Спочатку відкрийте "Всі примірки"'); return; }
+  const csv = ['Товар,Статус,Дата,UTM URL', ...allHistory.map(r =>
+    `"${r.product_name||''}",${r.status},${r.created_at?.slice(0,10)||''},"${r.utm_url||''}"`
+  )].join('\n');
+  const a = document.createElement('a');
+  a.href = 'data:text/csv;charset=utf-8,' + encodeURIComponent(csv);
+  a.download = `lumion_${BRAND?.slug||'export'}_${new Date().toISOString().slice(0,10)}.csv`;
+  a.click();
+  notify('CSV завантажено ✓');
+}
+
+function notify(msg) {
+  const n = document.createElement('div');
+  n.className = 'notif'; n.textContent = msg;
+  document.body.appendChild(n);
+  setTimeout(() => n.remove(), 2800);
+}
+</script>
+</body>
+</html>
