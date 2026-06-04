@@ -72,8 +72,8 @@
 
     .lo-modal {
       background: #fff; border-radius: 20px;
-      width: 100%; max-width: 480px;
-      max-height: 90vh; overflow-y: auto;
+      width: 100%; max-width: 620px;
+      max-height: 96vh; overflow-y: auto;
       box-shadow: 0 32px 80px rgba(0,0,0,0.28);
       animation: loSlideUp 0.28s cubic-bezier(0.34,1.56,0.64,1);
       font-family: 'Inter', sans-serif;
@@ -84,7 +84,7 @@
 
     .lo-header {
       display: flex; align-items: center; justify-content: space-between;
-      padding: 20px 22px 16px;
+      padding: 22px 28px 18px;
     }
     .lo-title { font-size: 15px; font-weight: 600; color: #111; margin: 0; }
     .lo-brand-tag {
@@ -102,7 +102,7 @@
 
     .lo-steps {
       display: flex; align-items: center;
-      padding: 0 22px 16px; gap: 0;
+      padding: 0 28px 18px; gap: 0;
     }
     .lo-step { display: flex; align-items: center; gap: 6px; flex-shrink: 0; }
     .lo-step-sep { flex: 1; height: 1px; background: #e8e8e8; margin: 0 4px; min-width: 16px; transition: background 0.3s; }
@@ -119,9 +119,9 @@
     .lo-step.active .lo-step-lbl { color: #111; font-weight: 500; }
     .lo-step.done .lo-step-num { background: #111; border-color: #111; color: #fff; font-size: 10px; }
 
-    .lo-divider { height: 1px; background: #f2f2f2; margin: 0 22px; }
+    .lo-divider { height: 1px; background: #f2f2f2; margin: 0 28px; }
 
-    .lo-body { padding: 18px 22px 22px; }
+    .lo-body { padding: 22px 28px 26px; }
 
     .lo-product {
       display: flex; gap: 12px; align-items: center;
@@ -137,7 +137,7 @@
       padding: 0; text-align: center; cursor: pointer;
       background: #fafafa; position: relative; overflow: hidden;
       transition: border-color 0.2s, background 0.2s;
-      min-height: 200px; display: flex; flex-direction: column;
+      min-height: 340px; display: flex; flex-direction: column;
       align-items: center; justify-content: center;
     }
     .lo-upload-zone:hover { border-color: #aaa; background: #f5f5f5; }
@@ -147,11 +147,11 @@
     .lo-upload-zone.has-photo .lo-upload-preview { display: block; }
     .lo-upload-zone.has-photo .lo-upload-placeholder { display: none; }
 
-    .lo-upload-placeholder { padding: 28px 20px 24px; width: 100%; }
+    .lo-upload-placeholder { padding: 40px 28px 34px; width: 100%; }
     .lo-photos-row { display: flex; gap: 12px; justify-content: center; margin-bottom: 16px; }
 
     .lo-photo-card {
-      width: 88px; height: 120px; border-radius: 10px;
+      width: 130px; height: 190px; border-radius: 10px;
       overflow: hidden; flex-shrink: 0;
       box-shadow: 0 4px 12px rgba(0,0,0,0.1);
       position: relative;
@@ -176,7 +176,7 @@
     .lo-main-btn:hover { background: #2a2a2a; }
     .lo-buy-btn { background: #111; margin-top: 10px; }
 
-    .lo-generating { text-align: center; padding: 52px 20px 44px; }
+    .lo-generating { text-align: center; padding: 70px 20px 60px; }
     .lo-spinner {
       width: 44px; height: 44px; margin: 0 auto 20px;
       border: 2.5px solid #f0f0f0; border-top-color: #111;
@@ -198,7 +198,7 @@
     }
     .lo-result-btns button:hover { border-color: #111; color: #111; }
 
-    .lo-footer { text-align: center; padding: 14px 22px 20px; font-size: 10px; color: #ddd; letter-spacing: 0.08em; text-transform: uppercase; }
+    .lo-footer { text-align: center; padding: 14px 28px 20px; font-size: 10px; color: #ddd; letter-spacing: 0.08em; text-transform: uppercase; }
     .lo-footer a { color: #ccc; text-decoration: none; }
     .lo-footer a:hover { color: #888; }
   `;
