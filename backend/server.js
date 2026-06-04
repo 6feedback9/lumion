@@ -387,7 +387,7 @@ module.exports = app;
 const crypto2 = require('crypto');
 
 function hashPassword(password) {
-  return crypto2.createHash('sha256').update(password + process.env.PASSWORD_SALT || 'lumion_salt').digest('hex');
+  return crypto2.createHash('sha256').update(password).digest('hex');
 }
 
 // POST /api/auth/login
