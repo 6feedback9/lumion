@@ -68,15 +68,4 @@
     revealTargets.forEach((el) => io.observe(el));
   }
 
-  /* hero title line reveal on load */
-  const heroTitle = document.querySelector('.hero-title');
-  if (heroTitle) {
-    if (reduceMotion) {
-      heroTitle.classList.add('is-visible');
-    } else {
-      requestAnimationFrame(() => {
-        setTimeout(() => heroTitle.classList.add('is-visible'), 120);
-      });
-    }
-  }
 })();
