@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+  <html lang="en">
+  <head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-S5JVKZ0ET5"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-S5JVKZ0ET5');
+</script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>About Us | Lúmi Web Agency — Team from Odessa</title>
+    <meta name="description" content="Lúmi Web Agency — a team from Odessa with 7+ years in web development. Started as content and sales managers, now a full-service digital agency." />
+    <meta name="robots" content="index,follow" />
+    <meta name="theme-color" content="#080b11" />
+    
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Lúmi Web Agency" />
+  <meta property="og:title" content="About Us | Lúmi Web Agency — Team from Odessa" />
+  <meta property="og:description" content="Lúmi Web Agency — a team from Odessa with 7+ years in web development." />
+  <meta property="og:url" content="https://lumiwebagency.com/en/about.html" />
+  <meta property="og:image" content="https://i.postimg.cc/WFkvPsp6/2026-03-03-20-34-27.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="About Us | Lúmi Web Agency — Team from Odessa" />
+  <meta name="twitter:description" content="Lúmi Web Agency — a team from Odessa with 7+ years in web development." />
+  <meta name="twitter:image" content="https://i.postimg.cc/WFkvPsp6/2026-03-03-20-34-27.jpg" />
+  <link rel="canonical" href="https://lumiwebagency.com/en/about.html" />
+    <link rel="icon" type="image/png" href="https://i.postimg.cc/WFkvPsp6/2026-03-03-20-34-27.jpg" />
+    <link rel="alternate" hreflang="uk" href="https://lumiwebagency.com/about.html" />
+    <link rel="alternate" hreflang="en" href="https://lumiwebagency.com/en/about.html" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Bricolage+Grotesque:wght@500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/style.css" />
+  <style>
+      .about-hero__label {
+        display: inline-block;
+        background: rgba(115, 183, 255, 0.1);
+        border: 1px solid rgba(115, 183, 255, 0.25);
+        border-radius: 100px;
+        padding: 6px 18px;
+        font-size: 13px;
+        font-weight: 600;
+        color: var(--accent);
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        margin-bottom: 28px;
+      }
+
+      .about-story {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 64px;
+        align-items: center;
+      }
+
+      @media (max-width: 768px) {
+        .about-story {
+          grid-template-columns: 1fr;
+          gap: 40px;
+        }
+      }
+
+      .about-story__text h2 {
+        font-size: clamp(28px, 4vw, 44px);
+        font-weight: 800;
+        line-height: 1.2;
+        margin: 0 0 24px;
+      }
+
+      .about-story__text p {
+        color: var(--muted);
+        font-size: 17px;
+        line-height: 1.75;
+        margin: 0 0 18px;
+      }
+
+      .about-story__text p:last-child {
+        margin-bottom: 0;
+      }
+
+      .about-story__text p strong {
+        color: var(--text);
+      }
+
+      .about-story__visual {
+        background: var(--card);
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        padding: 40px;
+        display: flex;
+        flex-direction: column;
+        gap: 28px;
+      }
+
+      .about-story__timeline {
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+      }
+
+      .about-timeline-item {
+        display: grid;
+        grid-template-columns: 80px 1fr;
+        gap: 20px;
+        position: relative;
+        padding-bottom: 28px;
+      }
+
+      .about-timeline-item:last-child {
+        padding-bottom: 0;
+      }
+
+      .about-timeline-item::before {
+        content: '';
+        position: absolute;
+        left: 39px;
+        top: 28px;
+        bottom: 0;
+        width: 1px;
+        background: var(--line);
+      }
+
+      .about-timeline-item:last-child::before {
+        display: none;
+      }
+
+      .about-timeline__year {
+        font-size: 13px;
+        font-weight: 700;
+        color: var(--accent);
+        padding-top: 3px;
+        text-align: right;
+      }
+
+      .about-timeline__dot {
+        position: absolute;
+        left: 33px;
+        top: 4px;
+        width: 13px;
+        height: 13px;
+        border-radius: 50%;
+        background: var(--accent);
+        box-shadow: 0 0 12px rgba(115, 183, 255, 0.5);
+      }
+
+      .about-timeline__content h4 {
+        font-size: 15px;
+        font-weight: 700;
+        color: var(--text);
+        margin: 0 0 4px;
+      }
+
+      .about-timeline__content p {
+        font-size: 13px;
+        color: var(--muted);
+        margin: 0;
+        line-height: 1.5;
+      }
+
+      .about-values {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 24px;
+      }
+
+      @media (max-width: 900px) {
+        .about-values {
+          grid-template-columns: 1fr 1fr;
+        }
+      }
+
+      @media (max-width: 560px) {
+        .about-values {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      .about-value-card {
+        background: var(--card);
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        padding: 36px 32px;
+        transition: border-color 0.3s, transform 0.3s;
+      }
+
+      .about-value-card:hover {
+        border-color: rgba(115, 183, 255, 0.35);
+        transform: translateY(-4px);
+      }
+
+      .about-value-card__icon {
+        font-size: 32px;
+        margin-bottom: 18px;
+        line-height: 1;
+      }
+
+      .about-value-card h3 {
+        font-size: 18px;
+        font-weight: 700;
+        margin: 0 0 10px;
+      }
+
+      .about-value-card p {
+        font-size: 15px;
+        color: var(--muted);
+        line-height: 1.65;
+        margin: 0;
+      }
+
+      .about-why-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 24px;
+      }
+
+      @media (max-width: 680px) {
+        .about-why-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      .about-why-item {
+        display: flex;
+        gap: 20px;
+        align-items: flex-start;
+        background: var(--card);
+        border: 1px solid var(--line);
+        border-radius: 20px;
+        padding: 28px 28px;
+        transition: border-color 0.3s;
+      }
+
+      .about-why-item:hover {
+        border-color: rgba(115, 183, 255, 0.3);
+      }
+
+      .about-why-item__num {
+        font-size: 13px;
+        font-weight: 800;
+        color: var(--accent);
+        opacity: 0.7;
+        min-width: 28px;
+        padding-top: 2px;
+      }
+
+      .about-why-item h4 {
+        font-size: 16px;
+        font-weight: 700;
+        margin: 0 0 6px;
+      }
+
+      .about-why-item p {
+        font-size: 14px;
+        color: var(--muted);
+        margin: 0;
+        line-height: 1.6;
+      }
+
+      .about-odessa-banner {
+        background: linear-gradient(135deg, rgba(115, 183, 255, 0.08), rgba(159, 140, 255, 0.08));
+        border: 1px solid rgba(115, 183, 255, 0.2);
+        border-radius: var(--radius);
+        padding: 56px 64px;
+        text-align: center;
+      }
+
+      @media (max-width: 680px) {
+        .about-odessa-banner {
+          padding: 40px 28px;
+        }
+      }
+
+      .about-odessa-banner__city {
+        font-size: 13px;
+        font-weight: 700;
+        color: var(--accent);
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        margin-bottom: 16px;
+      }
+
+      .about-odessa-banner h2 {
+        font-size: clamp(26px, 4vw, 42px);
+        font-weight: 800;
+        line-height: 1.2;
+        margin: 0 0 20px;
+      }
+
+      .about-odessa-banner p {
+        font-size: 17px;
+        color: var(--muted);
+        line-height: 1.7;
+        max-width: 680px;
+        margin: 0 auto;
+      }
+
+      .about-stats-row {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 24px;
+      }
+
+      @media (max-width: 860px) {
+        .about-stats-row {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+
+      @media (max-width: 480px) {
+        .about-stats-row {
+          grid-template-columns: 1fr 1fr;
+        }
+      }
+
+      .about-stat-box {
+        background: var(--card);
+        border: 1px solid var(--line);
+        border-radius: 20px;
+        padding: 32px 24px;
+        text-align: center;
+      }
+
+      .about-stat-box strong {
+        display: block;
+        font-size: clamp(36px, 5vw, 54px);
+        font-weight: 800;
+        background: linear-gradient(135deg, var(--accent), var(--accent-2));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        line-height: 1;
+        margin-bottom: 8px;
+      }
+
+      .about-stat-box span {
+        font-size: 14px;
+        color: var(--muted);
+        font-weight: 500;
+      }
+    </style>
+  
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "AboutPage",
+    "name": "About Lúmi Web Agency",
+    "url": "https://lumiwebagency.com/en/about.html",
+    "description": "Lúmi Web Agency — a team from Odessa with 7+ years in web development.",
+    "publisher": {
+      "@type": "Organization",
+      "name": "Lúmi Web Agency",
+      "url": "https://lumiwebagency.com",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://i.postimg.cc/WFkvPsp6/2026-03-03-20-34-27.jpg"
+      }
+    }
+  }
+  </script>
+</head>
+  <body class="about-page">
+    <div class="bg-blur bg-blur--one" aria-hidden="true"></div>
+    <div class="bg-blur bg-blur--two" aria-hidden="true"></div>
+    <div class="menu-overlay" id="menuOverlay"></div>
+
+    <header class="site-header" id="top">
+      <div class="container nav-wrap">
+        <a href="/en/index.html" id="logoLink" class="logo" aria-label="Lúmi Web Agency — home">
+          <img src="https://i.postimg.cc/WFkvPsp6/2026-03-03-20-34-27.jpg" alt="Lúmi Web Agency logo" class="logo__img" />
+          <span class="logo__text">Lúmi <em>web agency</em></span>
+        </a>
+
+        <nav class="nav nav--desktop nav--pill" aria-label="Main navigation">
+        <div class="nav-item has-dropdown">
+          <span class="nav-item__label" role="button" tabindex="0" aria-haspopup="true">Services</span>
+          <div class="nav-dropdown">
+            <div class="nav-dropdown__panel">
+              <a href="/en/platforms.html">Platforms & Pricing</a>
+              <a href="/en/process.html">Process</a>
+              <a href="/en/approach.html">Approach</a>
+              <a href="/en/support.html">Support</a>
+            </div>
+          </div>
+        </div>
+        <a href="/en/cases.html">Cases</a>
+        <a href="/en/addons.html">Add-ons</a>
+        <a href="/en/blog/">Blog</a>
+        <a href="/en/contact.html">Contact</a>
+        </nav>
+
+        <div class="nav-actions">
+          <a href="/en/contact.html" class="btn btn--sm btn--ghost nav-cta">Discuss a project</a>
+          <div class="lang-toggle" id="langToggle" aria-label="Language">
+          <a href="/about.html" class="lang-opt lang-opt--uk">UA</a>
+          <span class="lang-sep">|</span>
+          <a href="#" class="lang-opt lang-opt--en is-active">EN</a>
+        </div>
+        </div>
+
+        <button class="burger" id="burger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobileDrawer">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </header>
+
+    <aside class="mobile-drawer" id="mobileDrawer" aria-hidden="true">
+      <div class="mobile-drawer__top">
+        <div class="logo">
+          <img src="https://i.postimg.cc/WFkvPsp6/2026-03-03-20-34-27.jpg" alt="Lúmi Web Agency logo" class="logo__img" />
+          <span class="logo__text">Lúmi <em>web agency</em></span>
+        </div>
+      </div>
+      <nav class="mobile-drawer__nav" aria-label="Mobile navigation">
+        <span class="mobile-drawer__nav-label">Services</span>
+        <a class="mobile-drawer__nav-sub" href="/en/platforms.html">Platforms & Pricing</a>
+        <a class="mobile-drawer__nav-sub" href="/en/process.html">Process</a>
+        <a class="mobile-drawer__nav-sub" href="/en/approach.html">Approach</a>
+        <a class="mobile-drawer__nav-sub" href="/en/support.html">Support</a>
+        <a href="/en/cases.html">Cases</a>
+        <a href="/en/addons.html">Add-ons</a>
+        <a href="/en/blog/">Blog</a>
+        <a href="/en/contact.html">Contact</a>
+        </nav>
+      <div class="mobile-drawer__meta" aria-hidden="true">
+        <span>UI/UX</span><span>DEV</span><span>SEO</span><span>CRM</span>
+      </div>
+      <a href="/en/contact.html" class="btn btn--primary btn--full">Leave a request</a>
+    </aside>
+
+    <main>
+      <section class="section section--dark page-hero" aria-labelledby="about-title">
+        <div class="container">
+          <div class="section-head section-head--light reveal">
+            <div class="eyebrow">Odessa · since 2019</div>
+            <h1 id="about-title">We are Lúmi.<br>A team that knows how to build websites that sell</h1>
+            <p>Not just a web studio — an agency that grew from inside the industry. We know how clients think, where they get lost, and what makes them click "submit a request".</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container">
+          <div class="stats__grid">
+            <div class="stat reveal"><strong data-counter="7">0</strong><span>years in digital</span></div>
+            <div class="stat reveal"><strong data-counter="90">0</strong><span>completed projects</span></div>
+            <div class="stat reveal"><strong data-counter="100">0</strong><span>% attention to every project</span></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" aria-labelledby="about-story-title">
+        <div class="container">
+          <div class="section-head reveal">
+            <div class="eyebrow">Our story</div>
+            <h2 id="about-story-title">We started from scratch. We know the value of every click.</h2>
+          </div>
+          <div class="approach-grid">
+            <article class="approach-item reveal">
+              <h3>From inside the industry</h3>
+              <p>We started as content managers and sales managers — not coders. We understand how clients think, how hard it is to close a deal, and why a "beautiful" site doesn't mean a "selling" one.</p>
+            </article>
+            <article class="approach-item reveal reveal--delay">
+              <h3>7 years of growth</h3>
+              <p>Step by step: design, then development, then analytics, SEO, automations. From freelance to a full-scale agency with 90+ projects delivered.</p>
+            </article>
+            <article class="approach-item reveal reveal--delay-2">
+              <h3>From Odessa, Ukraine</h3>
+              <p>Our city taught us to be flexible, find solutions where others see a dead end, and never give up. We bring the same energy to every project.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" aria-labelledby="about-why-title">
+        <div class="container">
+          <div class="section-head reveal">
+            <div class="eyebrow">Why choose us</div>
+            <h2 id="about-why-title">Concrete reasons, no marketing fluff</h2>
+          </div>
+
+          <div class="about-why-grid">
+            <div class="about-why-item reveal">
+              <div class="about-why-item__num">01</div>
+              <div>
+                <h4>We know how to sell — not just how to code</h4>
+                <p>Our sales background gives us an edge: we build sites that "sell" on their own, even when you're not around.</p>
+              </div>
+            </div>
+            <div class="about-why-item reveal reveal--delay">
+              <div class="about-why-item__num">02</div>
+              <div>
+                <h4>Full cycle under one roof</h4>
+                <p>Strategy, design, development, SEO, CRM, support — no need to coordinate multiple contractors.</p>
+              </div>
+            </div>
+            <div class="about-why-item reveal">
+              <div class="about-why-item__num">03</div>
+              <div>
+                <h4>7 years — more than just a number</h4>
+                <p>90+ projects delivered. We've learned to anticipate problems before they appear and keep quality consistent.</p>
+              </div>
+            </div>
+            <div class="about-why-item reveal reveal--delay">
+              <div class="about-why-item__num">04</div>
+              <div>
+                <h4>Open communication</h4>
+                <p>No ghosting, no "we'll call you back". You're always up to date on everything happening with your project, in real time.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CTA -->
+      <section class="section page-cta">
+        <div class="container">
+          <div class="page-cta__box reveal">
+            <h2>Want to work with us?</h2>
+            <p>Tell us about your project — we'll come back with a concrete plan within one business day.</p>
+            <a href="/en/contact.html" class="btn btn--primary">Discuss a project</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-grid">
+        <div class="footer-col footer-col--brand">
+          <div class="footer-brand">
+            <img src="https://i.postimg.cc/WFkvPsp6/2026-03-03-20-34-27.jpg" alt="Lúmi Web Agency logo" class="footer-brand__logo" />
+            <div class="footer-brand__text">
+              <strong>Lúmi</strong>
+              <span>web agency</span>
+            </div>
+          </div>
+          <p class="footer-about">Full-cycle website development agency. We help businesses launch sites that generate real leads.</p>
+          <div class="footer-socials">
+            <a href="https://www.instagram.com/lumi.webagency/" target="_blank" rel="noopener" class="footer-instagram" aria-label="Instagram Lúmi Web Agency">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M7 2C4.2 2 2 4.2 2 7v10c0 2.8 2.2 5 5 5h10c2.8 0 5-2.2 5-5V7c0-2.8-2.2-5-5-5H7zm0 2h10c1.7 0 3 1.3 3 3v10c0 1.7-1.3 3-3 3H7c-1.7 0-3-1.3-3-3V7c0-1.7 1.3-3 3-3zm5 3.5A5.5 5.5 0 1 0 17.5 13 5.5 5.5 0 0 0 12 7.5zm0 2A3.5 3.5 0 1 1 8.5 13 3.5 3.5 0 0 1 12 9.5zm4.8-3.3a1.2 1.2 0 1 0 1.2 1.2 1.2 1.2 0 0 0-1.2-1.2z" />
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h4 class="footer-col__title">Navigation</h4>
+          <nav class="footer-nav-col" aria-label="Footer navigation">
+            <a href="/en/services.html">Services</a>
+            <a href="/en/platforms.html">Platforms & Pricing</a>
+            <a href="/en/cases.html">Cases</a>
+            <a href="/en/addons.html">Add-ons</a>
+            <a href="/en/process.html">Process</a>
+            <a href="/en/support.html">Support</a>
+          <a href="/en/blog/">Blog</a>
+          </nav>
+        </div>
+
+        <div class="footer-col">
+          <h4 class="footer-col__title">Contacts</h4>
+          <div class="footer-contacts-col">
+            <a class="footer-contact" href="mailto:agencytakeiteasy@gmail.com">agencytakeiteasy@gmail.com</a>
+            <a class="footer-contact" href="tel:+380635035505">+38 (063) 503 55 05</a>
+            <a class="footer-contact" href="https://t.me/lumiwebagency" target="_blank" rel="noopener">@lumiwebagency</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="container footer-bottom">
+        <p class="footer-copyright">© 2026 Lúmi Web Agency. FOP Yeromina Mariia Mykolaivna. All rights reserved.</p>
+        <nav class="footer-legal-links" aria-label="Legal documents">
+          <a href="/en/privacy.html">Privacy Policy</a>
+          <a href="/en/terms.html">Terms of Use</a>
+          <a href="/en/cookies.html">Cookie</a>
+        </nav>
+      </div>
+    </footer>
+
+    <div class="mobile-contact-bar" aria-label="Contact bar">
+      <a href="tel:+380635035505" class="mobile-contact-bar__item">
+        <span class="mobile-contact-bar__icon">✆</span>
+        <span class="mobile-contact-bar__text">Call us</span>
+      </a>
+      <a href="https://t.me/lumiwebagency" target="_blank" rel="noopener" class="mobile-contact-bar__item">
+        <span class="mobile-contact-bar__icon">✈</span>
+        <span class="mobile-contact-bar__text">Telegram</span>
+      </a>
+      <a href="/en/contact.html" class="mobile-contact-bar__item mobile-contact-bar__item--accent">
+        <span class="mobile-contact-bar__icon">✦</span>
+        <span class="mobile-contact-bar__text">Request</span>
+      </a>
+    </div>
+
+    <button class="back-to-top" id="backToTop" type="button" aria-label="Back to top">
+      <span class="back-to-top__arrow" aria-hidden="true">↑</span>
+      <span class="back-to-top__text">Top</span>
+    </button>
+
+    <div class="cookie-banner" id="cookieBanner" role="dialog" aria-label="Cookie notice">
+      <div class="cookie-banner__inner">
+        <p class="cookie-banner__text">We use cookies for analytics and to improve the site. <a href="/en/cookies.html">Learn more</a></p>
+        <div class="cookie-banner__actions">
+          <button class="cookie-banner__btn cookie-banner__btn--accept" id="cookieAccept">Accept</button>
+          <button class="cookie-banner__btn cookie-banner__btn--decline" id="cookieDecline">Decline</button>
+        </div>
+      </div>
+    </div>
+    <script src="/script.js"></script>
+</div>
+</body>
+  </html>

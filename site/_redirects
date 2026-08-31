@@ -1,0 +1,32 @@
+https://www.lumiwebagency.com/* https://lumiwebagency.com/:splat 301!
+http://www.lumiwebagency.com/* https://lumiwebagency.com/:splat 301!
+http://lumiwebagency.com/* https://lumiwebagency.com/:splat 301!
+
+# UA pages — clean URLs without .html
+/services /services.html 301
+/platforms /platforms.html 301
+/approach /approach.html 301
+/cases /cases.html 301
+/process /process.html 301
+/support /support.html 301
+/partners /partners.html 301
+/contact /contact.html 301
+/about /about.html 301
+/privacy /privacy.html 301
+/terms /terms.html 301
+/cookies /cookies.html 301
+
+# EN pages — clean URLs without .html
+/en/services /en/services.html 301
+/en/platforms /en/platforms.html 301
+/en/approach /en/approach.html 301
+/en/cases /en/cases.html 301
+/en/process /en/process.html 301
+/en/support /en/support.html 301
+/en/partners /en/partners.html 301
+/en/contact /en/contact.html 301
+/en/about /en/about.html 301
+/en/privacy /en/privacy.html 301
+/en/terms /en/terms.html 301
+/en/cookies /en/cookies.html 301
+/en /en/index.html 301
