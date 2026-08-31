@@ -5204,11 +5204,11 @@ body.consult-open {
 
 .consult-modal {
   position: relative;
-  width: min(100%, 460px);
+  width: min(100%, 440px);
   max-height: 90vh;
   overflow-y: auto;
-  border-radius: 28px;
-  padding: 34px 30px 28px;
+  border-radius: 24px;
+  padding: 26px 26px 22px;
   background: linear-gradient(180deg, rgba(25, 28, 36, 0.98), rgba(17, 19, 25, 0.98));
   border: 1px solid rgba(255, 255, 255, 0.22);
   box-shadow: var(--shadow);
@@ -5244,31 +5244,31 @@ body.consult-open {
 }
 
 .consult-modal__head {
-  margin-bottom: 20px;
+  margin-bottom: 14px;
   padding-right: 30px;
 }
 
 .consult-modal__head .eyebrow {
-  margin-bottom: 8px;
+  margin-bottom: 6px;
 }
 
 .consult-modal__head h3 {
-  margin: 8px 0 10px;
-  font-size: 24px;
+  margin: 6px 0 8px;
+  font-size: 21px;
   line-height: 1.15;
 }
 
 .consult-modal__head p {
   margin: 0;
   color: var(--muted);
-  font-size: 14.5px;
-  line-height: 1.55;
+  font-size: 13.5px;
+  line-height: 1.45;
 }
 
 .consult-counter {
-  margin-bottom: 22px;
-  padding: 14px 16px;
-  border-radius: 16px;
+  margin-bottom: 14px;
+  padding: 10px 14px;
+  border-radius: 14px;
   background: rgba(115, 183, 255, 0.08);
   border: 1px solid var(--line-strong);
 }
@@ -5296,11 +5296,26 @@ body.consult-open {
 }
 
 .consult-form .form-row {
-  margin-bottom: 14px;
+  gap: 6px;
+  margin-bottom: 10px;
+}
+
+.consult-form .form-row input,
+.consult-form .form-row textarea {
+  padding: 12px 14px;
+  border-radius: 14px;
+}
+
+.consult-form .form-row textarea {
+  min-height: 64px;
+}
+
+.consult-form .btn--full {
+  padding: 13px 24px;
 }
 
 .consult-form .form-success {
-  margin-top: 12px;
+  margin-top: 10px;
 }
 
 @media (max-width: 820px) {
