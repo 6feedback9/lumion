@@ -30,3 +30,40 @@ http://lumiwebagency.com/* https://lumiwebagency.com/:splat 301!
 /en/terms /en/terms.html 301
 /en/cookies /en/cookies.html 301
 /en /en/index.html 301
+
+# UA add-on pages — clean URLs without .html
+/addons /addons.html 301
+/try-on /try-on.html 301
+
+# EN add-on pages — clean URLs without .html
+/en/addons /en/addons.html 301
+/en/try-on /en/try-on.html 301
+
+# EN home — also cover the trailing-slash form
+/en/ /en/index.html 301
+
+# UA blog posts — clean URLs without .html
+/blog/chomu-sayt-ne-prynosyt-zayavok-2026 /blog/chomu-sayt-ne-prynosyt-zayavok-2026.html 301
+/blog/geo-optymizatsiya-2026 /blog/geo-optymizatsiya-2026.html 301
+/blog/sayt-dlya-restoranu-pid-klyuch-2026 /blog/sayt-dlya-restoranu-pid-klyuch-2026.html 301
+/blog/seo-dlya-maloho-biznesu-2026 /blog/seo-dlya-maloho-biznesu-2026.html 301
+/blog/shopify-vs-horoshop-vs-weblium-2026 /blog/shopify-vs-horoshop-vs-weblium-2026.html 301
+/blog/skilky-koshtuye-sayt-2026 /blog/skilky-koshtuye-sayt-2026.html 301
+/blog/telegram-boty-dlya-biznesu-2026 /blog/telegram-boty-dlya-biznesu-2026.html 301
+/blog/trendy-veb-dyzaynu-2026 /blog/trendy-veb-dyzaynu-2026.html 301
+/blog/yak-pereviryty-seo-sayta-2026 /blog/yak-pereviryty-seo-sayta-2026.html 301
+/blog/yak-potrapyty-v-google-discover-2026 /blog/yak-potrapyty-v-google-discover-2026.html 301
+/blog/ai-ta-neyromerezhі-u-veb-rozrobci-2026 /blog/ai-ta-neyromerezhі-u-veb-rozrobci-2026.html 301
+
+# EN blog posts — clean URLs without .html
+/en/blog/ai-in-web-development-2026 /en/blog/ai-in-web-development-2026.html 301
+/en/blog/geo-optimization-2026 /en/blog/geo-optimization-2026.html 301
+/en/blog/how-to-check-seo-2026 /en/blog/how-to-check-seo-2026.html 301
+/en/blog/how-to-get-into-google-discover-2026 /en/blog/how-to-get-into-google-discover-2026.html 301
+/en/blog/restaurant-website-2026 /en/blog/restaurant-website-2026.html 301
+/en/blog/seo-for-small-business-2026 /en/blog/seo-for-small-business-2026.html 301
+/en/blog/shopify-vs-horoshop-vs-weblium-2026 /en/blog/shopify-vs-horoshop-vs-weblium-2026.html 301
+/en/blog/telegram-bots-for-business-2026 /en/blog/telegram-bots-for-business-2026.html 301
+/en/blog/web-design-trends-2026 /en/blog/web-design-trends-2026.html 301
+/en/blog/website-cost-2026 /en/blog/website-cost-2026.html 301
+/en/blog/why-website-not-converting-2026 /en/blog/why-website-not-converting-2026.html 301
