@@ -444,7 +444,7 @@ function initCaseScrollPreview() {
         const hint = document.createElement('span');
         hint.className = 'case-card__scroll-hint';
         hint.setAttribute('aria-hidden', 'true');
-        hint.innerHTML = '<svg viewBox="0 0 24 24"><g fill="currentColor"><rect x="7" y="12" width="10" height="9" rx="4"/><rect x="7.5" y="4" width="2.6" height="10" rx="1.3"/><rect x="10.5" y="2.5" width="2.6" height="11.5" rx="1.3"/><rect x="13.5" y="3.5" width="2.6" height="10.5" rx="1.3"/><rect x="16.3" y="6" width="2.3" height="8" rx="1.15"/></g></svg>';
+        hint.innerHTML = '<img src="/images/cases/scroll-hand-cursor.png" alt="" draggable="false">';
         // Вставляємо всередині картинки: position:absolute + top/left:50% центрує
         // підказку прямо над карткою (видно, поки scrollTop === 0).
         imageWrap.appendChild(hint);
