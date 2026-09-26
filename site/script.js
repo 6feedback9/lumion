@@ -444,7 +444,7 @@ function initCaseScrollPreview() {
         const hint = document.createElement('span');
         hint.className = 'case-card__scroll-hint';
         hint.setAttribute('aria-hidden', 'true');
-        hint.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M11 13.2V6.3a1.2 1.2 0 0 1 2.4 0v6.2"/><path d="M13.4 12.5V5.1a1.2 1.2 0 0 1 2.4 0v7.6"/><path d="M15.8 12.7V7.4a1.2 1.2 0 0 1 2.4 0v6.9c0 3-2.2 5.4-5.2 5.4h-1.6a3.6 3.6 0 0 1-2.7-1.2l-3-3.3a1 1 0 0 1 1.4-1.4l2.3 2"/><path d="M18.3 4.3l1.1-1.1"/><path d="M19.7 7.6h1.6"/><path d="M18.3 10.9l1.1 1.1"/></svg>';
+        hint.innerHTML = '<svg viewBox="0 0 24 24"><g fill="currentColor"><rect x="7" y="12" width="10" height="9" rx="4"/><rect x="7.5" y="4" width="2.6" height="10" rx="1.3"/><rect x="10.5" y="2.5" width="2.6" height="11.5" rx="1.3"/><rect x="13.5" y="3.5" width="2.6" height="10.5" rx="1.3"/><rect x="16.3" y="6" width="2.3" height="8" rx="1.15"/></g></svg>';
         // Вставляємо всередині картинки: position:absolute + top/left:50% центрує
         // підказку прямо над карткою (видно, поки scrollTop === 0).
         imageWrap.appendChild(hint);
