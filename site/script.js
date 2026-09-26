@@ -437,28 +437,24 @@ function initCaseScrollPreview() {
       };
 
       if (isTouchDevice) {
-        // === МОБИЛЬНАЯ ВЕРСИЯ ===
-        // Запускаем скролл, когда карточка попадает в центр экрана
-        let isScrolling = false;
+        // === МОБІЛЬНА ВЕРСІЯ ===
+        // Без автопрокрутки — картинка просто скролиться пальцем всередині картки,
+        // startScroll/resetScroll (transform-анімація) тут не використовуються.
+        // Показуємо підказку "можна погортати", ховаємо після першого скролу.
+        const hint = document.createElement('span');
+        hint.className = 'case-card__scroll-hint';
+        hint.setAttribute('aria-hidden', 'true');
+        hint.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M12 19l-5-5M12 19l5-5"/></svg>';
+        // Вставляємо ПЕРЕД картинкою, всередині самого скрол-контейнера:
+        // position:sticky тримає підказку у видимій зоні з самого початку (scrollTop 0).
+        imageWrap.insertBefore(hint, img);
 
-        const observer = new IntersectionObserver((entries) => {
-          entries.forEach(entry => {
-            // Карточка достаточно видна (60%+) — запускаем скролл
-            if (entry.intersectionRatio >= 0.6 && !isScrolling) {
-              isScrolling = true;
-              startScroll();
-            }
-            // Карточка ушла из view — сбрасываем
-            else if (entry.intersectionRatio < 0.2 && isScrolling) {
-              isScrolling = false;
-              resetScroll();
-            }
-          });
-        }, {
-          threshold: [0, 0.2, 0.6, 1]
-        });
-
-        observer.observe(card);
+        let hintHidden = false;
+        imageWrap.addEventListener('scroll', () => {
+          if (hintHidden) return;
+          hintHidden = true;
+          hint.classList.add('is-hidden');
+        }, { passive: true });
       } else {
         // === DESKTOP (hover) ===
         card.addEventListener('mouseenter', startScroll);

@@ -957,6 +957,60 @@ p {
   will-change: transform;
 }
 
+/* На тач-устройствах — без авто-анимации, картинку просто гортають пальцем */
+@media (hover: none) {
+  .case-card__image.is-scrollable {
+    overflow-y: auto;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .case-card__image.is-scrollable::-webkit-scrollbar {
+    display: none;
+  }
+
+  .case-card__image.is-scrollable img {
+    transform: none !important;
+    transition: none !important;
+  }
+
+  .case-card__scroll-hint {
+    position: sticky;
+    top: 10px;
+    left: 100%;
+    z-index: 3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    margin-bottom: -34px;
+    transform: translateX(calc(-100% - 10px));
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.55);
+    backdrop-filter: blur(4px);
+    color: #fff;
+    pointer-events: none;
+    animation: caseScrollHintBounce 1.4s ease-in-out infinite;
+    transition: opacity 0.3s ease;
+  }
+
+  .case-card__scroll-hint svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .case-card__scroll-hint.is-hidden {
+    opacity: 0;
+  }
+
+  @keyframes caseScrollHintBounce {
+    0%, 100% { transform: translateX(calc(-100% - 10px)) translateY(0); }
+    50% { transform: translateX(calc(-100% - 10px)) translateY(5px); }
+  }
+}
+
 /* Hover для обычных (не скроллируемых) картинок */
 .case-card:hover .case-card__image:not(.is-scrollable) img {
   transform: scale(1.02);
