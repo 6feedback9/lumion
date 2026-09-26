@@ -980,34 +980,27 @@ p {
     top: 10px;
     left: 100%;
     z-index: 3;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    display: block;
     width: 34px;
     height: 34px;
     margin-bottom: -34px;
-    transform: translateX(calc(-100% - 10px));
-    border-radius: 50%;
-    background: rgba(0, 0, 0, 0.55);
-    backdrop-filter: blur(4px);
-    color: #fff;
+    font-size: 28px;
+    line-height: 34px;
+    text-align: center;
+    opacity: 0.55;
+    filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.6));
     pointer-events: none;
-    animation: caseScrollHintBounce 1.4s ease-in-out infinite;
+    animation: caseScrollHintSwipe 1.6s ease-in-out infinite;
     transition: opacity 0.3s ease;
   }
 
-  .case-card__scroll-hint svg {
-    width: 18px;
-    height: 18px;
-  }
-
   .case-card__scroll-hint.is-hidden {
-    opacity: 0;
+    opacity: 0 !important;
   }
 
-  @keyframes caseScrollHintBounce {
-    0%, 100% { transform: translateX(calc(-100% - 10px)) translateY(0); }
-    50% { transform: translateX(calc(-100% - 10px)) translateY(5px); }
+  @keyframes caseScrollHintSwipe {
+    0%, 100% { transform: translateX(calc(-100% - 10px)) translateY(0); opacity: 0.55; }
+    50% { transform: translateX(calc(-100% - 10px)) translateY(16px); opacity: 0.3; }
   }
 }
 
