@@ -976,20 +976,18 @@ p {
   }
 
   .case-card__scroll-hint {
-    position: sticky;
-    top: 10px;
-    left: 100%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
     z-index: 3;
     display: block;
-    width: 34px;
-    height: 34px;
-    margin-bottom: -34px;
+    width: 40px;
+    height: 40px;
     color: #fff;
-    opacity: 0.7;
+    opacity: 0;
     filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.55));
     pointer-events: none;
-    animation: caseScrollHintSwipe 1.6s ease-in-out infinite;
-    transition: opacity 0.3s ease;
+    animation: caseScrollHintCycle 4.5s ease-in-out infinite;
   }
 
   .case-card__scroll-hint svg {
@@ -999,11 +997,18 @@ p {
 
   .case-card__scroll-hint.is-hidden {
     opacity: 0 !important;
+    animation: none !important;
   }
 
-  @keyframes caseScrollHintSwipe {
-    0%, 100% { transform: translateX(calc(-100% - 10px)) translateY(0); opacity: 0.7; }
-    50% { transform: translateX(calc(-100% - 10px)) translateY(16px); opacity: 0.4; }
+  /* Поява по центру → імітація натискання (зменшення) → свайп вліво з
+     розчиненням → пауза ~2с → цикл повторюється */
+  @keyframes caseScrollHintCycle {
+    0% { opacity: 0; transform: translate(-50%, -50%) scale(1); }
+    11% { opacity: 0.8; transform: translate(-50%, -50%) scale(1); }
+    22% { opacity: 0.8; transform: translate(-50%, -50%) scale(0.82); }
+    33% { opacity: 0.8; transform: translate(-50%, -50%) scale(1); }
+    56% { opacity: 0; transform: translate(calc(-50% - 70px), -50%) scale(1); }
+    100% { opacity: 0; transform: translate(-50%, -50%) scale(1); }
   }
 }
 
