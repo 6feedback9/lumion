@@ -1,0 +1,16 @@
+name = "dnka-api"
+main = "src/index.js"
+compatibility_date = "2024-09-23"
+workers_dev = true
+
+[[d1_databases]]
+binding = "DB"
+database_name = "dnka"
+database_id = "__D1_ID__"
+
+[[kv_namespaces]]
+binding = "IMAGES"
+id = "__KV_ID__"
+
+[observability]
+enabled = true
