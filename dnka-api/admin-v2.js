@@ -35,7 +35,7 @@ function scheduleChips(sched){
     if (!groupsBy.has(key)) groupsBy.set(key, Object.assign({ sites: [] }, s));
     groupsBy.get(key).sites.push(s.label);
   }
-  if (!groupsBy.size) return '<span class="sched-chip none">Без розкладу</span>';
+  if (!groupsBy.size) return '<span class="sched-chip none">+ Дата показу</span>';
   const now = Date.now();
   return [...groupsBy.values()].map(g => {
     const startMs = g.start ? Date.parse(zonedInputToIso(g.start, SITE_TZ[g.lang])) : -Infinity;
@@ -94,8 +94,10 @@ function enhanceCard(card, placement, b){
   actions.className = 'head-actions';
   actions.innerHTML = `<button type="button" class="btn-ghost act-archive" title="Сховати з усіх сайтів і перенести в архів">В архів</button>
     <button type="button" class="btn-toggle"></button>`;
-  const sched = document.createElement('div');
+  const sched = document.createElement('button');
+  sched.type = 'button';
   sched.className = 'sum-sched';
+  sched.title = 'Змінити дати показу';
   head.insertBefore(sched, head.querySelector('.badges-lang'));
   head.appendChild(actions);
 
@@ -149,6 +151,103 @@ function enhanceCard(card, placement, b){
   toggle.addEventListener('click', () => setOpen(!card.classList.contains('open')));
   sum.addEventListener('click', () => setOpen(!card.classList.contains('open')));
   actions.querySelector('.act-archive').addEventListener('click', () => archiveBanner(placement, b.id));
+  sched.addEventListener('click', e => { e.stopPropagation(); openSchedPopover(card, b, sched, refreshSum); });
+}
+
+// Dates straight from the row: a small popover with "from / until" for each
+// site, saved on its own — no need to open the banner.
+let schedPop = null;
+function closeSchedPopover(){
+  if (!schedPop) return;
+  schedPop.remove();
+  schedPop = null;
+  document.removeEventListener('mousedown', schedOutside, true);
+  document.removeEventListener('keydown', schedEsc, true);
+}
+function schedOutside(e){ if (schedPop && !schedPop.contains(e.target) && !e.target.closest('.sum-sched')) closeSchedPopover(); }
+function schedEsc(e){ if (e.key === 'Escape') closeSchedPopover(); }
+
+function openSchedPopover(card, b, anchor, refresh){
+  const reopen = schedPop && schedPop.dataset.id === b.id;
+  closeSchedPopover();
+  if (reopen) return;
+  const editorVal = c => (card.querySelector('.f-' + c) || {}).value;
+  const current = (lang, sfx, key) => editorVal(key + '-' + lang) ??
+    (b[key + '_at' + sfx] ? isoToZonedInput(b[key + '_at' + sfx], SITE_TZ[lang]) : '');
+  const pop = document.createElement('div');
+  pop.className = 'sched-pop';
+  pop.dataset.id = b.id;
+  pop.innerHTML = `
+    <div class="sp-head"><b>Розклад показу</b><button type="button" class="sp-x" aria-label="Закрити">×</button></div>
+    ${SCHED_LANGS.map(([lang, sfx, label]) => `
+      <div class="sp-row" data-lang="${lang}">
+        <span class="sp-lang${b['active' + sfx] ? '' : ' off'}" title="${b['active' + sfx] ? 'Показується на сайті' : 'Вимкнено на цьому сайті'}">${label}</span>
+        <label>з<input type="datetime-local" class="sp-start" value="${escapeAttr(current(lang, sfx, 'starts'))}"></label>
+        <label>до<input type="datetime-local" class="sp-end" value="${escapeAttr(current(lang, sfx, 'ends'))}"></label>
+        <button type="button" class="sp-clear" title="Без обмежень за часом">очистити</button>
+      </div>`).join('')}
+    <div class="sp-note">Час — за часом сайту: PL і EN — Варшава, UK — Київ. Порожньо — без обмежень. Працює лише на сайтах, де стоїть галочка «Показувати на сайті».</div>
+    <div class="sp-actions">
+      <button type="button" class="btn-ghost sp-copy">Як у PL — для всіх</button>
+      <button type="button" class="btn-toggle sp-save">Зберегти</button>
+    </div>`;
+  document.body.appendChild(pop);
+  schedPop = pop;
+
+  // under the dates in the row; a bottom sheet on phones
+  if (innerWidth > 760) {
+    const r = anchor.getBoundingClientRect();
+    const w = pop.offsetWidth;
+    pop.style.top = (r.bottom + scrollY + 8) + 'px';
+    pop.style.left = Math.max(12, Math.min(r.right + scrollX - w, scrollX + innerWidth - w - 12)) + 'px';
+  } else {
+    pop.classList.add('sheet');
+  }
+  setTimeout(() => {
+    document.addEventListener('mousedown', schedOutside, true);
+    document.addEventListener('keydown', schedEsc, true);
+  }, 0);
+
+  pop.querySelector('.sp-x').addEventListener('click', closeSchedPopover);
+  pop.querySelectorAll('.sp-clear').forEach(btn => btn.addEventListener('click', () => {
+    const row = btn.closest('.sp-row');
+    row.querySelector('.sp-start').value = '';
+    row.querySelector('.sp-end').value = '';
+  }));
+  pop.querySelector('.sp-copy').addEventListener('click', () => {
+    const pl = pop.querySelector('.sp-row[data-lang="pl"]');
+    pop.querySelectorAll('.sp-row').forEach(row => {
+      row.querySelector('.sp-start').value = pl.querySelector('.sp-start').value;
+      row.querySelector('.sp-end').value = pl.querySelector('.sp-end').value;
+    });
+  });
+
+  pop.querySelector('.sp-save').addEventListener('click', async () => {
+    const payload = {};
+    for (const [lang, sfx, label] of SCHED_LANGS) {
+      const row = pop.querySelector(`.sp-row[data-lang="${lang}"]`);
+      const start = row.querySelector('.sp-start').value;
+      const end = row.querySelector('.sp-end').value;
+      if (start && end && end <= start) { toast(label + ': дата «до» має бути пізніше за «з»'); return; }
+      payload['starts_at' + sfx] = start ? zonedInputToIso(start, SITE_TZ[lang]) : null;
+      payload['ends_at' + sfx] = end ? zonedInputToIso(end, SITE_TZ[lang]) : null;
+    }
+    const btn = pop.querySelector('.sp-save');
+    btn.disabled = true; btn.textContent = 'Збереження…';
+    const { error } = await sb.from('banners').update(payload).eq('id', b.id);
+    btn.disabled = false; btn.textContent = 'Зберегти';
+    if (error) { toast('Помилка: ' + error.message); return; }
+    Object.assign(b, payload);
+    // keep the banner's own editor in step, so a later "Зберегти" there doesn't undo this
+    for (const [lang, sfx] of SCHED_LANGS) {
+      const s = card.querySelector('.f-starts-' + lang), e = card.querySelector('.f-ends-' + lang);
+      if (s) s.value = b['starts_at' + sfx] ? isoToZonedInput(b['starts_at' + sfx], SITE_TZ[lang]) : '';
+      if (e) e.value = b['ends_at' + sfx] ? isoToZonedInput(b['ends_at' + sfx], SITE_TZ[lang]) : '';
+    }
+    refresh();
+    closeSchedPopover();
+    toast('Розклад збережено');
+  });
 }
 
 function renderArchive(placement){
