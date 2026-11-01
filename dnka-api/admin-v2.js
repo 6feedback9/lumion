@@ -18,6 +18,35 @@ function bannerMeta(b){
   if (link) parts.push(link.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, ''));
   return parts.join(' → ') || 'Без кнопки';
 }
+// Schedule shown in the row: per site, in that site's own time zone, grouped
+// when several sites share the same dates.
+const SCHED_LANGS = [['pl', '', 'PL'], ['en', '_en', 'EN'], ['uk', '_uk', 'UK']];
+function shortWall(v){
+  // "2026-11-05T10:00" → "05.11 10:00" (year only when it isn't this year)
+  const m = /^(\d{4})-(\d{2})-(\d{2})T(\d{2}:\d{2})/.exec(v || '');
+  if (!m) return '';
+  return `${m[3]}.${m[2]}${+m[1] !== new Date().getFullYear() ? '.' + m[1] : ''} ${m[4]}`;
+}
+function scheduleChips(sched){
+  const groupsBy = new Map();
+  for (const s of sched) {
+    if (!s.start && !s.end) continue;
+    const key = s.start + '|' + s.end;
+    if (!groupsBy.has(key)) groupsBy.set(key, Object.assign({ sites: [] }, s));
+    groupsBy.get(key).sites.push(s.label);
+  }
+  if (!groupsBy.size) return '<span class="sched-chip none">Без розкладу</span>';
+  const now = Date.now();
+  return [...groupsBy.values()].map(g => {
+    const startMs = g.start ? Date.parse(zonedInputToIso(g.start, SITE_TZ[g.lang])) : -Infinity;
+    const endMs = g.end ? Date.parse(zonedInputToIso(g.end, SITE_TZ[g.lang])) : Infinity;
+    const state = now < startMs ? 'soon' : now >= endMs ? 'over' : 'live';
+    const hint = { soon: 'Ще не почався', live: 'Показується зараз', over: 'Вже закінчився' }[state];
+    const text = (g.start ? 'з ' + shortWall(g.start) : '') + (g.start && g.end ? ' ' : '') + (g.end ? 'до ' + shortWall(g.end) : '');
+    return `<span class="sched-chip ${state}" title="${hint}"><b>${g.sites.join(' · ')}</b> ${escapeHtml(text)}</span>`;
+  }).join('');
+}
+
 function thumbHtml(b){
   return `<div class="sum-thumb">${b.image_url ? `<img src="${escapeAttr(b.image_url)}" alt="" loading="lazy">` : '<span>немає фото</span>'}</div>`;
 }
@@ -65,6 +94,9 @@ function enhanceCard(card, placement, b){
   actions.className = 'head-actions';
   actions.innerHTML = `<button type="button" class="btn-ghost act-archive" title="Сховати з усіх сайтів і перенести в архів">В архів</button>
     <button type="button" class="btn-toggle"></button>`;
+  const sched = document.createElement('div');
+  sched.className = 'sum-sched';
+  head.insertBefore(sched, head.querySelector('.badges-lang'));
   head.appendChild(actions);
 
   // three columns: computer picture (+ button position) · phone picture · texts
@@ -94,9 +126,17 @@ function enhanceCard(card, placement, b){
     });
     sum.querySelector('.sum-title').textContent = bannerTitle(live);
     sum.querySelector('.sum-meta').textContent = bannerMeta(live);
+    sched.innerHTML = scheduleChips(SCHED_LANGS.map(([lang, sfx, label]) => ({
+      lang, label,
+      start: val('starts-' + lang) ?? (b['starts_at' + sfx] ? isoToZonedInput(b['starts_at' + sfx], SITE_TZ[lang]) : ''),
+      end: val('ends-' + lang) ?? (b['ends_at' + sfx] ? isoToZonedInput(b['ends_at' + sfx], SITE_TZ[lang]) : ''),
+    })));
   };
   refreshSum();
   fields.addEventListener('input', refreshSum);
+  fields.addEventListener('change', refreshSum);
+  // "очистити" under a date empties it without an input event
+  fields.addEventListener('click', e => { if (e.target.closest('.clear-date')) setTimeout(refreshSum, 0); });
 
   const toggle = actions.querySelector('.btn-toggle');
   const setOpen = open => {
