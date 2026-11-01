@@ -71,10 +71,10 @@ function enhanceCard(card, placement, b){
   const body = document.createElement('div');
   body.className = 'card-body';
   const colD = document.createElement('div');
-  colD.className = 'col-desk';
+  colD.className = 'col-desk img-col';
   colD.innerHTML = `<div class="col-title">Комп'ютер</div>`;
   const colM = document.createElement('div');
-  colM.className = 'col-mob';
+  colM.className = 'col-mob img-col';
   colM.innerHTML = `<div class="col-title">Телефон</div>`;
   const deskDrop = imgCol.querySelector('.img-drop:not(.mobile)');
   if (deskDrop) colD.appendChild(deskDrop);
