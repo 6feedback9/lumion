@@ -24,6 +24,7 @@ CREATE TABLE IF NOT EXISTS banners (
   button_position_mobile INTEGER,
   button_x_desktop INTEGER,
   button_y_desktop INTEGER,
+  archived INTEGER DEFAULT 0,
   created_at TEXT,
   updated_at TEXT
 );

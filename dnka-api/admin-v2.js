@@ -1,0 +1,185 @@
+
+/* ---------- Layout v2: each banner is a compact row (picture, title, sites)
+   that opens into a full-width editor — computer · phone · texts side by side.
+   Banners that are no longer needed go to the archive: hidden on every site,
+   kept with all their settings, and can be restored or deleted for good. ---------- */
+const openCards = new Set();
+groups.hero.archived = [];
+groups.category.archived = [];
+
+function bannerTitle(b){
+  return String(b.heading || b.heading_en || b.heading_uk || '').trim() || 'Без заголовка';
+}
+function bannerMeta(b){
+  const link = b.button_link || b.button_link_en || b.button_link_uk || '';
+  const text = b.button_text || b.button_text_en || b.button_text_uk || '';
+  const parts = [];
+  if (text) parts.push('Кнопка «' + text + '»');
+  if (link) parts.push(link.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, ''));
+  return parts.join(' → ') || 'Без кнопки';
+}
+function thumbHtml(b){
+  return `<div class="sum-thumb">${b.image_url ? `<img src="${escapeAttr(b.image_url)}" alt="" loading="lazy">` : '<span>немає фото</span>'}</div>`;
+}
+
+loadBanners = async function(){
+  const { data, error } = await sb.from('banners').select('*').order('position', { ascending: true });
+  if (error) { toast('Помилка завантаження: ' + error.message); return; }
+  for (const placement of ['hero', 'category']) {
+    const all = (data || []).filter(b => b.placement === placement);
+    groups[placement].list = all.filter(b => !b.archived);
+    groups[placement].archived = all.filter(b => b.archived);
+  }
+  render('hero');
+  render('category');
+};
+
+const renderV1 = render;
+render = function(placement){
+  renderV1(placement);
+  renderArchive(placement);
+};
+
+const renderCardV1 = renderCard;
+renderCard = function(placement, b, idx){
+  const card = renderCardV1(placement, b, idx);
+  enhanceCard(card, placement, b);
+  return card;
+};
+
+function enhanceCard(card, placement, b){
+  card.classList.add('v2');
+  const head = card.querySelector('.card-head');
+  const grid = card.querySelector('.grid');
+  const imgCol = grid.querySelector('.img-col');
+  const fields = grid.querySelector('.fields');
+
+  // compact summary in place of the empty spacer of the old header
+  const sum = document.createElement('div');
+  sum.className = 'card-sum';
+  sum.title = 'Натисніть, щоб відкрити або згорнути';
+  sum.innerHTML = thumbHtml(b) + `<div class="sum-text"><div class="sum-title"></div><div class="sum-meta"></div></div>`;
+  const spacer = [...head.children].find(el => el.getAttribute('style') === 'flex:1');
+  if (spacer) spacer.replaceWith(sum); else head.insertBefore(sum, head.querySelector('.badges-lang'));
+  const actions = document.createElement('div');
+  actions.className = 'head-actions';
+  actions.innerHTML = `<button type="button" class="btn-ghost act-archive" title="Сховати з усіх сайтів і перенести в архів">В архів</button>
+    <button type="button" class="btn-toggle"></button>`;
+  head.appendChild(actions);
+
+  // three columns: computer picture (+ button position) · phone picture · texts
+  const body = document.createElement('div');
+  body.className = 'card-body';
+  const colD = document.createElement('div');
+  colD.className = 'col-desk';
+  colD.innerHTML = `<div class="col-title">Комп'ютер</div>`;
+  const colM = document.createElement('div');
+  colM.className = 'col-mob';
+  colM.innerHTML = `<div class="col-title">Телефон</div>`;
+  const deskDrop = imgCol.querySelector('.img-drop:not(.mobile)');
+  if (deskDrop) colD.appendChild(deskDrop);
+  const posDesk = card.querySelector('.btn-pos-d');
+  if (posDesk) colD.appendChild(posDesk);
+  while (imgCol.firstChild) colM.appendChild(imgCol.firstChild);
+  fields.classList.add('col-fields');
+  body.append(colD, colM, fields);
+  grid.replaceWith(body);
+
+  // the row title follows what's typed, before it's even saved
+  const refreshSum = () => {
+    const val = c => (card.querySelector('.f-' + c) || {}).value;
+    const live = Object.assign({}, b, {
+      heading: val('heading-pl') ?? b.heading, heading_en: val('heading-en') ?? b.heading_en, heading_uk: val('heading-uk') ?? b.heading_uk,
+      button_text: val('button-text-pl') ?? b.button_text, button_link: val('button-link-pl') ?? b.button_link,
+    });
+    sum.querySelector('.sum-title').textContent = bannerTitle(live);
+    sum.querySelector('.sum-meta').textContent = bannerMeta(live);
+  };
+  refreshSum();
+  fields.addEventListener('input', refreshSum);
+
+  const toggle = actions.querySelector('.btn-toggle');
+  const setOpen = open => {
+    card.classList.toggle('open', open);
+    toggle.textContent = open ? 'Згорнути' : 'Редагувати';
+    if (open) openCards.add(b.id); else openCards.delete(b.id);
+  };
+  // a fresh, still-empty slide opens straight away so it can be filled in
+  setOpen(openCards.has(b.id) || !b.image_url);
+  toggle.addEventListener('click', () => setOpen(!card.classList.contains('open')));
+  sum.addEventListener('click', () => setOpen(!card.classList.contains('open')));
+  actions.querySelector('.act-archive').addEventListener('click', () => archiveBanner(placement, b.id));
+}
+
+function renderArchive(placement){
+  const group = groups[placement];
+  let box = document.getElementById('archive-' + placement);
+  if (!box) {
+    box = document.createElement('details');
+    box.className = 'archive';
+    box.id = 'archive-' + placement;
+    group.el.after(box);
+  }
+  const wasOpen = box.open;
+  const items = group.archived;
+  box.innerHTML = `<summary>Архів (${items.length})</summary>` + (items.length
+    ? items.map(b => `
+      <div class="archive-row" data-id="${escapeAttr(b.id)}">
+        ${thumbHtml(b)}
+        <div class="sum-text"><div class="sum-title">${escapeHtml(bannerTitle(b))}</div><div class="sum-meta">${escapeHtml(bannerMeta(b))}</div></div>
+        <button type="button" class="btn-ghost act-restore">Повернути</button>
+        <button type="button" class="btn-ghost danger act-delete">Видалити назавжди</button>
+      </div>`).join('')
+    : `<div class="archive-empty">Тут з'являться банери, які ви перенесете в архів. На сайтах вони не показуються, але їх можна повернути.</div>`);
+  box.open = wasOpen;
+  box.querySelectorAll('.archive-row').forEach(row => {
+    row.querySelector('.act-restore').addEventListener('click', () => restoreBanner(placement, row.dataset.id));
+    row.querySelector('.act-delete').addEventListener('click', () => deleteArchived(placement, row.dataset.id));
+  });
+}
+
+async function archiveBanner(placement, id){
+  const group = groups[placement];
+  const b = group.list.find(x => x.id === id);
+  if (!b) return;
+  if (!confirm('Перенести банер в архів?\n\nНа всіх сайтах він зникне, але всі налаштування збережуться — його можна буде повернути.')) return;
+  const { error } = await sb.from('banners').update({ archived: true }).eq('id', id);
+  if (error) { toast('Помилка: ' + error.message); return; }
+  b.archived = true;
+  group.list = group.list.filter(x => x.id !== id);
+  group.archived.unshift(b);
+  openCards.delete(id);
+  render(placement);
+  toast('Банер у архіві — на сайтах його вже немає');
+}
+
+async function restoreBanner(placement, id){
+  const group = groups[placement];
+  const b = group.archived.find(x => x.id === id);
+  if (!b) return;
+  // back at the end of the slider; the per-site "show" ticks stay as they were
+  const position = group.list.length ? Math.max(...group.list.map(x => x.position)) + 1 : 0;
+  const { error } = await sb.from('banners').update({ archived: false, position }).eq('id', id);
+  if (error) { toast('Помилка: ' + error.message); return; }
+  Object.assign(b, { archived: false, position });
+  group.archived = group.archived.filter(x => x.id !== id);
+  group.list.push(b);
+  render(placement);
+  toast('Банер повернуто в кінець списку');
+}
+
+async function deleteArchived(placement, id){
+  const group = groups[placement];
+  const b = group.archived.find(x => x.id === id);
+  if (!b) return;
+  if (!confirm('Видалити банер назавжди? Повернути його вже не вийде.')) return;
+  const { error } = await sb.from('banners').delete().eq('id', id);
+  if (error) { toast('Помилка: ' + error.message); return; }
+  for (const url of [b.image_url, b.image_url_mobile]) {
+    const path = url && extractStoragePath(url);
+    if (path) sb.storage.from('banner-images').remove([path]).catch(() => {});
+  }
+  group.archived = group.archived.filter(x => x.id !== id);
+  render(placement);
+  toast('Банер видалено');
+}

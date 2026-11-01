@@ -21,7 +21,7 @@
 //   ADMIN_PASSWORD, SESSION_SECRET, RESEND_API_KEY
 
 const TABLES = {
-  banners: { pk: 'id', uuid: true, bools: ['active', 'active_en', 'active_uk'], touch: true },
+  banners: { pk: 'id', uuid: true, bools: ['active', 'active_en', 'active_uk', 'archived'], touch: true },
   instructors: { pk: 'id', uuid: false, bools: ['active'], touch: true },
   partners: { pk: 'id', uuid: true, bools: [] },
   site_settings: { pk: 'key', uuid: false, bools: [], json: ['value'], touch: true },
@@ -118,7 +118,7 @@ async function publicBanners(env, lang) {
   const { results } = await env.DB.prepare('SELECT * FROM banners ORDER BY placement ASC, position ASC').all();
   const now = Date.now();
   const rows = results
-    .filter(b => isLive(b['active' + sfx], b['starts_at' + sfx], b['ends_at' + sfx], now))
+    .filter(b => !b.archived && isLive(b['active' + sfx], b['starts_at' + sfx], b['ends_at' + sfx], now))
     .map(b => decode('banners', b));
   // short browser/CDN cache: a scheduled banner still appears within a minute
   return json(rows, 200, { 'Cache-Control': 'public, max-age=60' });
