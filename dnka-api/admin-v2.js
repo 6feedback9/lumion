@@ -18,7 +18,7 @@ function bannerMeta(b){
   if (link) parts.push(link.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, ''));
   return parts.join(' → ') || 'Без кнопки';
 }
-// Schedule shown in the row: per site, in that site's own time zone, grouped
+// Schedule shown in the row: per site, in Kyiv time (SITE_TZ), grouped
 // when several sites share the same dates.
 const SCHED_LANGS = [['pl', '', 'PL'], ['en', '_en', 'EN'], ['uk', '_uk', 'UK']];
 function shortWall(v){
@@ -186,7 +186,7 @@ function openSchedPopover(card, b, anchor, refresh){
         <label>до<input type="datetime-local" class="sp-end" value="${escapeAttr(current(lang, sfx, 'ends'))}"></label>
         <button type="button" class="sp-clear" title="Без обмежень за часом">очистити</button>
       </div>`).join('')}
-    <div class="sp-note">Час — за часом сайту: PL і EN — Варшава, UK — Київ. Порожньо — без обмежень. Працює лише на сайтах, де стоїть галочка «Показувати на сайті».</div>
+    <div class="sp-note">Час — київський для всіх сайтів. Порожньо — без обмежень. Працює лише на сайтах, де стоїть галочка «Показувати на сайті».</div>
     <div class="sp-actions">
       <button type="button" class="btn-ghost sp-copy">Як у PL — для всіх</button>
       <button type="button" class="btn-toggle sp-save">Зберегти</button>
