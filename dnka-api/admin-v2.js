@@ -188,7 +188,7 @@ function openSchedPopover(card, b, anchor, refresh){
       </div>`).join('')}
     <div class="sp-note">Час — київський для всіх сайтів. Порожньо — без обмежень. Працює лише на сайтах, де стоїть галочка «Показувати на сайті».</div>
     <div class="sp-actions">
-      <button type="button" class="btn-ghost sp-copy">Як у PL — для всіх</button>
+      <button type="button" class="btn-ghost sp-copy">Однаково для всіх сайтів</button>
       <button type="button" class="btn-toggle sp-save">Зберегти</button>
     </div>`;
   document.body.appendChild(pop);
