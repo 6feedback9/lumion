@@ -6674,3 +6674,7 @@ html[data-theme="light"] .sc-frame{box-shadow:0 40px 80px rgba(70,50,110,.25),0 
   .scm-meta em{font-style:normal;font-size:13px;color:var(--muted)}
 }
 .svc-row[id],section[id="process"],section[id="approach"],section[id="support"]{scroll-margin-top:100px}
+
+.lm-logo{display:block;background:currentColor;-webkit-mask:var(--m) center/contain no-repeat;mask:var(--m) center/contain no-repeat;max-width:none}
+.lm-item{min-width:0!important;padding:0 40px!important}
+@media (max-width:700px){.lm-item{padding:0 28px!important}.lm-logo{transform:scale(.85)}}
