@@ -8,9 +8,9 @@
   var FS='precision highp float;uniform vec2 R;uniform float T;uniform float L;'+
   'float hash(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}'+
   'void main(){vec2 p=(gl_FragCoord.xy-.5*R)/R.y;float y0=R.x<R.y?-.35:-.26;'+
-  'vec3 bgD=vec3(.067,.075,.098),bgL=vec3(.961,.965,.980);vec3 bg=mix(bgD,bgL,L);'+
-  'vec3 c1=mix(vec3(.45,.72,1.),vec3(.18,.44,.95),L),c2=mix(vec3(.62,.55,1.),vec3(.42,.32,.9),L);'+
-  'vec3 col=bg;float sx=smoothstep(-.7,.7,p.x);vec3 cc=mix(c1,c2,sx);'+
+  'vec3 bgD=vec3(.067,.075,.098),bgL=vec3(.961,.949,.925);vec3 bg=mix(bgD,bgL,L);'+
+  'vec3 c1=mix(vec3(.45,.72,1.),vec3(.30,.36,.90),L),c2=mix(vec3(.62,.55,1.),vec3(.58,.38,.92),L);'+
+  'vec3 col=bg;col=mix(col,vec3(.80,.82,1.),L*exp(-length(p-vec2(-.55,.22))*2.1)*.55);col=mix(col,vec3(1.,.82,.72),L*exp(-length(p-vec2(.6,.3))*2.2)*.5);float sx=smoothstep(-.7,.7,p.x);vec3 cc=mix(c1,c2,sx);'+
   'col+=(cc-bg*0.)*exp(-abs(p.y-y0)*9.)*mix(.5,.22,L);'+
   'col+=cc*exp(-max(p.y-y0,0.)*3.2)*mix(.10,.06,L);'+
   'if(p.y<y0){float z=1./(y0-p.y);float x=p.x*z;float gx=abs(fract(x*.5)-.5),gz=abs(fract(z*.45+T*.3)-.5);'+
