@@ -6434,7 +6434,7 @@ html[data-theme="light"] .geo-svg .ga{fill:rgba(58,139,234,.25);stroke:#3a8bea}
 @media (max-width:700px){.lh-title{font-size:32px}}
 
 /* ===== Home hero: compact text like the reference, full-bleed animated banner ===== */
-.lh-hero__copy{max-width:900px}
+.lh-hero__copy{max-width:1000px}
 .lh-title{font-size:clamp(34px,4.4vw,66px);line-height:1.08;margin:16px 0 18px}
 .lh-lead{max-width:620px;font-size:clamp(16px,1.35vw,19px)}
 .lh-actions{gap:14px}
@@ -6450,4 +6450,3 @@ html[data-theme="light"] .geo-svg .ga{fill:rgba(58,139,234,.25);stroke:#3a8bea}
   .lh-hero{min-height:calc(100svh - 75px);padding:0 0 20px}
   .lh-hero__copy{padding:12px 20px 0}
 }
-.lh-hero__copy{max-width:1100px}
