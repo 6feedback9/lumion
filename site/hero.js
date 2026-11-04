@@ -21,7 +21,7 @@
   function draw(now){
     var t=(now-t0)/1000;ctx.clearRect(0,0,W,H);
     var cs=getComputedStyle(root),ink=cs.getPropertyValue('--ink').trim()||'255,255,255',hit=cs.getPropertyValue('--hit').trim()||'115,183,255';
-    var beam=((t*220)%(W+400))-200;
+    var k=root.getAttribute('data-theme')==='light'?.55:1,beam=((t*220)%(W+400))-200;
     ctx.font='400 '+(rows[0]?rows[0].fs:15)+'px "IBM Plex Mono",ui-monospace,monospace';ctx.textBaseline='middle';
     var cw=ctx.measureText('M').width;
     for(var i=0;i<rows.length;i++){
@@ -30,7 +30,7 @@
         var x0=rep*total-off;
         for(var c=0;c<r.s.length;c+=6){
           var x=x0+c*cw;if(x>W||x<-cw*6)continue;
-          var cx=x+cw*3,fm=fade(cx,r.y),a=.24*fm,d=Math.abs(cx-beam),md=Math.hypot(cx-mx,r.y-my),h=0;
+          var cx=x+cw*3,fm=fade(cx,r.y),a=.24*fm*k,d=Math.abs(cx-beam),md=Math.hypot(cx-mx,r.y-my),h=0;
           if(d<190)h=Math.max(h,1-d/190);if(md<150)h=Math.max(h,(1-md/150)*.9);h*=fm;
           ctx.fillStyle=h>0?'rgba('+hit+','+(a+h*.7)+')':'rgba('+ink+','+a+')';
           ctx.fillText(r.s.substr(c,6),x,r.y);
