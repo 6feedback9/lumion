@@ -6368,3 +6368,4 @@ body.consult-open {
 html[data-theme="light"] .geo-svg .gc{fill:#e1e6f1;stroke:#b9c3d9}
 html[data-theme="light"] .geo-svg .gc:hover{fill:#d3e3fb}
 html[data-theme="light"] .geo-svg .ga{fill:rgba(58,139,234,.25);stroke:#3a8bea}
+.nav-dropdown__panel a.is-active::after{display:none!important}
