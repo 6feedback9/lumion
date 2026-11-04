@@ -6652,3 +6652,6 @@ html[data-theme="light"] .sc-frame{box-shadow:0 40px 80px rgba(70,50,110,.25),0 
 .sc-d{position:absolute;left:0;top:0;opacity:0;transition:opacity .4s}.sc-d.is-on{opacity:1}
 .sc-open{color:var(--accent-fg);font-weight:600;white-space:nowrap}
 @media (max-width:900px){.sc{grid-template-columns:1fr;gap:22px}.sc-list{flex-direction:row;overflow-x:auto;gap:8px;padding-bottom:4px;scrollbar-width:none}.sc-list::-webkit-scrollbar{display:none}.sc-item{flex:none;border:1px solid rgba(var(--ink),.14);border-radius:100px;padding:9px 16px}.sc-item i,.sc-item em{display:none}.sc-item b{font-size:15px}.sc-item.is-on{padding-left:16px;border-color:var(--accent-fg);background:rgba(var(--hit),.1)}.sc-stage{order:-1}}
+
+/* floating consultation button removed */
+.consult-trigger{display:none!important}
