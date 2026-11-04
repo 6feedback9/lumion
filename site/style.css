@@ -6577,3 +6577,14 @@ html[data-theme="light"] .lh-hero{background:transparent}
 .geo-map-wrap{margin-top:8px!important}
 .geo-map-section + .section{padding-top:36px!important}
 .geo-map-section .section-head{margin-bottom:8px!important}
+
+/* light theme map */
+html[data-theme="light"] .geo-svg .pl{fill:#1c1826!important;stroke:#f5f2ec!important;stroke-width:3px;paint-order:stroke;font-weight:700;text-shadow:none!important}
+html[data-theme="light"] .geo-svg .gland{fill:rgba(70,80,214,.07)}
+html[data-theme="light"] .geo-svg .gborders{stroke:rgba(70,80,214,.2)}
+html[data-theme="light"] .geo-svg .ga{fill:rgba(85,96,232,.28);stroke:#4650d6;filter:none}
+html[data-theme="light"] .geo-svg .ga:hover{fill:rgba(85,96,232,.42)}
+html[data-theme="light"] .geo-svg .pd{fill:#4650d6;filter:none}
+html[data-theme="light"] .geo-svg .pr2{stroke:rgba(70,80,214,.55)}
+html[data-theme="light"] .geo-svg .pr{stroke:rgba(70,80,214,.25)}
+html[data-theme="light"] .geo-svg .gl{stroke:rgba(70,80,214,.4)}
