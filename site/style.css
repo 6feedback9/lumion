@@ -6433,14 +6433,11 @@ html[data-theme="light"] .geo-svg .ga{fill:rgba(58,139,234,.25);stroke:#3a8bea}
 .lh-note{max-width:none}
 @media (max-width:700px){.lh-title{font-size:32px}}
 
-/* ===== Home: edge-to-edge banner (header, hero, strip span the full screen) ===== */
-body:has(.lh-hero) .site-header{top:0;background:rgba(var(--surf),.88);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
-body:has(.lh-hero) .site-header .nav-wrap{max-width:none;width:100%;border:0;border-radius:0;background:transparent;box-shadow:none;padding:0 max(24px,3vw);min-height:68px}
-body:has(.lh-hero) .lh-hero{padding-top:36px}
-body:has(.lh-hero) .lh-hero__copy{max-width:none}
-body:has(.lh-hero) .lh-title{font-size:clamp(34px,5vw,84px)}
-body:has(.lh-hero) .lh-lead{max-width:760px}
-body:has(.lh-hero) .trust-bar{padding:0}
-body:has(.lh-hero) .trust-bar>.container{max-width:none;width:100%}
-body:has(.lh-hero) .trust-bar>.trust-bar__inner{border-radius:0;border-left:0;border-right:0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:rgba(var(--ink),.04);padding:20px max(24px,4vw)}
-@media (max-width:700px){body:has(.lh-hero) .site-header .nav-wrap{min-height:60px;padding:0 16px}}
+/* ===== Home hero: compact text like the reference, full-bleed animated banner ===== */
+.lh-hero__copy{max-width:900px}
+.lh-title{font-size:clamp(34px,4.4vw,66px);line-height:1.08;margin:16px 0 18px}
+.lh-lead{max-width:620px;font-size:clamp(16px,1.35vw,19px)}
+.lh-actions{gap:14px}
+.lh-link{border:1px solid var(--line-strong);border-radius:14px;padding:16px 26px;background:rgba(var(--ink),.06)}
+.lh-note{font-size:13px}
+@media (max-width:700px){.lh-title{font-size:32px}.lh-link{align-self:stretch;text-align:center}}
