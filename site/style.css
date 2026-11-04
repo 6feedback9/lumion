@@ -6678,3 +6678,43 @@ html[data-theme="light"] .sc-frame{box-shadow:0 40px 80px rgba(70,50,110,.25),0 
 .lm-logo{display:block;background:currentColor;-webkit-mask:var(--m) center/contain no-repeat;mask:var(--m) center/contain no-repeat;max-width:none}
 .lm-item{min-width:0!important;padding:0 40px!important}
 @media (max-width:700px){.lm-item{padding:0 28px!important}.lm-logo{transform:scale(.85)}}
+
+/* ===== TABLET (701–1100px): dedicated layout ===== */
+@media (min-width:701px) and (max-width:1100px){
+  .container{max-width:none;padding-left:max(32px,4.5vw);padding-right:max(32px,4.5vw)}
+  /* hero */
+  body:has(.lh-hero) .lh-hero{min-height:min(74svh,760px)!important}
+  .lh-title{font-size:clamp(44px,7vw,68px)!important;line-height:1.06!important}
+  .lh-hero__copy{max-width:760px}
+  /* sections spacing */
+  .section{padding-top:72px;padding-bottom:72px}
+  .section-head h2,.section h2{font-size:clamp(30px,4.4vw,42px);line-height:1.12}
+  /* prices + steps */
+  .hp-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+  .hs-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+  /* blog */
+  .blog-cards,.blog-cards--four{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+  /* cases */
+  .cx-grid,.cases-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:32px 24px!important}
+  /* showcase cards */
+  .scm-card{width:46vw!important;max-width:400px!important}
+  /* footer */
+  .footer-grid{grid-template-columns:1.4fr 1fr 1fr!important;gap:36px 32px!important}
+  .footer-col--brand{grid-column:auto!important}
+  /* drawer */
+  .mobile-drawer{width:min(460px,56vw);right:-480px;padding:112px 36px 36px;gap:26px}
+  .mobile-drawer.is-open{right:0}
+  .mobile-drawer__nav{gap:12px}
+  .mobile-drawer__nav a,.mobile-drawer__nav-label{font-size:20px;padding:17px 20px;border-radius:16px}
+  .mobile-drawer .btn--full{padding:18px 24px;font-size:17px}
+  /* header: bigger tap targets */
+  .burger{width:50px;height:50px}
+  .lang-toggle a{padding:8px 12px;font-size:14px}
+}
+@media (min-width:701px) and (max-width:760px){
+  .hp-grid{grid-template-columns:minmax(0,1fr)}
+}
+@media (min-width:701px) and (max-width:1100px){
+  .case-filters{flex-wrap:wrap!important;overflow:visible!important}
+}
+@media (min-width:900px) and (max-width:1100px){.hs-grid{grid-template-columns:repeat(4,minmax(0,1fr))}}
