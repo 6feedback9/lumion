@@ -6489,3 +6489,13 @@ section h2:not(.visually-hidden):not(.blog-card__title):not(.addon-card__title),
 @media (max-width:700px){
   main h1:not(.lh-title),.page-hero h1,.article-hero h1{font-size:30px!important}
 }
+
+/* cases filter = same compact pill style as the blog filter */
+.case-filters{display:flex!important;flex-wrap:wrap;gap:8px!important;max-width:none!important;margin-bottom:32px}
+.case-filters .case-filter{width:auto!important;min-height:0!important;display:inline-block!important;padding:8px 18px!important;border-radius:100px;border:1px solid rgba(var(--ink),.2);background:transparent;color:var(--muted);font-size:13px!important;font-weight:600;font-family:var(--font-body);white-space:nowrap;line-height:1.4}
+.case-filters .case-filter:hover{border-color:rgba(var(--ink),.5);color:var(--text);background:transparent}
+.case-filters .case-filter.active{background:rgba(115,183,255,.15);border-color:rgba(115,183,255,.5);color:var(--accent-fg)}
+@media (max-width:700px){.case-filters{flex-wrap:nowrap!important;overflow-x:auto!important;margin-right:-20px;padding-right:20px!important;scrollbar-width:none}.case-filters::-webkit-scrollbar{display:none}}
+.case-filters .case-filter{padding:8px 14px!important;font-size:13px!important}
+@media (min-width:701px){.case-filters{max-width:1200px!important}}
+.case-filters{gap:6px!important}.case-filters .case-filter{padding:8px 12px!important}
