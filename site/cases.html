@@ -1,6 +1,7 @@
 <!DOCTYPE html>
   <html lang="uk">
   <head>
+  <script>(function(){var t=null;try{t=localStorage.getItem('lumi-theme')}catch(e){}if(!t&&window.matchMedia&&matchMedia('(prefers-color-scheme: light)').matches)t='light';document.documentElement.setAttribute('data-theme',t==='light'?'light':'dark');document.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('.theme-toggle');if(!b)return;var n=document.documentElement.getAttribute('data-theme')==='light'?'dark':'light';document.documentElement.setAttribute('data-theme',n);try{localStorage.setItem('lumi-theme',n)}catch(x){}})})();</script>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-S5JVKZ0ET5"></script>
 <script>
@@ -90,6 +91,7 @@
 
         <div class="nav-actions">
           <a href="/contact.html" class="btn btn--sm btn--ghost nav-cta">Обговорити проєкт</a>
+          <button class="theme-toggle" type="button" aria-label="Змінити тему" title="Змінити тему"><span class="ti-moon">☾</span><span class="ti-sun">☀</span></button>
           <div class="lang-toggle" id="langToggle" aria-label="Language">
           <a href="#" class="lang-opt lang-opt--uk">UA</a>
           <span class="lang-sep">|</span>
@@ -150,238 +152,241 @@
             <button class="case-filter" data-filter="education" type="button">Освіта / Корпоративний</button>
           </div>
 
-          <div class="cases-grid">
-            
-            <article class="case-card reveal" data-category="fashion">
-              <a class="case-card__link" href="https://odyah.cz/" target="_blank" rel="noopener">
-                <div class="case-card__frame">
-                  <div class="case-card__side case-card__side--left"><span>ÓDYAH</span></div>
+          <div class="cases-grid cx-grid">
+            <article class="case-card cx-card cx-card--site reveal" data-category="fashion">
+              <a class="case-card__link cx-card__link" href="https://odyah.cz/" target="_blank" rel="noopener">
+                <div class="cx-card__panel"><div class="cx-browser">
+                  <div class="cx-browser__bar"><i></i><i></i><i></i><span>odyah.cz</span></div>
                   <div class="case-card__image"><img src="/images/cases/odyah.jpg" alt="ÓDYAH" loading="lazy" /></div>
-                  <div class="case-card__bottom">
-                    <span class="case-card__type">Fashion / Brand</span>
-                    <p>Естетичний сайт для fashion-проєкту з акцентом на бренд, візуальну подачу та чистий користувацький шлях.</p>
-                  </div>
+                </div></div>
+                <div class="cx-card__body">
+                  <h3 class="cx-card__title">odyah.cz</h3>
+                  <p class="cx-card__desc">Естетичний сайт для fashion-проєкту з акцентом на бренд, візуальну подачу та чистий користувацький шлях.</p>
+                  <div class="cx-card__tags"><span class="cx-tag">Fashion / Brand</span><span class="cx-card__cta">Відкрити сайт ↗</span></div>
                 </div>
               </a>
             </article>
 
-            <article class="case-card reveal" data-category="fashion">
-              <a class="case-card__link" href="https://ambitna.ua/" target="_blank" rel="noopener">
-                <div class="case-card__frame">
-                  <div class="case-card__side case-card__side--right"><span>Ambitna</span></div>
+            <article class="case-card cx-card cx-card--site reveal" data-category="fashion">
+              <a class="case-card__link cx-card__link" href="https://ambitna.ua/" target="_blank" rel="noopener">
+                <div class="cx-card__panel"><div class="cx-browser">
+                  <div class="cx-browser__bar"><i></i><i></i><i></i><span>ambitna.ua</span></div>
                   <div class="case-card__image"><img src="/images/cases/ambitna.jpg" alt="Ambitna" loading="lazy" /></div>
-                  <div class="case-card__bottom">
-                    <span class="case-card__type">Fashion / E-commerce</span>
-                    <p>Інтернет-магазин для fashion-бренду з фокусом на категорії, продаж і SEO-логіку.</p>
-                  </div>
+                </div></div>
+                <div class="cx-card__body">
+                  <h3 class="cx-card__title">ambitna.ua</h3>
+                  <p class="cx-card__desc">Інтернет-магазин для fashion-бренду з фокусом на категорії, продаж і SEO-логіку.</p>
+                  <div class="cx-card__tags"><span class="cx-tag">Fashion / E-commerce</span><span class="cx-card__cta">Відкрити сайт ↗</span></div>
                 </div>
               </a>
             </article>
 
-            <article class="case-card reveal" data-category="b2b">
-              <a class="case-card__link" href="https://denimtrade.com.ua/" target="_blank" rel="noopener">
-                <div class="case-card__frame">
-                  <div class="case-card__side case-card__side--left"><span>Denim Trade</span></div>
+            <article class="case-card cx-card cx-card--site reveal" data-category="b2b">
+              <a class="case-card__link cx-card__link" href="https://denimtrade.com.ua/" target="_blank" rel="noopener">
+                <div class="cx-card__panel"><div class="cx-browser">
+                  <div class="cx-browser__bar"><i></i><i></i><i></i><span>denimtrade.com.ua</span></div>
                   <div class="case-card__image"><img src="/images/cases/denimtrade.jpg" alt="Denim Trade" loading="lazy" /></div>
-                  <div class="case-card__bottom">
-                    <span class="case-card__type">Production / B2B</span>
-                    <p>Сайт для denim-напрямку з акцентом на виробничу експертизу, тканину та B2B-подачу.</p>
-                  </div>
+                </div></div>
+                <div class="cx-card__body">
+                  <h3 class="cx-card__title">denimtrade.com.ua</h3>
+                  <p class="cx-card__desc">Сайт для denim-напрямку з акцентом на виробничу експертизу, тканину та B2B-подачу.</p>
+                  <div class="cx-card__tags"><span class="cx-tag">Production / B2B</span><span class="cx-card__cta">Відкрити сайт ↗</span></div>
                 </div>
               </a>
             </article>
 
-            <article class="case-card reveal" data-category="restaurants">
-              <a class="case-card__link" href="https://sushiopole.pl/" target="_blank" rel="noopener">
-                <div class="case-card__frame">
-                  <div class="case-card__side case-card__side--right"><span>Sushi Opole</span></div>
+            <article class="case-card cx-card cx-card--site reveal" data-category="restaurants">
+              <a class="case-card__link cx-card__link" href="https://sushiopole.pl/" target="_blank" rel="noopener">
+                <div class="cx-card__panel"><div class="cx-browser">
+                  <div class="cx-browser__bar"><i></i><i></i><i></i><span>sushiopole.pl</span></div>
                   <div class="case-card__image"><img src="/images/cases/sushiopole.jpg" alt="Sushi Opole" loading="lazy" /></div>
-                  <div class="case-card__bottom">
-                    <span class="case-card__type">Restaurant / Delivery</span>
-                    <p>Сайт для доставки та ресторанного проєкту зі зрозумілою структурою і швидким користувацьким шляхом.</p>
-                  </div>
+                </div></div>
+                <div class="cx-card__body">
+                  <h3 class="cx-card__title">sushiopole.pl</h3>
+                  <p class="cx-card__desc">Сайт для доставки та ресторанного проєкту зі зрозумілою структурою і швидким користувацьким шляхом.</p>
+                  <div class="cx-card__tags"><span class="cx-tag">Restaurant / Delivery</span><span class="cx-card__cta">Відкрити сайт ↗</span></div>
                 </div>
               </a>
             </article>
 
-            <article class="case-card reveal" data-category="restaurants">
-              <a class="case-card__link" href="https://yugrestaurant.com/" target="_blank" rel="noopener">
-                <div class="case-card__frame">
-                  <div class="case-card__side case-card__side--left"><span>YUG Restaurant</span></div>
+            <article class="case-card cx-card cx-card--site reveal" data-category="restaurants">
+              <a class="case-card__link cx-card__link" href="https://yugrestaurant.com/" target="_blank" rel="noopener">
+                <div class="cx-card__panel"><div class="cx-browser">
+                  <div class="cx-browser__bar"><i></i><i></i><i></i><span>yugrestaurant.com</span></div>
                   <div class="case-card__image"><img src="/images/cases/yug.jpg" alt="YUG Restaurant" loading="lazy" /></div>
-                  <div class="case-card__bottom">
-                    <span class="case-card__type">Restaurant / Premium</span>
-                    <p>Преміальна ресторанна подача з атмосферою, локальним SEO і фокусом на досвід користувача.</p>
-                  </div>
+                </div></div>
+                <div class="cx-card__body">
+                  <h3 class="cx-card__title">yugrestaurant.com</h3>
+                  <p class="cx-card__desc">Преміальна ресторанна подача з атмосферою, локальним SEO і фокусом на досвід користувача.</p>
+                  <div class="cx-card__tags"><span class="cx-tag">Restaurant / Premium</span><span class="cx-card__cta">Відкрити сайт ↗</span></div>
                 </div>
               </a>
             </article>
 
-            <article class="case-card reveal" data-category="services">
-              <a class="case-card__link" href="https://psysoulcenter.com/" target="_blank" rel="noopener">
-                <div class="case-card__frame">
-                  <div class="case-card__side case-card__side--right"><span>PsySoul Center</span></div>
+            <article class="case-card cx-card cx-card--site reveal" data-category="services">
+              <a class="case-card__link cx-card__link" href="https://psysoulcenter.com/" target="_blank" rel="noopener">
+                <div class="cx-card__panel"><div class="cx-browser">
+                  <div class="cx-browser__bar"><i></i><i></i><i></i><span>psysoulcenter.com</span></div>
                   <div class="case-card__image"><img src="/images/cases/psysoul.jpg" alt="PsySoul Center" loading="lazy" /></div>
-                  <div class="case-card__bottom">
-                    <span class="case-card__type">Psychology / Services</span>
-                    <p>Сайт для центру психології та підтримки з м’якою подачею, довірою та структурою під заявки.</p>
-                  </div>
+                </div></div>
+                <div class="cx-card__body">
+                  <h3 class="cx-card__title">psysoulcenter.com</h3>
+                  <p class="cx-card__desc">Сайт для центру психології та підтримки з м’якою подачею, довірою та структурою під заявки.</p>
+                  <div class="cx-card__tags"><span class="cx-tag">Psychology / Services</span><span class="cx-card__cta">Відкрити сайт ↗</span></div>
                 </div>
               </a>
             </article>
 
-            <article class="case-card reveal" data-category="services">
-              <a class="case-card__link" href="https://personalityfirstcontentsecond.com/" target="_blank" rel="noopener">
-                <div class="case-card__frame">
-                  <div class="case-card__side case-card__side--left"><span>PFCS</span></div>
+            <article class="case-card cx-card cx-card--landing reveal" data-category="services">
+              <a class="case-card__link cx-card__link" href="https://personalityfirstcontentsecond.com/" target="_blank" rel="noopener">
+                <div class="cx-card__panel"><div class="cx-browser">
+                  <div class="cx-browser__bar"><i></i><i></i><i></i><span>personalityfirstcontentsecond.com</span></div>
                   <div class="case-card__image"><img src="/images/cases/pfcs.jpg" alt="PFCS" loading="lazy" /></div>
-                  <div class="case-card__bottom">
-                    <span class="case-card__type">Personal Brand / Expert</span>
-                    <p>Сайт для експертного проєкту з чітким позиціонуванням, сильним меседжем і персональною подачею.</p>
-                  </div>
+                </div></div>
+                <div class="cx-card__body">
+                  <h3 class="cx-card__title cx-card__title--long">personalityfirstcontentsecond.com</h3>
+                  <p class="cx-card__desc">Сайт для експертного проєкту з чітким позиціонуванням, сильним меседжем і персональною подачею.</p>
+                  <div class="cx-card__tags"><span class="cx-tag cx-tag--type">Лендінг</span><span class="cx-tag">Personal Brand / Expert</span><span class="cx-card__cta">Відкрити сайт ↗</span></div>
                 </div>
               </a>
             </article>
 
-            <article class="case-card reveal" data-category="tech">
-              <a class="case-card__link" href="https://shargetech.com.ua/" target="_blank" rel="noopener">
-                <div class="case-card__frame">
-                  <div class="case-card__side case-card__side--right"><span>ShargeTech</span></div>
+            <article class="case-card cx-card cx-card--site reveal" data-category="tech">
+              <a class="case-card__link cx-card__link" href="https://shargetech.com.ua/" target="_blank" rel="noopener">
+                <div class="cx-card__panel"><div class="cx-browser">
+                  <div class="cx-browser__bar"><i></i><i></i><i></i><span>shargetech.com.ua</span></div>
                   <div class="case-card__image"><img src="/images/cases/shargetech.jpg" alt="ShargeTech" loading="lazy" /></div>
-                  <div class="case-card__bottom">
-                    <span class="case-card__type">Tech / B2B</span>
-                    <p>Сайт для технологічного напряму з акцентом на послуги, зрозумілу подачу та бізнесову структуру.</p>
-                  </div>
+                </div></div>
+                <div class="cx-card__body">
+                  <h3 class="cx-card__title">shargetech.com.ua</h3>
+                  <p class="cx-card__desc">Сайт для технологічного напряму з акцентом на послуги, зрозумілу подачу та бізнесову структуру.</p>
+                  <div class="cx-card__tags"><span class="cx-tag">Tech / B2B</span><span class="cx-card__cta">Відкрити сайт ↗</span></div>
                 </div>
               </a>
             </article>
 
-            <article class="case-card reveal" data-category="b2b">
-              <a class="case-card__link" href="https://factoryhot.cz/" target="_blank" rel="noopener">
-                <div class="case-card__frame">
-                  <div class="case-card__side case-card__side--left"><span>Factory HOT</span></div>
+            <article class="case-card cx-card cx-card--site reveal" data-category="b2b">
+              <a class="case-card__link cx-card__link" href="https://factoryhot.cz/" target="_blank" rel="noopener">
+                <div class="cx-card__panel"><div class="cx-browser">
+                  <div class="cx-browser__bar"><i></i><i></i><i></i><span>factoryhot.cz</span></div>
                   <div class="case-card__image"><img src="/images/cases/factoryhot.jpg" alt="Factory HOT" loading="lazy" /></div>
-                  <div class="case-card__bottom">
-                    <span class="case-card__type">Production / B2B</span>
-                    <p>Сайт для студії garment dye та постобробки одягу з фокусом на сервіс, текстуру та виробничу експертизу.</p>
-                  </div>
+                </div></div>
+                <div class="cx-card__body">
+                  <h3 class="cx-card__title">factoryhot.cz</h3>
+                  <p class="cx-card__desc">Сайт для студії garment dye та постобробки одягу з фокусом на сервіс, текстуру та виробничу експертизу.</p>
+                  <div class="cx-card__tags"><span class="cx-tag">Production / B2B</span><span class="cx-card__cta">Відкрити сайт ↗</span></div>
                 </div>
               </a>
             </article>
 
-            <article class="case-card reveal" data-category="education">
-              <a class="case-card__link" href="https://mhrtb.com.ua/" target="_blank" rel="noopener">
-                <div class="case-card__frame">
-                  <div class="case-card__side case-card__side--right"><span>MHRTB</span></div>
+            <article class="case-card cx-card cx-card--site reveal" data-category="education">
+              <a class="case-card__link cx-card__link" href="https://mhrtb.com.ua/" target="_blank" rel="noopener">
+                <div class="cx-card__panel"><div class="cx-browser">
+                  <div class="cx-browser__bar"><i></i><i></i><i></i><span>mhrtb.com.ua</span></div>
                   <div class="case-card__image"><img src="/images/cases/mhrtb.jpg" alt="MHRTB" loading="lazy" /></div>
-                  <div class="case-card__bottom">
-                    <span class="case-card__type">Education / Corporate website</span>
-                    <p>Сайт для факультету з фокусом на залучення абітурієнтів, структуру програм навчання та зрозумілу навігацію.</p>
-                  </div>
+                </div></div>
+                <div class="cx-card__body">
+                  <h3 class="cx-card__title">mhrtb.com.ua</h3>
+                  <p class="cx-card__desc">Сайт для факультету з фокусом на залучення абітурієнтів, структуру програм навчання та зрозумілу навігацію.</p>
+                  <div class="cx-card__tags"><span class="cx-tag">Education / Corporate website</span><span class="cx-card__cta">Відкрити сайт ↗</span></div>
                 </div>
               </a>
             </article>
 
-            <article class="case-card reveal" data-category="fashion">
-              <a class="case-card__link" href="https://ever-breeze.cz/" target="_blank" rel="noopener">
-                <div class="case-card__frame">
-                  <div class="case-card__side case-card__side--left"><span>Ever-Breeze</span></div>
+            <article class="case-card cx-card cx-card--site reveal" data-category="fashion">
+              <a class="case-card__link cx-card__link" href="https://ever-breeze.cz/" target="_blank" rel="noopener">
+                <div class="cx-card__panel"><div class="cx-browser">
+                  <div class="cx-browser__bar"><i></i><i></i><i></i><span>ever-breeze.cz</span></div>
                   <div class="case-card__image"><img src="/images/cases/everbreeze.jpg" alt="Ever-Breeze" loading="lazy" /></div>
-                  <div class="case-card__bottom">
-                    <span class="case-card__type">E-commerce / Brand</span>
-                    <p>Сайт для бренду автопарфумів з акцентом на преміальну подачу, каталог, атмосферу бренду та продаж через e-commerce.</p>
-                  </div>
+                </div></div>
+                <div class="cx-card__body">
+                  <h3 class="cx-card__title">ever-breeze.cz</h3>
+                  <p class="cx-card__desc">Сайт для бренду автопарфумів з акцентом на преміальну подачу, каталог, атмосферу бренду та продаж через e-commerce.</p>
+                  <div class="cx-card__tags"><span class="cx-tag">E-commerce / Brand</span><span class="cx-card__cta">Відкрити сайт ↗</span></div>
                 </div>
               </a>
             </article>
 
-            <article class="case-card reveal" data-category="beauty">
-              <a class="case-card__link" href="https://lumousse.com/" target="_blank" rel="noopener">
-                <div class="case-card__frame">
-                  <div class="case-card__side case-card__side--right"><span>LUMOUSSE</span></div>
-                  <div class="case-card__image"><img src="/images/cases/lumousse.jpg" alt="LUMOUSSE" loading="lazy" /></div>
-                  <div class="case-card__bottom">
-                    <span class="case-card__type">Beauty / E-commerce</span>
-                    <p>Сайт для бренду натурального догляду за шкірою з акцентом на емоційну подачу, чуттєвий візуал та продаж через каталог.</p>
-                  </div>
-                </div>
-              </a>
-            </article>
-
-            <article class="case-card reveal" data-category="tech">
-              <a class="case-card__link" href="https://aimgear.com.ua/" target="_blank" rel="noopener">
-                <div class="case-card__frame">
-                  <div class="case-card__side case-card__side--left"><span>AIMGEAR</span></div>
+            <article class="case-card cx-card cx-card--site reveal" data-category="tech">
+              <a class="case-card__link cx-card__link" href="https://aimgear.com.ua/" target="_blank" rel="noopener">
+                <div class="cx-card__panel"><div class="cx-browser">
+                  <div class="cx-browser__bar"><i></i><i></i><i></i><span>aimgear.com.ua</span></div>
                   <div class="case-card__image"><img src="/images/cases/aimgear.jpg" alt="AIMGEAR" loading="lazy" /></div>
-                  <div class="case-card__bottom">
-                    <span class="case-card__type">Gaming / E-commerce</span>
-                    <p>Сайт для бренду геймерської периферії з акцентом на технічну подачу, каталог моделей і конверсію через e-commerce.</p>
-                  </div>
+                </div></div>
+                <div class="cx-card__body">
+                  <h3 class="cx-card__title">aimgear.com.ua</h3>
+                  <p class="cx-card__desc">Сайт для бренду геймерської периферії з акцентом на технічну подачу, каталог моделей і конверсію через e-commerce.</p>
+                  <div class="cx-card__tags"><span class="cx-tag">Gaming / E-commerce</span><span class="cx-card__cta">Відкрити сайт ↗</span></div>
                 </div>
               </a>
             </article>
 
-            <article class="case-card reveal" data-category="b2b">
-              <a class="case-card__link" href="https://souvenirsnewhope.com/" target="_blank" rel="noopener">
-                <div class="case-card__frame">
-                  <div class="case-card__side case-card__side--right"><span>New Hope</span></div>
+            <article class="case-card cx-card cx-card--site reveal" data-category="b2b">
+              <a class="case-card__link cx-card__link" href="https://souvenirsnewhope.com/" target="_blank" rel="noopener">
+                <div class="cx-card__panel"><div class="cx-browser">
+                  <div class="cx-browser__bar"><i></i><i></i><i></i><span>souvenirsnewhope.com</span></div>
                   <div class="case-card__image"><img src="/images/cases/newhope.jpg" alt="New Hope Souvenirs" loading="lazy" /></div>
-                  <div class="case-card__bottom">
-                    <span class="case-card__type">Production / B2B</span>
-                    <p>Сайт для виробника текстильних сувенірів і кастомного брендингу з акцентом на оптові поставки, корпоративні замовлення та B2B-структуру.</p>
-                  </div>
+                </div></div>
+                <div class="cx-card__body">
+                  <h3 class="cx-card__title">souvenirsnewhope.com</h3>
+                  <p class="cx-card__desc">Сайт для виробника текстильних сувенірів і кастомного брендингу з акцентом на оптові поставки, корпоративні замовлення та B2B-структуру.</p>
+                  <div class="cx-card__tags"><span class="cx-tag">Production / B2B</span><span class="cx-card__cta">Відкрити сайт ↗</span></div>
                 </div>
               </a>
             </article>
 
-            <article class="case-card reveal" data-category="beauty">
-              <a class="case-card__link" href="https://likar-levina.com/" target="_blank" rel="noopener">
-                <div class="case-card__frame">
-                  <div class="case-card__side case-card__side--left"><span>Лікар Левіна</span></div>
+            <article class="case-card cx-card cx-card--landing reveal" data-category="beauty">
+              <a class="case-card__link cx-card__link" href="https://likar-levina.com/" target="_blank" rel="noopener">
+                <div class="cx-card__panel"><div class="cx-browser">
+                  <div class="cx-browser__bar"><i></i><i></i><i></i><span>likar-levina.com</span></div>
                   <div class="case-card__image"><img src="/images/cases/likar-levina.jpg" alt="Лікар Левіна" loading="lazy" /></div>
-                  <div class="case-card__bottom">
-                    <span class="case-card__type">Медицина / Особистий бренд</span>
-                    <p>Сайт сімейного лікаря з акцентом на довіру, зручний запис на прийом і особистий бренд лікаря.</p>
-                  </div>
+                </div></div>
+                <div class="cx-card__body">
+                  <h3 class="cx-card__title">likar-levina.com</h3>
+                  <p class="cx-card__desc">Сайт сімейного лікаря з акцентом на довіру, зручний запис на прийом і особистий бренд лікаря.</p>
+                  <div class="cx-card__tags"><span class="cx-tag cx-tag--type">Лендінг</span><span class="cx-tag">Медицина / Особистий бренд</span><span class="cx-card__cta">Відкрити сайт ↗</span></div>
                 </div>
               </a>
             </article>
 
-            <article class="case-card reveal" data-category="beauty">
-              <a class="case-card__link" href="https://brace.com.ua/" target="_blank" rel="noopener">
-                <div class="case-card__frame">
-                  <div class="case-card__side case-card__side--right"><span>Brace</span></div>
-                  <div class="case-card__image"><img src="/images/cases/brace.jpg" alt="Brace" title="Brace — Медичне обладнання" loading="lazy" /></div>
-                  <div class="case-card__bottom">
-                    <span class="case-card__type">Медицина / E-commerce</span>
-                    <p>Редизайн сайту для українського постачальника ортопедичної та хірургічної продукції. Акцент на каталог, довіру та B2B-клієнтів.</p>
-                  </div>
+            <article class="case-card cx-card cx-card--site reveal" data-category="beauty">
+              <a class="case-card__link cx-card__link" href="https://brace.com.ua/" target="_blank" rel="noopener">
+                <div class="cx-card__panel"><div class="cx-browser">
+                  <div class="cx-browser__bar"><i></i><i></i><i></i><span>brace.com.ua</span></div>
+                  <div class="case-card__image"><img src="/images/cases/brace.jpg" alt="Brace" loading="lazy" /></div>
+                </div></div>
+                <div class="cx-card__body">
+                  <h3 class="cx-card__title">brace.com.ua</h3>
+                  <p class="cx-card__desc">Редизайн сайту для українського постачальника ортопедичної та хірургічної продукції. Акцент на каталог, довіру та B2B-клієнтів.</p>
+                  <div class="cx-card__tags"><span class="cx-tag">Медицина / E-commerce</span><span class="cx-card__cta">Відкрити сайт ↗</span></div>
                 </div>
               </a>
             </article>
 
-            <article class="case-card reveal" data-category="beauty">
-              <a class="case-card__link" href="https://goncharbeauty.com/" target="_blank" rel="noopener">
-                <div class="case-card__frame">
-                  <div class="case-card__side case-card__side--left"><span>Dr. Gonchar Beauty</span></div>
-                  <div class="case-card__image"><img src="/images/cases/gonchar.jpg" alt="Dr. Gonchar Beauty" title="Dr. Gonchar Beauty — Косметика та догляд" loading="lazy" /></div>
-                  <div class="case-card__bottom">
-                    <span class="case-card__type">Beauty / E-commerce</span>
-                    <p>Інтернет-магазин під ключ для мультибрендового косметологічного магазину. Розробка з нуля на Horoshop: каталог, SEO, імпорт товарів.</p>
-                  </div>
+            <article class="case-card cx-card cx-card--site reveal" data-category="beauty">
+              <a class="case-card__link cx-card__link" href="https://goncharbeauty.com/" target="_blank" rel="noopener">
+                <div class="cx-card__panel"><div class="cx-browser">
+                  <div class="cx-browser__bar"><i></i><i></i><i></i><span>goncharbeauty.com</span></div>
+                  <div class="case-card__image"><img src="/images/cases/gonchar.jpg" alt="Dr. Gonchar Beauty" loading="lazy" /></div>
+                </div></div>
+                <div class="cx-card__body">
+                  <h3 class="cx-card__title">goncharbeauty.com</h3>
+                  <p class="cx-card__desc">Інтернет-магазин під ключ для мультибрендового косметологічного магазину. Розробка з нуля на Horoshop: каталог, SEO, імпорт товарів.</p>
+                  <div class="cx-card__tags"><span class="cx-tag">Beauty / E-commerce</span><span class="cx-card__cta">Відкрити сайт ↗</span></div>
                 </div>
               </a>
             </article>
 
-            <article class="case-card reveal" data-category="tech">
-              <a class="case-card__link" href="https://pikasso.com.ua/ua/" target="_blank" rel="noopener">
-                <div class="case-card__frame">
-                  <div class="case-card__side case-card__side--right"><span>PIKASSO</span></div>
+            <article class="case-card cx-card cx-card--site reveal" data-category="tech">
+              <a class="case-card__link cx-card__link" href="https://pikasso.com.ua/ua/" target="_blank" rel="noopener">
+                <div class="cx-card__panel"><div class="cx-browser">
+                  <div class="cx-browser__bar"><i></i><i></i><i></i><span>pikasso.com.ua</span></div>
                   <div class="case-card__image"><img src="/images/cases/pikasso.jpg" alt="Pikasso" loading="lazy" /></div>
-                  <div class="case-card__bottom">
-                    <span class="case-card__type">Tech / E-commerce</span>
-                    <p>Редизайн інтернет-магазину дизайнерських аксесуарів для гаджетів Apple з трьома напрямками — Mobile, Tech, Gaming — та фокусом на каталог і конверсію.</p>
-                  </div>
+                </div></div>
+                <div class="cx-card__body">
+                  <h3 class="cx-card__title">pikasso.com.ua</h3>
+                  <p class="cx-card__desc">Редизайн інтернет-магазину дизайнерських аксесуарів для гаджетів Apple з трьома напрямками — Mobile, Tech, Gaming — та фокусом на каталог і конверсію.</p>
+                  <div class="cx-card__tags"><span class="cx-tag">Tech / E-commerce</span><span class="cx-card__cta">Відкрити сайт ↗</span></div>
                 </div>
               </a>
             </article>

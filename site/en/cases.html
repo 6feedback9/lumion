@@ -1,6 +1,7 @@
 <!DOCTYPE html>
   <html lang="en">
   <head>
+  <script>(function(){var t=null;try{t=localStorage.getItem('lumi-theme')}catch(e){}if(!t&&window.matchMedia&&matchMedia('(prefers-color-scheme: light)').matches)t='light';document.documentElement.setAttribute('data-theme',t==='light'?'light':'dark');document.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('.theme-toggle');if(!b)return;var n=document.documentElement.getAttribute('data-theme')==='light'?'dark':'light';document.documentElement.setAttribute('data-theme',n);try{localStorage.setItem('lumi-theme',n)}catch(x){}})})();</script>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-S5JVKZ0ET5"></script>
 <script>
@@ -89,6 +90,7 @@
 
         <div class="nav-actions">
           <a href="/en/contact.html" class="btn btn--sm btn--ghost nav-cta">Discuss a project</a>
+          <button class="theme-toggle" type="button" aria-label="Switch theme" title="Switch theme"><span class="ti-moon">☾</span><span class="ti-sun">☀</span></button>
           <div class="lang-toggle" id="langToggle" aria-label="Language">
           <a href="/cases.html" class="lang-opt lang-opt--uk">UA</a>
           <span class="lang-sep">|</span>
@@ -146,237 +148,241 @@
             <button class="case-filter" data-filter="education" type="button">Education / Corporate</button>
           </div>
 
-          <div class="cases-grid">
-            
-            <article class="case-card reveal" data-category="fashion">
-              <a class="case-card__link" href="https://odyah.cz/" target="_blank" rel="noopener">
-                <div class="case-card__frame">
-                  <div class="case-card__side case-card__side--left"><span>ÓDYAH</span></div>
+          <div class="cases-grid cx-grid">
+            <article class="case-card cx-card cx-card--site reveal" data-category="fashion">
+              <a class="case-card__link cx-card__link" href="https://odyah.cz/" target="_blank" rel="noopener">
+                <div class="cx-card__panel"><div class="cx-browser">
+                  <div class="cx-browser__bar"><i></i><i></i><i></i><span>odyah.cz</span></div>
                   <div class="case-card__image"><img src="/images/cases/odyah.jpg" alt="ÓDYAH" loading="lazy" /></div>
-                  <div class="case-card__bottom">
-                    <span class="case-card__type">Fashion / Brand</span>
-                    <p>Aesthetic website for a fashion project focused on brand identity, visual storytelling and a clean user journey.</p>
-                  </div>
+                </div></div>
+                <div class="cx-card__body">
+                  <h3 class="cx-card__title">odyah.cz</h3>
+                  <p class="cx-card__desc">Aesthetic website for a fashion project focused on brand identity, visual storytelling and a clean user journey.</p>
+                  <div class="cx-card__tags"><span class="cx-tag">Fashion / Brand</span><span class="cx-card__cta">Open site ↗</span></div>
                 </div>
               </a>
             </article>
 
-            <article class="case-card reveal" data-category="fashion">
-              <a class="case-card__link" href="https://ambitna.ua/" target="_blank" rel="noopener">
-                <div class="case-card__frame">
-                  <div class="case-card__side case-card__side--right"><span>Ambitna</span></div>
+            <article class="case-card cx-card cx-card--site reveal" data-category="fashion">
+              <a class="case-card__link cx-card__link" href="https://ambitna.ua/" target="_blank" rel="noopener">
+                <div class="cx-card__panel"><div class="cx-browser">
+                  <div class="cx-browser__bar"><i></i><i></i><i></i><span>ambitna.ua</span></div>
                   <div class="case-card__image"><img src="/images/cases/ambitna.jpg" alt="Ambitna" loading="lazy" /></div>
-                  <div class="case-card__bottom">
-                    <span class="case-card__type">Fashion / E-commerce</span>
-                    <p>Online store for a fashion brand focused on categories, sales conversion and SEO logic.</p>
-                  </div>
+                </div></div>
+                <div class="cx-card__body">
+                  <h3 class="cx-card__title">ambitna.ua</h3>
+                  <p class="cx-card__desc">Online store for a fashion brand focused on categories, sales conversion and SEO logic.</p>
+                  <div class="cx-card__tags"><span class="cx-tag">Fashion / E-commerce</span><span class="cx-card__cta">Open site ↗</span></div>
                 </div>
               </a>
             </article>
 
-            <article class="case-card reveal" data-category="b2b">
-              <a class="case-card__link" href="https://denimtrade.com.ua/" target="_blank" rel="noopener">
-                <div class="case-card__frame">
-                  <div class="case-card__side case-card__side--left"><span>Denim Trade</span></div>
+            <article class="case-card cx-card cx-card--site reveal" data-category="b2b">
+              <a class="case-card__link cx-card__link" href="https://denimtrade.com.ua/" target="_blank" rel="noopener">
+                <div class="cx-card__panel"><div class="cx-browser">
+                  <div class="cx-browser__bar"><i></i><i></i><i></i><span>denimtrade.com.ua</span></div>
                   <div class="case-card__image"><img src="/images/cases/denimtrade.jpg" alt="Denim Trade" loading="lazy" /></div>
-                  <div class="case-card__bottom">
-                    <span class="case-card__type">Production / B2B</span>
-                    <p>Site for a denim manufacturing company emphasising production expertise and B2B presentation.</p>
-                  </div>
+                </div></div>
+                <div class="cx-card__body">
+                  <h3 class="cx-card__title">denimtrade.com.ua</h3>
+                  <p class="cx-card__desc">Site for a denim manufacturing company emphasising production expertise and B2B presentation.</p>
+                  <div class="cx-card__tags"><span class="cx-tag">Production / B2B</span><span class="cx-card__cta">Open site ↗</span></div>
                 </div>
               </a>
             </article>
 
-            <article class="case-card reveal" data-category="restaurants">
-              <a class="case-card__link" href="https://sushiopole.pl/" target="_blank" rel="noopener">
-                <div class="case-card__frame">
-                  <div class="case-card__side case-card__side--right"><span>Sushi Opole</span></div>
+            <article class="case-card cx-card cx-card--site reveal" data-category="restaurants">
+              <a class="case-card__link cx-card__link" href="https://sushiopole.pl/" target="_blank" rel="noopener">
+                <div class="cx-card__panel"><div class="cx-browser">
+                  <div class="cx-browser__bar"><i></i><i></i><i></i><span>sushiopole.pl</span></div>
                   <div class="case-card__image"><img src="/images/cases/sushiopole.jpg" alt="Sushi Opole" loading="lazy" /></div>
-                  <div class="case-card__bottom">
-                    <span class="case-card__type">Restaurant / Delivery</span>
-                    <p>Website for a delivery and restaurant project with clear structure and a fast user path to order.</p>
-                  </div>
+                </div></div>
+                <div class="cx-card__body">
+                  <h3 class="cx-card__title">sushiopole.pl</h3>
+                  <p class="cx-card__desc">Website for a delivery and restaurant project with clear structure and a fast user path to order.</p>
+                  <div class="cx-card__tags"><span class="cx-tag">Restaurant / Delivery</span><span class="cx-card__cta">Open site ↗</span></div>
                 </div>
               </a>
             </article>
 
-            <article class="case-card reveal" data-category="restaurants">
-              <a class="case-card__link" href="https://yugrestaurant.com/" target="_blank" rel="noopener">
-                <div class="case-card__frame">
-                  <div class="case-card__side case-card__side--left"><span>YUG Restaurant</span></div>
+            <article class="case-card cx-card cx-card--site reveal" data-category="restaurants">
+              <a class="case-card__link cx-card__link" href="https://yugrestaurant.com/" target="_blank" rel="noopener">
+                <div class="cx-card__panel"><div class="cx-browser">
+                  <div class="cx-browser__bar"><i></i><i></i><i></i><span>yugrestaurant.com</span></div>
                   <div class="case-card__image"><img src="/images/cases/yug.jpg" alt="YUG Restaurant" loading="lazy" /></div>
-                  <div class="case-card__bottom">
-                    <span class="case-card__type">Restaurant / Premium</span>
-                    <p>Premium restaurant presentation with atmosphere, local SEO and a focus on user experience.</p>
-                  </div>
+                </div></div>
+                <div class="cx-card__body">
+                  <h3 class="cx-card__title">yugrestaurant.com</h3>
+                  <p class="cx-card__desc">Premium restaurant presentation with atmosphere, local SEO and a focus on user experience.</p>
+                  <div class="cx-card__tags"><span class="cx-tag">Restaurant / Premium</span><span class="cx-card__cta">Open site ↗</span></div>
                 </div>
               </a>
             </article>
 
-            <article class="case-card reveal" data-category="services">
-              <a class="case-card__link" href="https://psysoulcenter.com/" target="_blank" rel="noopener">
-                <div class="case-card__frame">
-                  <div class="case-card__side case-card__side--right"><span>PsySoul Center</span></div>
+            <article class="case-card cx-card cx-card--site reveal" data-category="services">
+              <a class="case-card__link cx-card__link" href="https://psysoulcenter.com/" target="_blank" rel="noopener">
+                <div class="cx-card__panel"><div class="cx-browser">
+                  <div class="cx-browser__bar"><i></i><i></i><i></i><span>psysoulcenter.com</span></div>
                   <div class="case-card__image"><img src="/images/cases/psysoul.jpg" alt="PsySoul Center" loading="lazy" /></div>
-                  <div class="case-card__bottom">
-                    <span class="case-card__type">Psychology / Services</span>
-                    <p>Website for a psychology and support centre with a soft tone, trust-building layout and lead-focused structure.</p>
-                  </div>
+                </div></div>
+                <div class="cx-card__body">
+                  <h3 class="cx-card__title">psysoulcenter.com</h3>
+                  <p class="cx-card__desc">Website for a psychology and support centre with a soft tone, trust-building layout and lead-focused structure.</p>
+                  <div class="cx-card__tags"><span class="cx-tag">Psychology / Services</span><span class="cx-card__cta">Open site ↗</span></div>
                 </div>
               </a>
             </article>
 
-            <article class="case-card reveal" data-category="services">
-              <a class="case-card__link" href="https://personalityfirstcontentsecond.com/" target="_blank" rel="noopener">
-                <div class="case-card__frame">
-                  <div class="case-card__side case-card__side--left"><span>PFCS</span></div>
+            <article class="case-card cx-card cx-card--landing reveal" data-category="services">
+              <a class="case-card__link cx-card__link" href="https://personalityfirstcontentsecond.com/" target="_blank" rel="noopener">
+                <div class="cx-card__panel"><div class="cx-browser">
+                  <div class="cx-browser__bar"><i></i><i></i><i></i><span>personalityfirstcontentsecond.com</span></div>
                   <div class="case-card__image"><img src="/images/cases/pfcs.jpg" alt="PFCS" loading="lazy" /></div>
-                  <div class="case-card__bottom">
-                    <span class="case-card__type">Personal Brand / Expert</span>
-                    <p>Website for an expert project with clear positioning, a strong message and a personal presentation style.</p>
-                  </div>
+                </div></div>
+                <div class="cx-card__body">
+                  <h3 class="cx-card__title cx-card__title--long">personalityfirstcontentsecond.com</h3>
+                  <p class="cx-card__desc">Website for an expert project with clear positioning, a strong message and a personal presentation style.</p>
+                  <div class="cx-card__tags"><span class="cx-tag cx-tag--type">Landing page</span><span class="cx-tag">Personal Brand / Expert</span><span class="cx-card__cta">Open site ↗</span></div>
                 </div>
               </a>
             </article>
 
-            <article class="case-card reveal" data-category="b2b">
-              <a class="case-card__link" href="https://shargetech.com.ua/" target="_blank" rel="noopener">
-                <div class="case-card__frame">
-                  <div class="case-card__side case-card__side--right"><span>ShargeTech</span></div>
+            <article class="case-card cx-card cx-card--site reveal" data-category="b2b">
+              <a class="case-card__link cx-card__link" href="https://shargetech.com.ua/" target="_blank" rel="noopener">
+                <div class="cx-card__panel"><div class="cx-browser">
+                  <div class="cx-browser__bar"><i></i><i></i><i></i><span>shargetech.com.ua</span></div>
                   <div class="case-card__image"><img src="/images/cases/shargetech.jpg" alt="ShargeTech" loading="lazy" /></div>
-                  <div class="case-card__bottom">
-                    <span class="case-card__type">Tech / B2B</span>
-                    <p>Website for a tech company focused on services, clear communication and a business-oriented structure.</p>
-                  </div>
+                </div></div>
+                <div class="cx-card__body">
+                  <h3 class="cx-card__title">shargetech.com.ua</h3>
+                  <p class="cx-card__desc">Website for a tech company focused on services, clear communication and a business-oriented structure.</p>
+                  <div class="cx-card__tags"><span class="cx-tag">Tech / B2B</span><span class="cx-card__cta">Open site ↗</span></div>
                 </div>
               </a>
             </article>
 
-            <article class="case-card reveal" data-category="b2b">
-              <a class="case-card__link" href="https://factoryhot.cz/" target="_blank" rel="noopener">
-                <div class="case-card__frame">
-                  <div class="case-card__side case-card__side--left"><span>Factory HOT</span></div>
+            <article class="case-card cx-card cx-card--site reveal" data-category="b2b">
+              <a class="case-card__link cx-card__link" href="https://factoryhot.cz/" target="_blank" rel="noopener">
+                <div class="cx-card__panel"><div class="cx-browser">
+                  <div class="cx-browser__bar"><i></i><i></i><i></i><span>factoryhot.cz</span></div>
                   <div class="case-card__image"><img src="/images/cases/factoryhot.jpg" alt="Factory HOT" loading="lazy" /></div>
-                  <div class="case-card__bottom">
-                    <span class="case-card__type">Production / B2B</span>
-                    <p>Website for a garment dye and post-processing studio with focus on service, texture and production expertise.</p>
-                  </div>
+                </div></div>
+                <div class="cx-card__body">
+                  <h3 class="cx-card__title">factoryhot.cz</h3>
+                  <p class="cx-card__desc">Website for a garment dye and post-processing studio with focus on service, texture and production expertise.</p>
+                  <div class="cx-card__tags"><span class="cx-tag">Production / B2B</span><span class="cx-card__cta">Open site ↗</span></div>
                 </div>
               </a>
             </article>
 
-            <article class="case-card reveal" data-category="education">
-              <a class="case-card__link" href="https://mhrtb.com.ua/" target="_blank" rel="noopener">
-                <div class="case-card__frame">
-                  <div class="case-card__side case-card__side--right"><span>MHRTB</span></div>
+            <article class="case-card cx-card cx-card--site reveal" data-category="education">
+              <a class="case-card__link cx-card__link" href="https://mhrtb.com.ua/" target="_blank" rel="noopener">
+                <div class="cx-card__panel"><div class="cx-browser">
+                  <div class="cx-browser__bar"><i></i><i></i><i></i><span>mhrtb.com.ua</span></div>
                   <div class="case-card__image"><img src="/images/cases/mhrtb.jpg" alt="MHRTB" loading="lazy" /></div>
-                  <div class="case-card__bottom">
-                    <span class="case-card__type">Education / Corporate website</span>
-                    <p>Faculty website focused on attracting applicants, showcasing study programmes and clear navigation.</p>
-                  </div>
+                </div></div>
+                <div class="cx-card__body">
+                  <h3 class="cx-card__title">mhrtb.com.ua</h3>
+                  <p class="cx-card__desc">Faculty website focused on attracting applicants, showcasing study programmes and clear navigation.</p>
+                  <div class="cx-card__tags"><span class="cx-tag">Education / Corporate website</span><span class="cx-card__cta">Open site ↗</span></div>
                 </div>
               </a>
             </article>
 
-            <article class="case-card reveal" data-category="fashion">
-              <a class="case-card__link" href="https://ever-breeze.cz/" target="_blank" rel="noopener">
-                <div class="case-card__frame">
-                  <div class="case-card__side case-card__side--right"><span>Ever-Breeze</span></div>
+            <article class="case-card cx-card cx-card--site reveal" data-category="fashion">
+              <a class="case-card__link cx-card__link" href="https://ever-breeze.cz/" target="_blank" rel="noopener">
+                <div class="cx-card__panel"><div class="cx-browser">
+                  <div class="cx-browser__bar"><i></i><i></i><i></i><span>ever-breeze.cz</span></div>
                   <div class="case-card__image"><img src="/images/cases/everbreeze.jpg" alt="Ever-Breeze" loading="lazy" /></div>
-                  <div class="case-card__bottom">
-                    <span class="case-card__type">E-commerce / Brand</span>
-                    <p>Website for a car fragrance brand with premium presentation, product catalogue, brand atmosphere and e-commerce sales.</p>
-                  </div>
+                </div></div>
+                <div class="cx-card__body">
+                  <h3 class="cx-card__title">ever-breeze.cz</h3>
+                  <p class="cx-card__desc">Website for a car fragrance brand with premium presentation, product catalogue, brand atmosphere and e-commerce sales.</p>
+                  <div class="cx-card__tags"><span class="cx-tag">E-commerce / Brand</span><span class="cx-card__cta">Open site ↗</span></div>
                 </div>
               </a>
             </article>
 
-            <article class="case-card reveal" data-category="beauty">
-              <a class="case-card__link" href="https://lumousse.com/" target="_blank" rel="noopener">
-                <div class="case-card__frame">
-                  <div class="case-card__side case-card__side--left"><span>LUMOUSSE</span></div>
-                  <div class="case-card__image"><img src="/images/cases/lumousse.jpg" alt="LUMOUSSE" loading="lazy" /></div>
-                  <div class="case-card__bottom">
-                    <span class="case-card__type">Beauty / E-commerce</span>
-                    <p>Website for a natural skincare brand with emotional storytelling, sensory visuals and a catalogue-driven sales structure.</p>
-                  </div>
-                </div>
-              </a>
-            </article>
-
-            <article class="case-card reveal" data-category="tech">
-              <a class="case-card__link" href="https://aimgear.com.ua/" target="_blank" rel="noopener">
-                <div class="case-card__frame">
-                  <div class="case-card__side case-card__side--left"><span>AIMGEAR</span></div>
+            <article class="case-card cx-card cx-card--site reveal" data-category="tech">
+              <a class="case-card__link cx-card__link" href="https://aimgear.com.ua/" target="_blank" rel="noopener">
+                <div class="cx-card__panel"><div class="cx-browser">
+                  <div class="cx-browser__bar"><i></i><i></i><i></i><span>aimgear.com.ua</span></div>
                   <div class="case-card__image"><img src="/images/cases/aimgear.jpg" alt="AIMGEAR" loading="lazy" /></div>
-                  <div class="case-card__bottom">
-                    <span class="case-card__type">Gaming / E-commerce</span>
-                    <p>Website for a gaming peripherals brand focused on technical presentation, product catalogue and e-commerce conversion.</p>
-                  </div>
+                </div></div>
+                <div class="cx-card__body">
+                  <h3 class="cx-card__title">aimgear.com.ua</h3>
+                  <p class="cx-card__desc">Website for a gaming peripherals brand focused on technical presentation, product catalogue and e-commerce conversion.</p>
+                  <div class="cx-card__tags"><span class="cx-tag">Gaming / E-commerce</span><span class="cx-card__cta">Open site ↗</span></div>
                 </div>
               </a>
             </article>
 
-            <article class="case-card reveal" data-category="b2b">
-              <a class="case-card__link" href="https://souvenirsnewhope.com/" target="_blank" rel="noopener">
-                <div class="case-card__frame">
-                  <div class="case-card__side case-card__side--right"><span>New Hope</span></div>
+            <article class="case-card cx-card cx-card--site reveal" data-category="b2b">
+              <a class="case-card__link cx-card__link" href="https://souvenirsnewhope.com/" target="_blank" rel="noopener">
+                <div class="cx-card__panel"><div class="cx-browser">
+                  <div class="cx-browser__bar"><i></i><i></i><i></i><span>souvenirsnewhope.com</span></div>
                   <div class="case-card__image"><img src="/images/cases/newhope.jpg" alt="New Hope Souvenirs" loading="lazy" /></div>
-                  <div class="case-card__bottom">
-                    <span class="case-card__type">Production / B2B</span>
-                    <p>Website for a textile souvenir manufacturer and custom branding service focused on wholesale, corporate orders and a B2B-driven structure.</p>
-                  </div>
+                </div></div>
+                <div class="cx-card__body">
+                  <h3 class="cx-card__title">souvenirsnewhope.com</h3>
+                  <p class="cx-card__desc">Website for a textile souvenir manufacturer and custom branding service focused on wholesale, corporate orders and a B2B-driven structure.</p>
+                  <div class="cx-card__tags"><span class="cx-tag">Production / B2B</span><span class="cx-card__cta">Open site ↗</span></div>
                 </div>
               </a>
             </article>
 
-            <article class="case-card reveal" data-category="beauty">
-              <a class="case-card__link" href="https://likar-levina.com/" target="_blank" rel="noopener">
-                <div class="case-card__frame">
-                  <div class="case-card__side case-card__side--left"><span>Dr. Levina</span></div>
+            <article class="case-card cx-card cx-card--landing reveal" data-category="beauty">
+              <a class="case-card__link cx-card__link" href="https://likar-levina.com/" target="_blank" rel="noopener">
+                <div class="cx-card__panel"><div class="cx-browser">
+                  <div class="cx-browser__bar"><i></i><i></i><i></i><span>likar-levina.com</span></div>
                   <div class="case-card__image"><img src="/images/cases/likar-levina.jpg" alt="Dr. Levina" loading="lazy" /></div>
-                  <div class="case-card__bottom">
-                    <span class="case-card__type">Medicine / Personal brand</span>
-                    <p>Website for a family doctor focused on trust, easy appointment booking and building the doctor's personal brand.</p>
-                  </div>
+                </div></div>
+                <div class="cx-card__body">
+                  <h3 class="cx-card__title">likar-levina.com</h3>
+                  <p class="cx-card__desc">Website for a family doctor focused on trust, easy appointment booking and building the doctor's personal brand.</p>
+                  <div class="cx-card__tags"><span class="cx-tag cx-tag--type">Landing page</span><span class="cx-tag">Medicine / Personal brand</span><span class="cx-card__cta">Open site ↗</span></div>
                 </div>
               </a>
             </article>
-            <article class="case-card reveal" data-category="beauty">
-              <a class="case-card__link" href="https://brace.com.ua/" target="_blank" rel="noopener">
-                <div class="case-card__frame">
-                  <div class="case-card__side case-card__side--right"><span>Brace</span></div>
+
+            <article class="case-card cx-card cx-card--site reveal" data-category="beauty">
+              <a class="case-card__link cx-card__link" href="https://brace.com.ua/" target="_blank" rel="noopener">
+                <div class="cx-card__panel"><div class="cx-browser">
+                  <div class="cx-browser__bar"><i></i><i></i><i></i><span>brace.com.ua</span></div>
                   <div class="case-card__image"><img src="/images/cases/brace.jpg" alt="Brace" loading="lazy" /></div>
-                  <div class="case-card__bottom">
-                    <span class="case-card__type">Medicine / E-commerce</span>
-                    <p>Redesign for a Ukrainian supplier of orthopedic and surgical products. Focus on catalog, trust-building and B2B clients.</p>
-                  </div>
+                </div></div>
+                <div class="cx-card__body">
+                  <h3 class="cx-card__title">brace.com.ua</h3>
+                  <p class="cx-card__desc">Redesign for a Ukrainian supplier of orthopedic and surgical products. Focus on catalog, trust-building and B2B clients.</p>
+                  <div class="cx-card__tags"><span class="cx-tag">Medicine / E-commerce</span><span class="cx-card__cta">Open site ↗</span></div>
                 </div>
               </a>
             </article>
 
-            <article class="case-card reveal" data-category="beauty">
-              <a class="case-card__link" href="https://goncharbeauty.com/" target="_blank" rel="noopener">
-                <div class="case-card__frame">
-                  <div class="case-card__side case-card__side--left"><span>Dr. Gonchar Beauty</span></div>
+            <article class="case-card cx-card cx-card--site reveal" data-category="beauty">
+              <a class="case-card__link cx-card__link" href="https://goncharbeauty.com/" target="_blank" rel="noopener">
+                <div class="cx-card__panel"><div class="cx-browser">
+                  <div class="cx-browser__bar"><i></i><i></i><i></i><span>goncharbeauty.com</span></div>
                   <div class="case-card__image"><img src="/images/cases/gonchar.jpg" alt="Dr. Gonchar Beauty" loading="lazy" /></div>
-                  <div class="case-card__bottom">
-                    <span class="case-card__type">Beauty / E-commerce</span>
-                    <p>Turnkey online store for a multi-brand cosmetics shop. Built from scratch on Horoshop: catalog, SEO, product import.</p>
-                  </div>
+                </div></div>
+                <div class="cx-card__body">
+                  <h3 class="cx-card__title">goncharbeauty.com</h3>
+                  <p class="cx-card__desc">Turnkey online store for a multi-brand cosmetics shop. Built from scratch on Horoshop: catalog, SEO, product import.</p>
+                  <div class="cx-card__tags"><span class="cx-tag">Beauty / E-commerce</span><span class="cx-card__cta">Open site ↗</span></div>
                 </div>
               </a>
             </article>
 
-            <article class="case-card reveal" data-category="tech">
-              <a class="case-card__link" href="https://pikasso.com.ua/ua/" target="_blank" rel="noopener">
-                <div class="case-card__frame">
-                  <div class="case-card__side case-card__side--right"><span>PIKASSO</span></div>
+            <article class="case-card cx-card cx-card--site reveal" data-category="tech">
+              <a class="case-card__link cx-card__link" href="https://pikasso.com.ua/ua/" target="_blank" rel="noopener">
+                <div class="cx-card__panel"><div class="cx-browser">
+                  <div class="cx-browser__bar"><i></i><i></i><i></i><span>pikasso.com.ua</span></div>
                   <div class="case-card__image"><img src="/images/cases/pikasso.jpg" alt="Pikasso" loading="lazy" /></div>
-                  <div class="case-card__bottom">
-                    <span class="case-card__type">Tech / E-commerce</span>
-                    <p>Redesign of an online store for designer accessories for Apple devices, with three directions — Mobile, Tech, Gaming — focused on the catalog and conversion.</p>
-                  </div>
+                </div></div>
+                <div class="cx-card__body">
+                  <h3 class="cx-card__title">pikasso.com.ua</h3>
+                  <p class="cx-card__desc">Redesign of an online store for designer accessories for Apple devices, with three directions — Mobile, Tech, Gaming — focused on the catalog and conversion.</p>
+                  <div class="cx-card__tags"><span class="cx-tag">Tech / E-commerce</span><span class="cx-card__cta">Open site ↗</span></div>
                 </div>
               </a>
             </article>
