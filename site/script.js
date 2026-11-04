@@ -927,3 +927,14 @@ if (document.readyState === 'loading') {
     net.style.transform = 'translate(0, 0)';
   });
 })();
+
+/* floating theme toggle: step aside while scrolling down */
+(function(){
+  var tt=document.querySelector('.theme-toggle');if(!tt)return;
+  var last=window.scrollY,timer;
+  window.addEventListener('scroll',function(){
+    var y=window.scrollY;
+    if(y>last+4&&y>200)tt.classList.add('is-away');else if(y<last-4)tt.classList.remove('is-away');
+    last=y;clearTimeout(timer);timer=setTimeout(function(){tt.classList.remove('is-away')},900);
+  },{passive:true});
+})();

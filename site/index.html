@@ -157,7 +157,6 @@
 
         <div class="nav-actions">
           <a href="/contact.html" class="btn btn--sm btn--ghost nav-cta">Обговорити проєкт</a>
-          <button class="theme-toggle" type="button" aria-label="Змінити тему" title="Змінити тему"><span class="ti-moon">☾</span><span class="ti-sun">☀</span></button>
           <div class="lang-toggle" id="langToggle" aria-label="Language">
           <a href="#" class="lang-opt lang-opt--uk">UA</a>
           <span class="lang-sep">|</span>
@@ -199,89 +198,19 @@
 
     <main>
   
-      <section class="hero section hero--split" aria-labelledby="hero-title">
-        <div class="container hero__grid hero__grid--new">
-          <div class="hero__content reveal">
-            <div class="eyebrow hero__eyebrow">Web design · development · SEO · CRM</div>
-            <h1 id="hero-title" class="hero-title">
-              <span class="hero-title__line">Розробка сайтів</span>
-              <span class="hero-title__line">під ключ для бізнесу</span>
-            </h1>
-            <p class="hero__text hero__text--compact">
-              Створюємо сайти, які виглядають сильно, працюють на довіру та допомагають бізнесу отримувати реальні звернення.
-            </p>
-            <div class="hero-code-line" aria-label="Технічний підхід">
-              <span class="hero-code-line__prompt">$</span>
-              <span class="hero-code-line__text" id="heroTypingText" data-lines="build --site --seo --crm,deploy --responsive --fast,design --ui --ux --conversion"></span>
-              <span class="hero-code-line__cursor" aria-hidden="true"></span>
-            </div>
-            <div class="hero__actions hero__actions--compact">
-              <a href="/contact.html" class="btn btn--primary">Обговорити проєкт</a>
-              <a href="/cases.html" class="btn btn--ghost">Дивитися кейси</a>
-            </div>
-            <div class="hero__offer">
-              <span class="offer-pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12v9H4v-9"/><path d="M2 7h20v5H2z"/><path d="M12 22V7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg><span>Перший місяць супроводу — <strong>безкоштовно</strong></span></span>
-            </div>
+      <section class="lh-hero" id="lhHero" aria-labelledby="hero-title">
+        <canvas class="lh-hero__cv" id="lhCanvas" aria-hidden="true"></canvas>
+        <div class="lh-hero__copy">
+          <div class="lh-eyebrow">Агенція · Одеса · з 2019</div>
+          <h1 id="hero-title" class="lh-title">Розробка сайтів і магазинів, що <em>працюють</em> на ваш бізнес</h1>
+          <p class="lh-lead">Від ідеї до запуску: Shopify, Horoshop, Weblium і код під вашу задачу. Швидкі, зручні, готові до SEO.</p>
+          <div class="lh-actions">
+            <a href="/contact.html" class="btn btn--primary">Отримати розрахунок</a>
+            <a href="/cases.html" class="lh-link">Дивитися кейси →</a>
           </div>
-
-          <div class="hero-showcase reveal reveal--delay" id="heroShowcase" aria-hidden="true">
-            <div class="hero-abstract" id="heroAbstract">
-              <span class="hero-abstract__blob hero-abstract__blob--a"></span>
-              <span class="hero-abstract__blob hero-abstract__blob--b"></span>
-              <span class="hero-abstract__blob hero-abstract__blob--c"></span>
-              <span class="hero-abstract__ring"></span>
-              <span class="hero-abstract__ring hero-abstract__ring--sm"></span>
-              <svg class="hero-abstract__net" id="heroNet" viewBox="0 0 420 420" fill="none">
-                <g class="hero-abstract__lines" stroke="url(#netLine)" stroke-width="1">
-                  <line x1="80" y1="120" x2="200" y2="70" />
-                  <line x1="200" y1="70" x2="330" y2="130" />
-                  <line x1="200" y1="70" x2="210" y2="210" />
-                  <line x1="80" y1="120" x2="210" y2="210" />
-                  <line x1="330" y1="130" x2="210" y2="210" />
-                  <line x1="210" y1="210" x2="120" y2="310" />
-                  <line x1="210" y1="210" x2="300" y2="300" />
-                  <line x1="120" y1="310" x2="300" y2="300" />
-                  <line x1="330" y1="130" x2="340" y2="260" />
-                  <line x1="340" y1="260" x2="300" y2="300" />
-                  <line x1="40" y1="200" x2="80" y2="120" />
-                  <line x1="40" y1="200" x2="210" y2="210" />
-                  <line x1="210" y1="380" x2="120" y2="310" />
-                  <line x1="210" y1="380" x2="300" y2="300" />
-                  <line x1="380" y1="210" x2="330" y2="130" />
-                  <line x1="380" y1="210" x2="340" y2="260" />
-                  <line x1="150" y1="150" x2="200" y2="70" />
-                  <line x1="150" y1="150" x2="210" y2="210" />
-                </g>
-                <defs>
-                  <linearGradient id="netLine" x1="0" y1="0" x2="420" y2="420">
-                    <stop offset="0" stop-color="#73b7ff" stop-opacity="0.55" />
-                    <stop offset="1" stop-color="#9f8cff" stop-opacity="0.15" />
-                  </linearGradient>
-                </defs>
-                <g class="hero-abstract__nodes">
-                  <circle cx="80" cy="120" r="5" style="--d:0s" />
-                  <circle cx="200" cy="70" r="6" style="--d:0.4s" />
-                  <circle cx="330" cy="130" r="5" style="--d:0.8s" />
-                  <circle cx="120" cy="310" r="5" style="--d:1.1s" />
-                  <circle cx="300" cy="300" r="6" style="--d:0.6s" />
-                  <circle cx="340" cy="260" r="4" style="--d:1.4s" />
-                  <circle cx="40" cy="200" r="4" style="--d:1.7s" />
-                  <circle cx="210" cy="380" r="5" style="--d:0.9s" />
-                  <circle cx="380" cy="210" r="4" style="--d:0.3s" />
-                  <circle cx="150" cy="150" r="3" style="--d:1.3s" />
-                </g>
-              </svg>
-              <div class="hero-abstract__hub">
-                <span class="hero-abstract__hub-glow"></span>
-                <span class="hero-abstract__hub-mark">Ú</span>
-              </div>
-              <span class="hero-abstract__chip hero-abstract__chip--a">UI/UX</span>
-              <span class="hero-abstract__chip hero-abstract__chip--b">SEO</span>
-              <span class="hero-abstract__chip hero-abstract__chip--c">DEV</span>
-              <span class="hero-abstract__chip hero-abstract__chip--d">CRM</span>
-            </div>
-          </div>
+          <p class="lh-note">Відповімо протягом робочого дня · <b>перший місяць супроводу безкоштовно</b></p>
         </div>
+        <div class="lh-stats"><span>90+ проєктів</span><span>7+ років</span><span>Україна · Чехія · Польща · Австрія · Болгарія</span></div>
       </section>
 
       <section class="section trust-bar reveal" aria-label="Кому ми допомагаємо">
@@ -670,57 +599,31 @@
           </div>
 
           <div class="blog-cards blog-cards--four">
-            <a href="/blog/seo-dlya-maloho-biznesu-2026.html" class="blog-card reveal">
-              <div class="blog-card__meta">
-                <span>SEO</span>
-                <span class="blog-card__dot"></span>
-                <span class="blog-card__date">14 червня 2026</span>
-              </div>
-              <h3 class="blog-card__title">SEO для малого бізнесу в Україні: з чого почати у 2026</h3>
-              <p class="blog-card__excerpt">
-                Що зробити спочатку, які безкоштовні інструменти використовувати і де реально потрібна допомога фахівця. Покроковий гайд без зайвих термінів.
-              </p>
-              <span class="blog-card__cta">Читати статтю</span>
-            </a>
+<a href="/blog/chomu-google-ne-indeksuye-storinky-2026.html" class="blog-card reveal">
+            <div class="blog-card__meta"><span>SEO</span><span class="blog-card__dot"></span><span class="blog-card__date">4 листопада 2026</span></div>
+            <h3 class="blog-card__title">Чому Google не індексує сторінки сайту: 4 статуси в Search Console і що з ними робити</h3>
+            <p class="blog-card__excerpt">«Виявлено, але не проіндексовано», «Проскановано, але не проіндексовано», canonical і noindex: що означає кожен статус у Search Console і як…</p>
+            <span class="blog-card__cta">Читати статтю</span>
+          </a>
+<a href="/blog/chy-potriben-sayt-yakshcho-ye-instagram-2026.html" class="blog-card reveal">
+            <div class="blog-card__meta"><span>Бізнес</span><span class="blog-card__dot"></span><span class="blog-card__date">4 листопада 2026</span></div>
+            <h3 class="blog-card__title">Чи потрібен сайт, якщо є Instagram: 5 причин, чому одного акаунта мало</h3>
+            <p class="blog-card__excerpt">Чи можна продавати лише через Instagram? Розбираємо, що дає сайт, чого не дає акаунт і коли пора запускати власний сайт чи магазин.</p>
+            <span class="blog-card__cta">Читати статтю</span>
+          </a>
+<a href="/blog/sayt-dlya-prodazhiv-u-chekhiyi-polshchi-2026.html" class="blog-card reveal">
+            <div class="blog-card__meta"><span>Інтернет-магазин</span><span class="blog-card__dot"></span><span class="blog-card__date">4 листопада 2026</span></div>
+            <h3 class="blog-card__title">Сайт для продажів у Чехії та Польщі: що врахувати українському бізнесу у 2026</h3>
+            <p class="blog-card__excerpt">Мова, валюта, hreflang, оплата, доставка і cookies: що потрібно врахувати, коли ви виходите з сайтом на ринки Чехії та Польщі.</p>
+            <span class="blog-card__cta">Читати статтю</span>
+          </a>
+<a href="/blog/shvydkist-saytu-core-web-vitals-2026.html" class="blog-card reveal">
+            <div class="blog-card__meta"><span>Розробка</span><span class="blog-card__dot"></span><span class="blog-card__date">4 листопада 2026</span></div>
+            <h3 class="blog-card__title">Швидкість сайту і Core Web Vitals: що перевірити і як пришвидшити у 2026</h3>
+            <p class="blog-card__excerpt">Що таке LCP, INP і CLS, які значення вважаються хорошими і 8 способів пришвидшити сайт без переробки з нуля.</p>
+            <span class="blog-card__cta">Читати статтю</span>
+          </a>
 
-            <a href="/blog/yak-pereviryty-seo-sayta-2026.html" class="blog-card reveal reveal--delay">
-              <div class="blog-card__meta">
-                <span>SEO</span>
-                <span class="blog-card__dot"></span>
-                <span class="blog-card__date">14 червня 2026</span>
-              </div>
-              <h3 class="blog-card__title">Як перевірити SEO свого сайту самостійно: безкоштовні інструменти</h3>
-              <p class="blog-card__excerpt">
-                Покроковий чек-ліст з 10 кроків: від Google Search Console до Schema.org. Перевірте сайт за годину без платних сервісів.
-              </p>
-              <span class="blog-card__cta">Читати статтю</span>
-            </a>
-
-            <a href="/blog/skilky-koshtuye-sayt-2026.html" class="blog-card reveal">
-              <div class="blog-card__meta">
-                <span>Гайд</span>
-                <span class="blog-card__dot"></span>
-                <span class="blog-card__date">5 травня 2026</span>
-              </div>
-              <h3 class="blog-card__title">Скільки коштує сайт під ключ в Україні у 2026 році: чесний розбір цін</h3>
-              <p class="blog-card__excerpt">
-                Розбираємо чесно: скільки коштує лендинг, корпоративний сайт та інтернет-магазин. З чого складається ціна і на чому можна зекономити.
-              </p>
-              <span class="blog-card__cta">Читати статтю</span>
-            </a>
-
-            <a href="/blog/geo-optymizatsiya-2026.html" class="blog-card reveal reveal--delay">
-              <div class="blog-card__meta">
-                <span>SEO &amp; AI</span>
-                <span class="blog-card__dot"></span>
-                <span class="blog-card__date">5 травня 2026</span>
-              </div>
-              <h3 class="blog-card__title">GEO для бізнесу: як зробити, щоб ChatGPT і Perplexity рекомендували саме вас</h3>
-              <p class="blog-card__excerpt">
-                Generative Engine Optimization — нове SEO для епохи AI. Покрокова стратегія, як потрапити у відповіді ChatGPT та Google AI Overviews.
-              </p>
-              <span class="blog-card__cta">Читати статтю</span>
-            </a>
           </div>
 
           <div class="reveal reveal--delay-2" style="text-align:center; margin-top:36px;">
@@ -897,6 +800,8 @@
     </div>
     <script src="/script.js"></script>
 </div>
+<script src="/hero.js" defer></script>
+<button class="theme-toggle" type="button" aria-label="Змінити тему" title="Змінити тему"><span class="ti-moon">☾</span><span class="ti-sun">☀</span></button>
 </body>
   </html>
   

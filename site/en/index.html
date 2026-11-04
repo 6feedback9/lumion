@@ -139,7 +139,6 @@
 
         <div class="nav-actions">
           <a href="/en/contact.html" class="btn btn--sm btn--ghost nav-cta">Discuss a project</a>
-          <button class="theme-toggle" type="button" aria-label="Switch theme" title="Switch theme"><span class="ti-moon">☾</span><span class="ti-sun">☀</span></button>
           <div class="lang-toggle" id="langToggle" aria-label="Language">
           <a href="/" class="lang-opt lang-opt--uk">UA</a>
           <span class="lang-sep">|</span>
@@ -179,89 +178,19 @@
 
     <main>
 
-      <section class="hero section hero--split" aria-labelledby="hero-title">
-        <div class="container hero__grid hero__grid--new">
-          <div class="hero__content reveal">
-            <div class="eyebrow hero__eyebrow">Web design · development · SEO · CRM</div>
-            <h1 id="hero-title" class="hero-title">
-              <span class="hero-title__line">Custom website</span>
-              <span class="hero-title__line">development for business</span>
-            </h1>
-            <p class="hero__text hero__text--compact">
-              We build websites that look powerful, earn trust and help businesses get real leads.
-            </p>
-            <div class="hero-code-line" aria-label="Technical approach">
-              <span class="hero-code-line__prompt">$</span>
-              <span class="hero-code-line__text" id="heroTypingText" data-lines="build --site --seo --crm,deploy --responsive --fast,design --ui --ux --conversion"></span>
-              <span class="hero-code-line__cursor" aria-hidden="true"></span>
-            </div>
-            <div class="hero__actions hero__actions--compact">
-              <a href="/en/contact.html" class="btn btn--primary">Discuss a project</a>
-              <a href="/en/cases.html" class="btn btn--ghost">View cases</a>
-            </div>
-            <div class="hero__offer">
-              <span class="offer-pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12v9H4v-9"/><path d="M2 7h20v5H2z"/><path d="M12 22V7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg><span>First month of support — <strong>free</strong></span></span>
-            </div>
+      <section class="lh-hero" id="lhHero" aria-labelledby="hero-title">
+        <canvas class="lh-hero__cv" id="lhCanvas" aria-hidden="true"></canvas>
+        <div class="lh-hero__copy">
+          <div class="lh-eyebrow">Agency · Odesa · since 2019</div>
+          <h1 id="hero-title" class="lh-title">Websites and online stores that <em>work</em> for your business</h1>
+          <p class="lh-lead">From idea to launch: Shopify, Horoshop, Weblium and custom code. Fast, easy to use, SEO-ready.</p>
+          <div class="lh-actions">
+            <a href="/en/contact.html" class="btn btn--primary">Get an estimate</a>
+            <a href="/en/cases.html" class="lh-link">View cases →</a>
           </div>
-
-          <div class="hero-showcase reveal reveal--delay" id="heroShowcase" aria-hidden="true">
-            <div class="hero-abstract" id="heroAbstract">
-              <span class="hero-abstract__blob hero-abstract__blob--a"></span>
-              <span class="hero-abstract__blob hero-abstract__blob--b"></span>
-              <span class="hero-abstract__blob hero-abstract__blob--c"></span>
-              <span class="hero-abstract__ring"></span>
-              <span class="hero-abstract__ring hero-abstract__ring--sm"></span>
-              <svg class="hero-abstract__net" id="heroNet" viewBox="0 0 420 420" fill="none">
-                <g class="hero-abstract__lines" stroke="url(#netLine)" stroke-width="1">
-                  <line x1="80" y1="120" x2="200" y2="70" />
-                  <line x1="200" y1="70" x2="330" y2="130" />
-                  <line x1="200" y1="70" x2="210" y2="210" />
-                  <line x1="80" y1="120" x2="210" y2="210" />
-                  <line x1="330" y1="130" x2="210" y2="210" />
-                  <line x1="210" y1="210" x2="120" y2="310" />
-                  <line x1="210" y1="210" x2="300" y2="300" />
-                  <line x1="120" y1="310" x2="300" y2="300" />
-                  <line x1="330" y1="130" x2="340" y2="260" />
-                  <line x1="340" y1="260" x2="300" y2="300" />
-                  <line x1="40" y1="200" x2="80" y2="120" />
-                  <line x1="40" y1="200" x2="210" y2="210" />
-                  <line x1="210" y1="380" x2="120" y2="310" />
-                  <line x1="210" y1="380" x2="300" y2="300" />
-                  <line x1="380" y1="210" x2="330" y2="130" />
-                  <line x1="380" y1="210" x2="340" y2="260" />
-                  <line x1="150" y1="150" x2="200" y2="70" />
-                  <line x1="150" y1="150" x2="210" y2="210" />
-                </g>
-                <defs>
-                  <linearGradient id="netLine" x1="0" y1="0" x2="420" y2="420">
-                    <stop offset="0" stop-color="#73b7ff" stop-opacity="0.55" />
-                    <stop offset="1" stop-color="#9f8cff" stop-opacity="0.15" />
-                  </linearGradient>
-                </defs>
-                <g class="hero-abstract__nodes">
-                  <circle cx="80" cy="120" r="5" style="--d:0s" />
-                  <circle cx="200" cy="70" r="6" style="--d:0.4s" />
-                  <circle cx="330" cy="130" r="5" style="--d:0.8s" />
-                  <circle cx="120" cy="310" r="5" style="--d:1.1s" />
-                  <circle cx="300" cy="300" r="6" style="--d:0.6s" />
-                  <circle cx="340" cy="260" r="4" style="--d:1.4s" />
-                  <circle cx="40" cy="200" r="4" style="--d:1.7s" />
-                  <circle cx="210" cy="380" r="5" style="--d:0.9s" />
-                  <circle cx="380" cy="210" r="4" style="--d:0.3s" />
-                  <circle cx="150" cy="150" r="3" style="--d:1.3s" />
-                </g>
-              </svg>
-              <div class="hero-abstract__hub">
-                <span class="hero-abstract__hub-glow"></span>
-                <span class="hero-abstract__hub-mark">Ú</span>
-              </div>
-              <span class="hero-abstract__chip hero-abstract__chip--a">UI/UX</span>
-              <span class="hero-abstract__chip hero-abstract__chip--b">SEO</span>
-              <span class="hero-abstract__chip hero-abstract__chip--c">DEV</span>
-              <span class="hero-abstract__chip hero-abstract__chip--d">CRM</span>
-            </div>
-          </div>
+          <p class="lh-note">We reply within one business day · <b>first month of support is free</b></p>
         </div>
+        <div class="lh-stats"><span>90+ projects</span><span>7+ years</span><span>Ukraine · Czechia · Poland · Austria · Bulgaria</span></div>
       </section>
 
       <section class="section trust-bar reveal" aria-label="Who we help">
@@ -640,57 +569,31 @@
           </div>
 
           <div class="blog-cards blog-cards--four">
-            <a href="/en/blog/seo-for-small-business-2026.html" class="blog-card reveal">
-              <div class="blog-card__meta">
-                <span>SEO</span>
-                <span class="blog-card__dot"></span>
-                <span class="blog-card__date">June 14, 2026</span>
-              </div>
-              <h3 class="blog-card__title">SEO for Small Business in Ukraine: Where to Start in 2026</h3>
-              <p class="blog-card__excerpt">
-                What to do first, which free tools to use, and where you actually need professional help. A step-by-step guide without jargon.
-              </p>
-              <span class="blog-card__cta">Read article</span>
-            </a>
+<a href="/en/blog/why-google-not-indexing-pages-2026.html" class="blog-card reveal">
+            <div class="blog-card__meta"><span>SEO</span><span class="blog-card__dot"></span><span class="blog-card__date">November 4, 2026</span></div>
+            <h3 class="blog-card__title">Why Google Isn't Indexing Your Pages: 4 Search Console Statuses and How to Fix Them</h3>
+            <p class="blog-card__excerpt">"Discovered – currently not indexed", "Crawled – currently not indexed", canonical and noindex: what each Search Console status means and how to fix…</p>
+            <span class="blog-card__cta">Read article</span>
+          </a>
+<a href="/en/blog/do-you-need-a-website-if-you-have-instagram-2026.html" class="blog-card reveal">
+            <div class="blog-card__meta"><span>Business</span><span class="blog-card__dot"></span><span class="blog-card__date">November 4, 2026</span></div>
+            <h3 class="blog-card__title">Do You Need a Website If You Have Instagram: 5 Reasons One Account Is Not Enough</h3>
+            <p class="blog-card__excerpt">Can you sell only through Instagram? What a website gives you that an account does not, and when it is time to launch your own site or store.</p>
+            <span class="blog-card__cta">Read article</span>
+          </a>
+<a href="/en/blog/website-for-selling-in-czechia-poland-2026.html" class="blog-card reveal">
+            <div class="blog-card__meta"><span>E-commerce</span><span class="blog-card__dot"></span><span class="blog-card__date">November 4, 2026</span></div>
+            <h3 class="blog-card__title">Selling in Czechia and Poland: A Website Checklist for Ukrainian Businesses in 2026</h3>
+            <p class="blog-card__excerpt">Language, currency, hreflang, payments, delivery and cookies: what to plan when you take your website to the Czech and Polish markets.</p>
+            <span class="blog-card__cta">Read article</span>
+          </a>
+<a href="/en/blog/website-speed-core-web-vitals-2026.html" class="blog-card reveal">
+            <div class="blog-card__meta"><span>Development</span><span class="blog-card__dot"></span><span class="blog-card__date">November 4, 2026</span></div>
+            <h3 class="blog-card__title">Website Speed and Core Web Vitals: What to Check and How to Speed Up in 2026</h3>
+            <p class="blog-card__excerpt">What LCP, INP and CLS are, which values count as good, and 8 ways to speed up your website without rebuilding it from scratch.</p>
+            <span class="blog-card__cta">Read article</span>
+          </a>
 
-            <a href="/en/blog/how-to-check-seo-2026.html" class="blog-card reveal reveal--delay">
-              <div class="blog-card__meta">
-                <span>SEO</span>
-                <span class="blog-card__dot"></span>
-                <span class="blog-card__date">June 14, 2026</span>
-              </div>
-              <h3 class="blog-card__title">How to Check Your Website's SEO Yourself: Free Tools</h3>
-              <p class="blog-card__excerpt">
-                A 10-step checklist: from Google Search Console to Schema.org. Audit your site in an hour without paid services.
-              </p>
-              <span class="blog-card__cta">Read article</span>
-            </a>
-
-            <a href="/en/blog/website-cost-2026.html" class="blog-card reveal">
-              <div class="blog-card__meta">
-                <span>Guide</span>
-                <span class="blog-card__dot"></span>
-                <span class="blog-card__date">May 5, 2026</span>
-              </div>
-              <h3 class="blog-card__title">How much does a turnkey website cost in Ukraine in 2026: an honest breakdown</h3>
-              <p class="blog-card__excerpt">
-                Real numbers: how much landing pages, corporate sites and online stores cost. What makes up the price and where you can save.
-              </p>
-              <span class="blog-card__cta">Read article</span>
-            </a>
-
-            <a href="/en/blog/geo-optimization-2026.html" class="blog-card reveal reveal--delay">
-              <div class="blog-card__meta">
-                <span>SEO &amp; AI</span>
-                <span class="blog-card__dot"></span>
-                <span class="blog-card__date">May 5, 2026</span>
-              </div>
-              <h3 class="blog-card__title">GEO for Business: How to Make ChatGPT and Perplexity Recommend You</h3>
-              <p class="blog-card__excerpt">
-                Generative Engine Optimization is the new SEO for the AI era. A step-by-step strategy to appear in ChatGPT and Google AI Overviews answers.
-              </p>
-              <span class="blog-card__cta">Read article</span>
-            </a>
           </div>
 
           <div class="reveal reveal--delay-2" style="text-align:center; margin-top:36px;">
@@ -865,5 +768,7 @@
     </div>
     <script src="/script.js"></script>
 </div>
+<script src="/hero.js" defer></script>
+<button class="theme-toggle" type="button" aria-label="Switch theme" title="Switch theme"><span class="ti-moon">☾</span><span class="ti-sun">☀</span></button>
 </body>
   </html>
