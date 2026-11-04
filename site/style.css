@@ -6499,3 +6499,8 @@ section h2:not(.visually-hidden):not(.blog-card__title):not(.addon-card__title),
 .case-filters .case-filter{padding:8px 14px!important;font-size:13px!important}
 @media (min-width:701px){.case-filters{max-width:1200px!important}}
 .case-filters{gap:6px!important}.case-filters .case-filter{padding:8px 12px!important}
+
+/* floating pill header sits a bit lower on desktop */
+@media (min-width:961px){
+  .site-header{top:22px;margin-top:10px}
+}
