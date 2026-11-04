@@ -6526,3 +6526,9 @@ body:has(.lh-hero) .lh-hero{padding-top:var(--hh,64px)!important;min-height:calc
 .lh-hero::after{background:radial-gradient(ellipse 46% 50% at 50% 52%,var(--bg) 0%,rgba(var(--bgrgb,7,11,22),.7) 45%,transparent 85%),linear-gradient(180deg,transparent 82%,var(--bg) 100%)!important}
 .lh-note{opacity:.75}
 @media (max-width:700px){.lh-title{font-size:30px!important}.lh-kw{font-size:12px}.lh-kw li+li::before{margin:0 10px}}
+
+/* perspective-grid hero */
+.lh-hero::after{background:linear-gradient(180deg,transparent 88%,var(--bg) 100%)!important}
+@media (max-width:700px){
+  body:has(.lh-hero) .lh-hero{min-height:100vh!important;min-height:100svh!important;justify-content:center;padding-bottom:28px!important}
+}
