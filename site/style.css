@@ -6456,3 +6456,10 @@ html[data-theme="light"] .geo-svg .ga{fill:rgba(58,139,234,.25);stroke:#3a8bea}
   .lh-hero{min-height:calc(100vh - 54px - 80px);min-height:calc(100svh - 54px - 80px)}
   .lh-hero + .trust-bar{margin-top:100px}
 }
+
+/* mobile: no bottom contact bar; theme toggle stays reachable */
+.mobile-contact-bar{display:none!important}
+body{padding-bottom:0!important}
+@media (max-width:767px){
+  .theme-toggle{width:42px;height:42px;opacity:.7;left:max(14px,env(safe-area-inset-left,0px));bottom:max(18px,env(safe-area-inset-bottom,0px))}
+}
