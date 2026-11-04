@@ -73,18 +73,20 @@
 
         <nav class="nav nav--desktop nav--pill" aria-label="Основна навігація">
         <div class="nav-item has-dropdown">
-          <span class="nav-item__label" role="button" tabindex="0" aria-haspopup="true">Послуги</span>
+          <a class="nav-item__label" href="/services.html" aria-haspopup="true">Послуги</a>
           <div class="nav-dropdown">
             <div class="nav-dropdown__panel">
-              <a href="/platforms.html">Платформи та ціни</a>
-              <a href="/process.html">Процес</a>
-              <a href="/approach.html">Підхід</a>
-              <a href="/support.html">Супровід</a>
+              <a href="/services.html#web">Розробка сайтів</a>
+              <a href="/services.html#seo">SEO</a>
+              <a href="/services.html#crm">CRM і автоматизації</a>
+              <a href="/services.html#bots">Чат-боти</a>
+              <a href="/services.html#brand">Брендинг</a>
             </div>
           </div>
         </div>
         <a href="/cases.html" class="is-active" aria-current="page">Кейси</a>
         <a href="/addons.html">Додатки</a>
+        <a href="/about.html">Про нас</a>
         <a href="/blog/">Блог</a>
         <a href="/contact.html">Контакти</a>
         </nav>
@@ -114,340 +116,17 @@
         </div>
       </div>
       <nav class="mobile-drawer__nav" aria-label="Мобільна навігація">
-        <span class="mobile-drawer__nav-label">Послуги</span>
-        <a class="mobile-drawer__nav-sub" href="/platforms.html">Платформи та ціни</a>
-        <a class="mobile-drawer__nav-sub" href="/process.html">Процес</a>
-        <a class="mobile-drawer__nav-sub" href="/approach.html">Підхід</a>
-        <a class="mobile-drawer__nav-sub" href="/support.html">Супровід</a>
-        <a href="/cases.html" class="is-active" aria-current="page">Кейси</a>
-        <a href="/addons.html">Додатки</a>
-        <a href="/blog/">Блог</a>
-        <a href="/contact.html">Контакти</a>
-        </nav>
-      <div class="mobile-drawer__meta" aria-hidden="true">
-        <span>UI/UX</span><span>DEV</span><span>SEO</span><span>CRM</span>
-      </div>
-      <a href="/contact.html" class="btn btn--primary btn--full">Залишити заявку</a>
-    </aside>
-
-    <main>
-  
-      <section class="section page-hero" aria-labelledby="projects-title">
-        <div class="container">
-          <div class="section-head reveal">
-            <div class="eyebrow">Кейси</div>
-            <h1 id="projects-title">Кейси зі створення сайтів для брендів, ресторанів, сервісів і B2B</h1>
-            <p>Від fashion і виробництва до ресторанів, експертних проєктів і B2B.</p>
-          </div>
-
-          <div class="case-filters reveal">
-            <button class="case-filter active" data-filter="all" type="button">Усі</button>
-            <button class="case-filter" data-filter="fashion" type="button">Одяг і бренди</button>
-            <button class="case-filter" data-filter="restaurants" type="button">Ресторани та доставка</button>
-            <button class="case-filter" data-filter="services" type="button">Послуги та експерти</button>
-            <button class="case-filter" data-filter="b2b" type="button">Виробництво та B2B</button>
-            <button class="case-filter" data-filter="beauty" type="button">Краса і здоров'я</button>
-            <button class="case-filter" data-filter="tech" type="button">Електроніка / Гаджети</button>
-            <button class="case-filter" data-filter="education" type="button">Освіта / Корпоративний</button>
-          </div>
-
-          <div class="cases-grid cx-grid">
-            <article class="case-card cx-card cx-card--site reveal" data-category="services">
-              <a class="case-card__link cx-card__link" href="https://autoservisvesmir.cz/" target="_blank" rel="noopener">
-                <div class="cx-card__panel"><div class="cx-browser">
-                  <div class="cx-browser__bar"><i></i><i></i><i></i><span>autoservisvesmir.cz</span></div>
-                  <div class="case-card__image cx-live" data-live="https://autoservisvesmir.cz/"><img src="/images/cases/vesmir.jpg?v=1793808271" alt="Autoservis Vesmír" loading="lazy" /></div>
-                </div></div>
-                <div class="cx-card__body">
-                  <h3 class="cx-card__title">autoservisvesmir.cz</h3>
-                  <p class="cx-card__desc">Сайт для автосервісу в Чехії: діагностика, розрахунок вартості, команда та форма заявки під запити на ремонт.</p>
-                  <div class="cx-card__tags"><span class="cx-tag">Auto service / Services</span><span class="cx-card__cta">Відкрити сайт ↗</span></div>
-                </div>
-              </a>
-            </article>
-
-            <article class="case-card cx-card cx-card--site reveal" data-category="fashion">
-              <a class="case-card__link cx-card__link" href="https://odyah.cz/" target="_blank" rel="noopener">
-                <div class="cx-card__panel"><div class="cx-browser">
-                  <div class="cx-browser__bar"><i></i><i></i><i></i><span>odyah.cz</span></div>
-                  <div class="case-card__image"><img src="/images/cases/odyah.jpg" alt="ÓDYAH" loading="lazy" /></div>
-                </div></div>
-                <div class="cx-card__body">
-                  <h3 class="cx-card__title">odyah.cz</h3>
-                  <p class="cx-card__desc">Естетичний сайт для fashion-проєкту з акцентом на бренд, візуальну подачу та чистий користувацький шлях.</p>
-                  <div class="cx-card__tags"><span class="cx-tag">Fashion / Brand</span><span class="cx-card__cta">Відкрити сайт ↗</span></div>
-                </div>
-              </a>
-            </article>
-
-            <article class="case-card cx-card cx-card--site reveal" data-category="fashion">
-              <a class="case-card__link cx-card__link" href="https://ambitna.ua/" target="_blank" rel="noopener">
-                <div class="cx-card__panel"><div class="cx-browser">
-                  <div class="cx-browser__bar"><i></i><i></i><i></i><span>ambitna.ua</span></div>
-                  <div class="case-card__image"><img src="/images/cases/ambitna.jpg" alt="Ambitna" loading="lazy" /></div>
-                </div></div>
-                <div class="cx-card__body">
-                  <h3 class="cx-card__title">ambitna.ua</h3>
-                  <p class="cx-card__desc">Інтернет-магазин для fashion-бренду з фокусом на категорії, продаж і SEO-логіку.</p>
-                  <div class="cx-card__tags"><span class="cx-tag">Fashion / E-commerce</span><span class="cx-card__cta">Відкрити сайт ↗</span></div>
-                </div>
-              </a>
-            </article>
-
-            <article class="case-card cx-card cx-card--site reveal" data-category="b2b">
-              <a class="case-card__link cx-card__link" href="https://denimtrade.com.ua/" target="_blank" rel="noopener">
-                <div class="cx-card__panel"><div class="cx-browser">
-                  <div class="cx-browser__bar"><i></i><i></i><i></i><span>denimtrade.com.ua</span></div>
-                  <div class="case-card__image"><img src="/images/cases/denimtrade.jpg" alt="Denim Trade" loading="lazy" /></div>
-                </div></div>
-                <div class="cx-card__body">
-                  <h3 class="cx-card__title">denimtrade.com.ua</h3>
-                  <p class="cx-card__desc">Сайт для denim-напрямку з акцентом на виробничу експертизу, тканину та B2B-подачу.</p>
-                  <div class="cx-card__tags"><span class="cx-tag">Production / B2B</span><span class="cx-card__cta">Відкрити сайт ↗</span></div>
-                </div>
-              </a>
-            </article>
-
-            <article class="case-card cx-card cx-card--site reveal" data-category="restaurants">
-              <a class="case-card__link cx-card__link" href="https://sushiopole.pl/" target="_blank" rel="noopener">
-                <div class="cx-card__panel"><div class="cx-browser">
-                  <div class="cx-browser__bar"><i></i><i></i><i></i><span>sushiopole.pl</span></div>
-                  <div class="case-card__image"><img src="/images/cases/sushiopole.jpg" alt="Sushi Opole" loading="lazy" /></div>
-                </div></div>
-                <div class="cx-card__body">
-                  <h3 class="cx-card__title">sushiopole.pl</h3>
-                  <p class="cx-card__desc">Сайт для доставки та ресторанного проєкту зі зрозумілою структурою і швидким користувацьким шляхом.</p>
-                  <div class="cx-card__tags"><span class="cx-tag">Restaurant / Delivery</span><span class="cx-card__cta">Відкрити сайт ↗</span></div>
-                </div>
-              </a>
-            </article>
-
-            <article class="case-card cx-card cx-card--site reveal" data-category="restaurants">
-              <a class="case-card__link cx-card__link" href="https://yugrestaurant.com/" target="_blank" rel="noopener">
-                <div class="cx-card__panel"><div class="cx-browser">
-                  <div class="cx-browser__bar"><i></i><i></i><i></i><span>yugrestaurant.com</span></div>
-                  <div class="case-card__image"><img src="/images/cases/yug.jpg?v=3" alt="YUG Restaurant" loading="lazy" /></div>
-                </div></div>
-                <div class="cx-card__body">
-                  <h3 class="cx-card__title">yugrestaurant.com</h3>
-                  <p class="cx-card__desc">Преміальна ресторанна подача з атмосферою, локальним SEO і фокусом на досвід користувача.</p>
-                  <div class="cx-card__tags"><span class="cx-tag">Restaurant / Premium</span><span class="cx-card__cta">Відкрити сайт ↗</span></div>
-                </div>
-              </a>
-            </article>
-
-            <article class="case-card cx-card cx-card--site reveal" data-category="services">
-              <a class="case-card__link cx-card__link" href="https://psysoulcenter.com/" target="_blank" rel="noopener">
-                <div class="cx-card__panel"><div class="cx-browser">
-                  <div class="cx-browser__bar"><i></i><i></i><i></i><span>psysoulcenter.com</span></div>
-                  <div class="case-card__image"><img src="/images/cases/psysoul.jpg" alt="PsySoul Center" loading="lazy" /></div>
-                </div></div>
-                <div class="cx-card__body">
-                  <h3 class="cx-card__title">psysoulcenter.com</h3>
-                  <p class="cx-card__desc">Сайт для центру психології та підтримки з м’якою подачею, довірою та структурою під заявки.</p>
-                  <div class="cx-card__tags"><span class="cx-tag">Psychology / Services</span><span class="cx-card__cta">Відкрити сайт ↗</span></div>
-                </div>
-              </a>
-            </article>
-
-            <article class="case-card cx-card cx-card--landing reveal" data-category="services">
-              <a class="case-card__link cx-card__link" href="https://personalityfirstcontentsecond.com/" target="_blank" rel="noopener">
-                <div class="cx-card__panel"><div class="cx-browser">
-                  <div class="cx-browser__bar"><i></i><i></i><i></i><span>personalityfirstcontentsecond.com</span></div>
-                  <div class="case-card__image"><img src="/images/cases/pfcs.jpg" alt="PFCS" loading="lazy" /></div>
-                </div></div>
-                <div class="cx-card__body">
-                  <h3 class="cx-card__title cx-card__title--long">personalityfirstcontentsecond.com</h3>
-                  <p class="cx-card__desc">Сайт для експертного проєкту з чітким позиціонуванням, сильним меседжем і персональною подачею.</p>
-                  <div class="cx-card__tags"><span class="cx-tag cx-tag--type">Лендінг</span><span class="cx-tag">Personal Brand / Expert</span><span class="cx-card__cta">Відкрити сайт ↗</span></div>
-                </div>
-              </a>
-            </article>
-
-            <article class="case-card cx-card cx-card--site reveal" data-category="tech">
-              <a class="case-card__link cx-card__link" href="https://shargetech.com.ua/" target="_blank" rel="noopener">
-                <div class="cx-card__panel"><div class="cx-browser">
-                  <div class="cx-browser__bar"><i></i><i></i><i></i><span>shargetech.com.ua</span></div>
-                  <div class="case-card__image"><img src="/images/cases/shargetech.jpg" alt="ShargeTech" loading="lazy" /></div>
-                </div></div>
-                <div class="cx-card__body">
-                  <h3 class="cx-card__title">shargetech.com.ua</h3>
-                  <p class="cx-card__desc">Сайт для технологічного напряму з акцентом на послуги, зрозумілу подачу та бізнесову структуру.</p>
-                  <div class="cx-card__tags"><span class="cx-tag">Tech / B2B</span><span class="cx-card__cta">Відкрити сайт ↗</span></div>
-                </div>
-              </a>
-            </article>
-
-            <article class="case-card cx-card cx-card--site reveal" data-category="b2b">
-              <a class="case-card__link cx-card__link" href="https://factoryhot.cz/" target="_blank" rel="noopener">
-                <div class="cx-card__panel"><div class="cx-browser">
-                  <div class="cx-browser__bar"><i></i><i></i><i></i><span>factoryhot.cz</span></div>
-                  <div class="case-card__image"><img src="/images/cases/factoryhot.jpg" alt="Factory HOT" loading="lazy" /></div>
-                </div></div>
-                <div class="cx-card__body">
-                  <h3 class="cx-card__title">factoryhot.cz</h3>
-                  <p class="cx-card__desc">Сайт для студії garment dye та постобробки одягу з фокусом на сервіс, текстуру та виробничу експертизу.</p>
-                  <div class="cx-card__tags"><span class="cx-tag">Production / B2B</span><span class="cx-card__cta">Відкрити сайт ↗</span></div>
-                </div>
-              </a>
-            </article>
-
-            <article class="case-card cx-card cx-card--site reveal" data-category="education">
-              <a class="case-card__link cx-card__link" href="https://mhrtb.com.ua/" target="_blank" rel="noopener">
-                <div class="cx-card__panel"><div class="cx-browser">
-                  <div class="cx-browser__bar"><i></i><i></i><i></i><span>mhrtb.com.ua</span></div>
-                  <div class="case-card__image"><img src="/images/cases/mhrtb.jpg" alt="MHRTB" loading="lazy" /></div>
-                </div></div>
-                <div class="cx-card__body">
-                  <h3 class="cx-card__title">mhrtb.com.ua</h3>
-                  <p class="cx-card__desc">Сайт для факультету з фокусом на залучення абітурієнтів, структуру програм навчання та зрозумілу навігацію.</p>
-                  <div class="cx-card__tags"><span class="cx-tag">Education / Corporate website</span><span class="cx-card__cta">Відкрити сайт ↗</span></div>
-                </div>
-              </a>
-            </article>
-
-            <article class="case-card cx-card cx-card--site reveal" data-category="fashion">
-              <a class="case-card__link cx-card__link" href="https://ever-breeze.cz/" target="_blank" rel="noopener">
-                <div class="cx-card__panel"><div class="cx-browser">
-                  <div class="cx-browser__bar"><i></i><i></i><i></i><span>ever-breeze.cz</span></div>
-                  <div class="case-card__image"><img src="/images/cases/everbreeze.jpg" alt="Ever-Breeze" loading="lazy" /></div>
-                </div></div>
-                <div class="cx-card__body">
-                  <h3 class="cx-card__title">ever-breeze.cz</h3>
-                  <p class="cx-card__desc">Сайт для бренду автопарфумів з акцентом на преміальну подачу, каталог, атмосферу бренду та продаж через e-commerce.</p>
-                  <div class="cx-card__tags"><span class="cx-tag">E-commerce / Brand</span><span class="cx-card__cta">Відкрити сайт ↗</span></div>
-                </div>
-              </a>
-            </article>
-
-            <article class="case-card cx-card cx-card--site reveal" data-category="tech">
-              <a class="case-card__link cx-card__link" href="https://aimgear.com.ua/" target="_blank" rel="noopener">
-                <div class="cx-card__panel"><div class="cx-browser">
-                  <div class="cx-browser__bar"><i></i><i></i><i></i><span>aimgear.com.ua</span></div>
-                  <div class="case-card__image"><img src="/images/cases/aimgear.jpg" alt="AIMGEAR" loading="lazy" /></div>
-                </div></div>
-                <div class="cx-card__body">
-                  <h3 class="cx-card__title">aimgear.com.ua</h3>
-                  <p class="cx-card__desc">Сайт для бренду геймерської периферії з акцентом на технічну подачу, каталог моделей і конверсію через e-commerce.</p>
-                  <div class="cx-card__tags"><span class="cx-tag">Gaming / E-commerce</span><span class="cx-card__cta">Відкрити сайт ↗</span></div>
-                </div>
-              </a>
-            </article>
-
-            <article class="case-card cx-card cx-card--site reveal" data-category="b2b">
-              <a class="case-card__link cx-card__link" href="https://souvenirsnewhope.com/" target="_blank" rel="noopener">
-                <div class="cx-card__panel"><div class="cx-browser">
-                  <div class="cx-browser__bar"><i></i><i></i><i></i><span>souvenirsnewhope.com</span></div>
-                  <div class="case-card__image"><img src="/images/cases/newhope.jpg" alt="New Hope Souvenirs" loading="lazy" /></div>
-                </div></div>
-                <div class="cx-card__body">
-                  <h3 class="cx-card__title">souvenirsnewhope.com</h3>
-                  <p class="cx-card__desc">Сайт для виробника текстильних сувенірів і кастомного брендингу з акцентом на оптові поставки, корпоративні замовлення та B2B-структуру.</p>
-                  <div class="cx-card__tags"><span class="cx-tag">Production / B2B</span><span class="cx-card__cta">Відкрити сайт ↗</span></div>
-                </div>
-              </a>
-            </article>
-
-            <article class="case-card cx-card cx-card--landing reveal" data-category="beauty">
-              <a class="case-card__link cx-card__link" href="https://likar-levina.com/" target="_blank" rel="noopener">
-                <div class="cx-card__panel"><div class="cx-browser">
-                  <div class="cx-browser__bar"><i></i><i></i><i></i><span>likar-levina.com</span></div>
-                  <div class="case-card__image"><img src="/images/cases/likar-levina.jpg" alt="Лікар Левіна" loading="lazy" /></div>
-                </div></div>
-                <div class="cx-card__body">
-                  <h3 class="cx-card__title">likar-levina.com</h3>
-                  <p class="cx-card__desc">Сайт сімейного лікаря з акцентом на довіру, зручний запис на прийом і особистий бренд лікаря.</p>
-                  <div class="cx-card__tags"><span class="cx-tag cx-tag--type">Лендінг</span><span class="cx-tag">Медицина / Особистий бренд</span><span class="cx-card__cta">Відкрити сайт ↗</span></div>
-                </div>
-              </a>
-            </article>
-
-            <article class="case-card cx-card cx-card--site reveal" data-category="beauty">
-              <a class="case-card__link cx-card__link" href="https://brace.com.ua/" target="_blank" rel="noopener">
-                <div class="cx-card__panel"><div class="cx-browser">
-                  <div class="cx-browser__bar"><i></i><i></i><i></i><span>brace.com.ua</span></div>
-                  <div class="case-card__image"><img src="/images/cases/brace.jpg" alt="Brace" loading="lazy" /></div>
-                </div></div>
-                <div class="cx-card__body">
-                  <h3 class="cx-card__title">brace.com.ua</h3>
-                  <p class="cx-card__desc">Редизайн сайту для українського постачальника ортопедичної та хірургічної продукції. Акцент на каталог, довіру та B2B-клієнтів.</p>
-                  <div class="cx-card__tags"><span class="cx-tag">Медицина / E-commerce</span><span class="cx-card__cta">Відкрити сайт ↗</span></div>
-                </div>
-              </a>
-            </article>
-
-            <article class="case-card cx-card cx-card--site reveal" data-category="beauty">
-              <a class="case-card__link cx-card__link" href="https://goncharbeauty.com/" target="_blank" rel="noopener">
-                <div class="cx-card__panel"><div class="cx-browser">
-                  <div class="cx-browser__bar"><i></i><i></i><i></i><span>goncharbeauty.com</span></div>
-                  <div class="case-card__image"><img src="/images/cases/gonchar.jpg" alt="Dr. Gonchar Beauty" loading="lazy" /></div>
-                </div></div>
-                <div class="cx-card__body">
-                  <h3 class="cx-card__title">goncharbeauty.com</h3>
-                  <p class="cx-card__desc">Інтернет-магазин під ключ для мультибрендового косметологічного магазину. Розробка з нуля на Horoshop: каталог, SEO, імпорт товарів.</p>
-                  <div class="cx-card__tags"><span class="cx-tag">Beauty / E-commerce</span><span class="cx-card__cta">Відкрити сайт ↗</span></div>
-                </div>
-              </a>
-            </article>
-
-            <article class="case-card cx-card cx-card--site reveal" data-category="tech">
-              <a class="case-card__link cx-card__link" href="https://pikasso.com.ua/ua/" target="_blank" rel="noopener">
-                <div class="cx-card__panel"><div class="cx-browser">
-                  <div class="cx-browser__bar"><i></i><i></i><i></i><span>pikasso.com.ua</span></div>
-                  <div class="case-card__image"><img src="/images/cases/pikasso.jpg?v=2" alt="Pikasso" loading="lazy" /></div>
-                </div></div>
-                <div class="cx-card__body">
-                  <h3 class="cx-card__title">pikasso.com.ua</h3>
-                  <p class="cx-card__desc">Редизайн інтернет-магазину дизайнерських аксесуарів для гаджетів Apple з трьома напрямками — Mobile, Tech, Gaming — та фокусом на каталог і конверсію.</p>
-                  <div class="cx-card__tags"><span class="cx-tag">Tech / E-commerce</span><span class="cx-card__cta">Відкрити сайт ↗</span></div>
-                </div>
-              </a>
-            </article>
-          </div>
-        </div>
-      </section>
-
-      <section class="section page-cta">
-        <div class="container">
-          <div class="page-cta__box reveal">
-            <h2>Сподобались наші роботи?</h2>
-            <p>Розкажіть про свій проєкт — зробимо так само якісно або сильніше.</p>
-            <a href="/contact.html" class="btn btn--primary">Обговорити проєкт</a>
-          </div>
-        </div>
-      </section>
-  
-    </main>
-
-        <footer class="site-footer">
-      <div class="container footer-grid">
-        <div class="footer-col footer-col--brand">
-          <div class="footer-brand">
-            <img src="https://i.postimg.cc/WFkvPsp6/2026-03-03-20-34-27.jpg" alt="Lúmi Web Agency логотип" class="footer-brand__logo" />
-            <div class="footer-brand__text">
-              <strong>Lúmi</strong>
-              <span>web agency</span>
-            </div>
-          </div>
-          <p class="footer-about">Агентство розробки сайтів під ключ. Допомагаємо бізнесу запускати сайти, що приносять заявки.</p>
-          <div class="footer-socials">
-            <a href="https://www.instagram.com/lumi.webagency/" target="_blank" rel="noopener" class="footer-instagram" aria-label="Instagram Lúmi Web Agency">
-              <svg viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M7 2C4.2 2 2 4.2 2 7v10c0 2.8 2.2 5 5 5h10c2.8 0 5-2.2 5-5V7c0-2.8-2.2-5-5-5H7zm0 2h10c1.7 0 3 1.3 3 3v10c0 1.7-1.3 3-3 3H7c-1.7 0-3-1.3-3-3V7c0-1.7 1.3-3 3-3zm5 3.5A5.5 5.5 0 1 0 17.5 13 5.5 5.5 0 0 0 12 7.5zm0 2A3.5 3.5 0 1 1 8.5 13 3.5 3.5 0 0 1 12 9.5zm4.8-3.3a1.2 1.2 0 1 0 1.2 1.2 1.2 1.2 0 0 0-1.2-1.2z" />
-              </svg>
-            </a>
-          </div>
-        </div>
-
-        <div class="footer-col">
-          <h4 class="footer-col__title">Навігація</h4>
-          <nav class="footer-nav-col" aria-label="Навігація у футері">
-            <a href="/services.html">Послуги</a>
-            <a href="/platforms.html">Платформи та ціни</a>
-            <a href="/cases.html">Кейси</a>
+        <a class="mobile-drawer__nav-label" href="/services.html">Послуги</a>
+        <a class="mobile-drawer__nav-sub" href="/services.html#web">Розробка сайтів</a>
+        <a class="mobile-drawer__nav-sub" href="/services.html#seo">SEO</a>
+        <a class="mobile-drawer__nav-sub" href="/services.html#crm">CRM і автоматизації</a>
+        <a class="mobile-drawer__nav-sub" href="/services.html#bots">Чат-боти</a>
+        <a class="mobile-drawer__nav-sub" href="/services.html#brand">Брендинг</a>
+        <a href="/platforms.html">Платформи та ціни</a>
+        <a href="/cases.html">Кейси</a>
             <a href="/addons.html">Додатки</a>
-            <a href="/process.html">Процес</a>
-            <a href="/support.html">Супровід</a>
+            <a href="/services.html#process">Процес</a>
+            <a href="/services.html#support">Супровід</a>
         <a href="/blog/">Блог</a>
           </nav>
         </div>
