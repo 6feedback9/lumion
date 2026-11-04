@@ -6571,3 +6571,9 @@ html[data-theme="light"] .lh-hero{background:transparent}
 .geo-svg .ga{fill:rgba(var(--hit),.2);stroke:rgba(var(--hit),.85)}
 .geo-svg .pl{font-size:9px;font-weight:600;paint-order:stroke;stroke:var(--bg);stroke-width:3px;stroke-linejoin:round}
 .geo-map-wrap.is-cursor-zoom .geo-svg{transform:scale(1.35)}
+
+/* tighter spacing around the map */
+.geo-map-section{padding-top:28px!important;padding-bottom:0!important}
+.geo-map-wrap{margin-top:8px!important}
+.geo-map-section + .section{padding-top:36px!important}
+.geo-map-section .section-head{margin-bottom:8px!important}
