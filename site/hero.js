@@ -5,7 +5,7 @@
   if(!gl)return;
   var root=document.documentElement,run=true,vis=true,t0=performance.now();
   var reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var FS='precision highp float;uniform vec2 R;uniform float T;uniform float L;'+
+  var FS='precision mediump float;uniform vec2 R;uniform float T;uniform float L;'+
   'float hash(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}'+
   'void main(){vec2 p=(gl_FragCoord.xy-.5*R)/R.y;float y0=R.x<R.y?-.35:-.26;'+
   'vec3 bgD=vec3(.067,.075,.098),bgL=vec3(.961,.949,.925);vec3 bg=mix(bgD,bgL,L);'+
@@ -26,15 +26,15 @@
   var b=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,b);gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,1,-1,-1,1,1,1]),gl.STATIC_DRAW);
   var a=gl.getAttribLocation(pr,'a');gl.enableVertexAttribArray(a);gl.vertexAttribPointer(a,2,gl.FLOAT,false,0,0);
   var uR=gl.getUniformLocation(pr,'R'),uT=gl.getUniformLocation(pr,'T'),uL=gl.getUniformLocation(pr,'L');
-  function size(){var r=hero.getBoundingClientRect(),d=Math.min(window.devicePixelRatio||1,1.5);cv.width=Math.max(2,r.width*d);cv.height=Math.max(2,r.height*d);gl.viewport(0,0,cv.width,cv.height);draw(performance.now())}
+  function size(){var r=hero.getBoundingClientRect(),d=Math.min(window.devicePixelRatio||1,1);var m=Math.sqrt(900000/Math.max(1,r.width*r.height*d*d));if(m<1)d*=m;cv.width=Math.max(2,Math.round(r.width*d));cv.height=Math.max(2,Math.round(r.height*d));gl.viewport(0,0,cv.width,cv.height);draw(performance.now())}
   function draw(ts){
     gl.uniform2f(uR,cv.width,cv.height);gl.uniform1f(uT,reduce?2:(ts-t0)/1000);
     gl.uniform1f(uL,root.getAttribute('data-theme')==='light'?1:0);gl.drawArrays(gl.TRIANGLE_STRIP,0,4)}
-  function loop(ts){if(run&&vis&&!reduce)draw(ts);requestAnimationFrame(loop)}
+  var last=0;function loop(ts){if(run&&vis&&!reduce&&ts-last>30){last=ts;draw(ts)}requestAnimationFrame(loop)}
   if('IntersectionObserver' in window)new IntersectionObserver(function(e){vis=e[0].isIntersecting}).observe(hero);
   document.addEventListener('visibilitychange',function(){run=!document.hidden});
   new MutationObserver(function(){draw(performance.now())}).observe(root,{attributes:true,attributeFilter:['data-theme']});
-  window.addEventListener('resize',size);window.addEventListener('load',size);size();requestAnimationFrame(loop);
+  window.addEventListener('resize',size);size();requestAnimationFrame(loop);
 })();
 
 (function(){function s(){var h=document.querySelector('.site-header');if(h)document.documentElement.style.setProperty('--hh',(h.offsetHeight+parseFloat(getComputedStyle(h).marginTop||0)+(parseFloat(getComputedStyle(h).top)||0)-0)+'px')}s();addEventListener('resize',s);addEventListener('load',s)})();
