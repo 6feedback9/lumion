@@ -6450,3 +6450,9 @@ html[data-theme="light"] .geo-svg .ga{fill:rgba(58,139,234,.25);stroke:#3a8bea}
   .lh-hero{min-height:calc(100svh - 75px);padding:0 0 20px}
   .lh-hero__copy{padding:12px 20px 0}
 }
+
+/* hero a bit lower than the screen; next block starts below the fold */
+@media (min-width:701px){
+  .lh-hero{min-height:calc(100vh - 54px - 80px);min-height:calc(100svh - 54px - 80px)}
+  .lh-hero + .trust-bar{margin-top:100px}
+}
