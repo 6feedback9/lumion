@@ -6504,3 +6504,9 @@ section h2:not(.visually-hidden):not(.blog-card__title):not(.addon-card__title),
 @media (min-width:961px){
   .site-header{top:22px;margin-top:10px}
 }
+
+/* header floats over the hero so the code-rain animation fills the whole banner */
+body:has(.lh-hero) .site-header{margin-bottom:calc(var(--hh,64px) * -1)}
+body:has(.lh-hero) .lh-hero{padding-top:var(--hh,64px)!important;min-height:calc(100svh - 66px)}
+@media (max-width:700px){body:has(.lh-hero) .lh-hero{min-height:0}}
+@media (min-width:961px){.site-header{top:34px!important;margin-top:0!important}}

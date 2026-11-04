@@ -47,3 +47,5 @@
   new MutationObserver(function(){draw(performance.now())}).observe(root,{attributes:true,attributeFilter:['data-theme']});
   size();requestAnimationFrame(loop);
 })();
+
+(function(){function s(){var h=document.querySelector('.site-header');if(h)document.documentElement.style.setProperty('--hh',(h.offsetHeight+parseFloat(getComputedStyle(h).marginTop||0)+(parseFloat(getComputedStyle(h).top)||0)-0)+'px')}s();addEventListener('resize',s);addEventListener('load',s)})();
