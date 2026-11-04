@@ -6563,3 +6563,11 @@ html[data-theme="light"] .lh-hero{background:transparent}
 
 /* keep back-to-top clear of the theme toggle */
 @media (min-width:821px){.back-to-top{left:18px!important;bottom:84px!important}}
+
+/* high-detail world map */
+.geo-svg .gland{fill:rgba(var(--hit),.075);stroke:none}
+.geo-svg .gborders{fill:none;stroke:rgba(var(--hit),.22);stroke-width:.3;stroke-linejoin:round}
+.geo-svg{will-change:auto!important;shape-rendering:geometricPrecision}
+.geo-svg .ga{fill:rgba(var(--hit),.2);stroke:rgba(var(--hit),.85)}
+.geo-svg .pl{font-size:9px;font-weight:600;paint-order:stroke;stroke:var(--bg);stroke-width:3px;stroke-linejoin:round}
+.geo-map-wrap.is-cursor-zoom .geo-svg{transform:scale(1.35)}

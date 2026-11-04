@@ -562,7 +562,7 @@ if (document.readyState === 'loading') {
   const applyResponsiveViewBox = () => {
     if (mobileQuery.matches) {
       // Central/Eastern Europe: Austria, Czech Republic, Poland, Ukraine + neighbours.
-      svg.setAttribute('viewBox', '490 60 150 131');
+      svg.setAttribute('viewBox', '462 62 150 132');
       svg.setAttribute('preserveAspectRatio', 'xMidYMid meet');
     } else {
       svg.setAttribute('viewBox', baseViewBox);
