@@ -6463,3 +6463,17 @@ body{padding-bottom:0!important}
 @media (max-width:767px){
   .theme-toggle{width:42px;height:42px;opacity:.7;left:max(14px,env(safe-area-inset-left,0px));bottom:max(18px,env(safe-area-inset-bottom,0px))}
 }
+
+/* big screens: the trust plaque sits at the bottom of the first screen, no extra gap */
+@media (min-width:701px){
+  .lh-hero{min-height:calc(100vh - 54px - 66px);min-height:calc(100svh - 54px - 66px)}
+  .lh-hero + .trust-bar{margin-top:0}
+}
+/* mobile map: soft fade into the page, no hard stripe */
+@media (max-width:600px){
+  .geo-map-wrap::after{
+    background:linear-gradient(to bottom,transparent 0%,transparent 55%,rgba(var(--bgrgb,7,11,22),0) 55%),
+      linear-gradient(to bottom,transparent 50%,var(--bg) 100%);
+    opacity:1;
+  }
+}
