@@ -121,6 +121,11 @@ if (form) {
       phone: form.querySelector('#phone')?.value.trim() || '',
       message: form.querySelector('#message')?.value.trim() || ''
     };
+    const serviceVal = form.querySelector('#service')?.value || '';
+    if (serviceVal) {
+      const isEnSvc = window.location.pathname.startsWith('/en/');
+      formData.message = `${isEnSvc ? 'Service' : 'Послуга'}: ${serviceVal}` + (formData.message ? `\n${formData.message}` : '');
+    }
 
     try {
       const payload = new URLSearchParams();
@@ -739,6 +744,10 @@ if (document.readyState === 'loading') {
     name: 'Your name',
     phone: 'Phone / Telegram',
     message: 'Briefly about your task (optional)',
+    service: 'Which service do you need',
+    servicePh: 'Choose a service',
+    serviceOpts: ["Website development", "Online store", "Website redesign", "Website maintenance & support", "SEO", "CRM integration", "Chatbot / Telegram bot", "Branding & identity", "Other / need advice"],
+    serviceKey: 'Service',
     submit: 'Get free consultation',
     sending: 'Sending...',
     success: 'Thank you! We will contact you shortly.',
@@ -756,6 +765,10 @@ if (document.readyState === 'loading') {
     name: 'Ваше ім’я',
     phone: 'Телефон / Telegram',
     message: 'Коротко про задачу (необов’язково)',
+    service: 'Яка послуга потрібна',
+    servicePh: 'Оберіть послугу',
+    serviceOpts: ["Розробка сайту", "Інтернет-магазин", "Редизайн сайту", "Обслуговування та підтримка сайту", "SEO-просування", "CRM-інтеграція", "Чат-бот / Telegram-бот", "Айдентика та брендинг", "Інше / потрібна порада"],
+    serviceKey: 'Послуга',
     submit: 'Отримати консультацію',
     sending: 'Надсилання...',
     success: 'Дякуємо! Ми зв’яжемось з вами найближчим часом.',
@@ -790,6 +803,10 @@ if (document.readyState === 'loading') {
           <div class="form-row">
             <label for="consultPhone">${copy.phone}</label>
             <input id="consultPhone" name="phone" type="text" placeholder="+380..." required />
+          </div>
+          <div class="form-row">
+            <label for="consultService">${copy.service}</label>
+            <select id="consultService" name="service"><option value="">${copy.servicePh}</option>${copy.serviceOpts.map(o => `<option value="${o}">${o}</option>`).join('')}</select>
           </div>
           <div class="form-row">
             <label for="consultMessage">${copy.message}</label>
@@ -856,7 +873,9 @@ if (document.readyState === 'loading') {
     const name = modalForm.querySelector('#consultName')?.value.trim() || '';
     const phone = modalForm.querySelector('#consultPhone')?.value.trim() || '';
     const rawMessage = modalForm.querySelector('#consultMessage')?.value.trim() || '';
-    const message = rawMessage ? `${copy.sourceLabel}\n${rawMessage}` : copy.sourceLabel;
+    const svc = modalForm.querySelector('#consultService')?.value || '';
+    const svcLine = svc ? `${copy.serviceKey}: ${svc}\n` : '';
+    const message = svcLine + (rawMessage ? `${copy.sourceLabel}\n${rawMessage}` : copy.sourceLabel);
 
     try {
       const payload = new URLSearchParams();
