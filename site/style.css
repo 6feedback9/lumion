@@ -6723,3 +6723,8 @@ html[data-theme="light"] .sc-frame{box-shadow:0 40px 80px rgba(70,50,110,.25),0 
 html{overflow-x:hidden;max-width:100%}
 body{overflow-x:clip;max-width:100%;position:relative}
 @media (max-width:700px){.scm{margin-left:0;margin-right:0;max-width:100%;overflow:hidden}}
+
+/* cookie banner buttons match site buttons */
+.cookie-banner__btn{border-radius:12px;padding:10px 20px}
+.cookie-banner__btn--accept{background:linear-gradient(135deg,var(--accent),var(--accent-2));color:var(--btn-fg);box-shadow:0 8px 20px rgba(115,183,255,.25)}
+html[data-theme="light"] .cookie-banner__btn--accept{background:linear-gradient(135deg,#5560e8,#8b5cf0)!important;color:#fff!important;box-shadow:0 8px 20px rgba(85,96,232,.3)}
