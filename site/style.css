@@ -6728,3 +6728,8 @@ body{overflow-x:clip;max-width:100%;position:relative}
 .cookie-banner__btn{border-radius:12px;padding:10px 20px}
 .cookie-banner__btn--accept{background:linear-gradient(135deg,var(--accent),var(--accent-2));color:var(--btn-fg);box-shadow:0 8px 20px rgba(115,183,255,.25)}
 html[data-theme="light"] .cookie-banner__btn--accept{background:linear-gradient(135deg,#5560e8,#8b5cf0)!important;color:#fff!important;box-shadow:0 8px 20px rgba(85,96,232,.3)}
+
+/* blog card meta: no mid-word wrapping */
+.blog-card__meta{flex-wrap:wrap;row-gap:6px;column-gap:10px}
+.blog-card__meta>*{white-space:nowrap}
+@media (max-width:700px){.blog-card__meta{font-size:11px;letter-spacing:.08em}.blog-card__date{letter-spacing:.06em}}
