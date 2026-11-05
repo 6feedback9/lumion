@@ -6743,3 +6743,7 @@ html[data-theme="light"] .cookie-banner__btn--accept{background:linear-gradient(
 .form-row select option{background:#14171f;color:#f2f4fa}
 html[data-theme="light"] .form-row select option{background:#fff;color:#1a1d2b}
 .consult-form .form-row select{padding:12px 40px 12px 14px;border-radius:14px}
+
+/* page end blends into the area under the footer (iOS bottom bar / overscroll) */
+html{background:#0d0e11}
+html[data-theme="light"]{background:#f7f4ee}
