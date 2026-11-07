@@ -957,3 +957,82 @@ if (document.readyState === 'loading') {
     last=y;clearTimeout(timer);timer=setTimeout(function(){tt.classList.remove('is-away')},900);
   },{passive:true});
 })();
+
+/* Partners marquee: auto-scroll + drag / swipe / wheel to browse */
+(function () {
+  const lm = document.querySelector('.lm');
+  if (!lm || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const vp = lm.querySelector('.lm__viewport');
+  const track = lm.querySelector('.lm__track');
+  if (!vp || !track) return;
+  lm.classList.add('is-js');
+
+  let half = track.scrollWidth / 2;
+  let pos = 0, paused = false, dragging = false, startX = 0, startPos = 0, last = 0, resumeT;
+  const SPEED = 32; // px per second
+
+  const wrap = () => {
+    if (!half) return;
+    if (pos >= half) pos -= half;
+    if (pos < 0) pos += half;
+  };
+  const recalc = () => { half = track.scrollWidth / 2; };
+  window.addEventListener('resize', recalc);
+  window.addEventListener('load', recalc);
+
+  vp.addEventListener('scroll', () => {
+    if (!dragging && paused) { pos = vp.scrollLeft; }
+  }, { passive: true });
+
+  const pauseFor = (ms) => {
+    paused = true;
+    clearTimeout(resumeT);
+    if (ms) resumeT = setTimeout(() => { pos = vp.scrollLeft; paused = false; }, ms);
+  };
+
+  lm.addEventListener('mouseenter', () => pauseFor(0));
+  lm.addEventListener('mouseleave', () => { if (!dragging) { pos = vp.scrollLeft; paused = false; } });
+  vp.addEventListener('touchstart', () => pauseFor(0), { passive: true });
+  vp.addEventListener('touchend', () => pauseFor(2500), { passive: true });
+  vp.addEventListener('wheel', () => { pauseFor(2500); }, { passive: true });
+
+  vp.addEventListener('pointerdown', (e) => {
+    if (e.pointerType !== 'mouse' || e.button !== 0) return;
+    dragging = true; paused = true;
+    startX = e.clientX; startPos = vp.scrollLeft;
+    vp.classList.add('is-dragging');
+    vp.setPointerCapture(e.pointerId);
+  });
+  vp.addEventListener('pointermove', (e) => {
+    if (!dragging) return;
+    pos = startPos - (e.clientX - startX);
+    wrap();
+    vp.scrollLeft = pos;
+    startX = e.clientX; startPos = pos;
+  });
+  const endDrag = (e) => {
+    if (!dragging) return;
+    dragging = false;
+    vp.classList.remove('is-dragging');
+    try { vp.releasePointerCapture(e.pointerId); } catch (_) {}
+  };
+  vp.addEventListener('pointerup', endDrag);
+  vp.addEventListener('pointercancel', endDrag);
+
+  const tick = (t) => {
+    if (!last) last = t;
+    const dt = Math.min(64, t - last); last = t;
+    if (!paused && !dragging) {
+      pos += SPEED * dt / 1000;
+      wrap();
+      vp.scrollLeft = pos;
+    } else if (!dragging) {
+      // keep wrap-around seamless while the user scrolls manually
+      const sl = vp.scrollLeft;
+      if (half && sl >= half) { vp.scrollLeft = sl - half; }
+      else if (half && sl <= 0) { vp.scrollLeft = half; }
+    }
+    requestAnimationFrame(tick);
+  };
+  requestAnimationFrame(tick);
+})();

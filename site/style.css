@@ -6747,3 +6747,10 @@ html[data-theme="light"] .form-row select option{background:#fff;color:#1a1d2b}
 /* page end blends into the area under the footer (iOS bottom bar / overscroll) */
 html{background:#0d0e11}
 html[data-theme="light"]{background:#f7f4ee}
+
+/* partners marquee: draggable scroller (JS adds .is-js) */
+.lm.is-js .lm__viewport{overflow-x:auto;overflow-y:hidden;scrollbar-width:none;-ms-overflow-style:none;cursor:grab;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain;touch-action:pan-x pan-y}
+.lm.is-js .lm__viewport::-webkit-scrollbar{display:none}
+.lm.is-js .lm__viewport.is-dragging{cursor:grabbing;user-select:none;-webkit-user-select:none}
+.lm.is-js .lm__track{animation:none}
+.lm.is-js .lm-logo{pointer-events:none}
