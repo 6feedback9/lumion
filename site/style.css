@@ -6754,12 +6754,3 @@ html[data-theme="light"]{background:#f7f4ee}
 .lm.is-js .lm__viewport.is-dragging{cursor:grabbing;user-select:none;-webkit-user-select:none}
 .lm.is-js .lm__track{animation:none}
 .lm.is-js .lm-logo{pointer-events:none}
-
-/* Accent: one warm ember colour, only on the main call-to-action buttons. Flat, no glow. Everything else stays in the base palette. */
-:root{--hot:#f26a2e;--hot-hover:#ff7d45;--hot-ink:#1a0c04}
-.btn--primary,
-html[data-theme="light"] .btn--primary,
-.nav-cta,
-html[data-theme="light"] .nav-cta{
-  background:var(--hot)!important;color:var(--hot-ink)!important;box-shadow:none!important;border-color:transparent!important}
-.btn--primary:hover,.nav-cta:hover{background:var(--hot-hover)!important;box-shadow:none!important}
