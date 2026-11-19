@@ -6757,18 +6757,18 @@ html[data-theme="light"]{background:#f7f4ee}
 
 /* Accent colour: tiger orange. Used only for the main call-to-action buttons, prices and key numbers.
    Blue stays the base. Orange text on light backgrounds uses a darker shade to keep contrast above 4.5:1. */
-:root{--hot:#ff8500;--hot-hover:#ffa033;--hot-ink:#1b1200;--hot-fg:#ff8500}
-html[data-theme="light"]{--hot-fg:#b35900}
+:root{--hot:#ff5a1f;--hot-hover:#ff7340;--hot-ink:#1a0800;--hot-fg:#ff6a33}
+html[data-theme="light"]{--hot-fg:#c2410c}
 .btn--primary,
 html[data-theme="light"] .btn--primary,
 html[data-theme="light"] .nav-cta,
 .cookie-banner__btn--accept{
   background:var(--hot)!important;color:var(--hot-ink)!important;
-  box-shadow:0 12px 28px rgba(255,133,0,.28)!important}
+  box-shadow:0 12px 28px rgba(255,90,31,.28)!important}
 .btn--primary:hover,.cookie-banner__btn--accept:hover{background:var(--hot-hover)!important}
 .platform-card__amount,.hp b{color:var(--hot-fg)!important}
 .hp em,.card-link{color:var(--hot-fg)}
 
 /* accent: header CTA in dark theme */
-.nav-cta{background:var(--hot,#ff8500)!important;color:var(--hot-ink,#1b1200)!important;box-shadow:0 6px 20px rgba(255,133,0,.28)!important}
+.nav-cta{background:var(--hot,#ff8500)!important;color:var(--hot-ink,#1b1200)!important;box-shadow:0 6px 20px rgba(255,90,31,.28)!important}
 .nav-cta:hover{background:var(--hot-hover,#ff9a2e)!important}
