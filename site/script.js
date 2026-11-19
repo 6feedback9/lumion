@@ -1047,7 +1047,7 @@ if (document.readyState === 'loading') {
       try {
         if (localStorage.getItem('lumi_cookie_consent') !== 'declined' && navigator.sendBeacon) {
           navigator.sendBeacon('https://script.google.com/macros/s/AKfycbxxuK52USQ6l77m1FtkqvU2ygtlIN7Fpr1ESi6emqCDX4qP4_64OlWAh1WMljqezxQUPg/exec',
-            new Blob([JSON.stringify({event:name,page:params.page_path,lang:params.page_lang,label:params.label||'',link:params.link_url||'',location:params.location||'',phone:params.phone||'',channel:params.channel||'',percent:params.percent||''})],{type:'text/plain'}));
+            new Blob([JSON.stringify({k:'lm7Kq2xV9pRt4Zc8',event:name,page:params.page_path,lang:params.page_lang,label:params.label||'',link:params.link_url||'',location:params.location||'',phone:params.phone||'',channel:params.channel||'',percent:params.percent||''})],{type:'text/plain'}));
         }
       } catch(e) {}
       if (typeof window.gtag === 'function') window.gtag('event', name, params);
