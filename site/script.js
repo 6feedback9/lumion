@@ -1036,3 +1036,47 @@ if (document.readyState === 'loading') {
   };
   requestAnimationFrame(tick);
 })();
+
+/* Lúmi analytics: GA4 events for calls, messengers, buttons, forms, scroll depth */
+(function(){
+  function send(name, params){
+    try{
+      params = params || {};
+      params.page_path = location.pathname;
+      params.page_lang = document.documentElement.lang || '';
+      if (typeof window.gtag === 'function') window.gtag('event', name, params);
+    }catch(e){}
+  }
+  function label(el){
+    var t = (el.getAttribute('aria-label') || el.textContent || '').replace(/\s+/g,' ').trim();
+    return t.slice(0,60);
+  }
+  function section(el){
+    var s = el.closest('section,header,footer,nav,form');
+    return s ? (s.id || s.getAttribute('aria-label') || s.className.split(' ')[0] || s.tagName.toLowerCase()) : '';
+  }
+  document.addEventListener('click', function(e){
+    var el = e.target.closest && e.target.closest('a,button');
+    if (!el) return;
+    var href = el.getAttribute('href') || '';
+    var where = section(el);
+    if (href.indexOf('tel:') === 0) { send('phone_click', {phone: href.slice(4), location: where}); return; }
+    if (href.indexOf('mailto:') === 0) { send('email_click', {location: where}); return; }
+    if (/t\.me\/|wa\.me\/|viber:|telegram/i.test(href)) { send('messenger_click', {channel: 'telegram', link_url: href, location: where}); return; }
+    if (/instagram\.com|linkedin\.com|facebook\.com/i.test(href)) { send('social_click', {link_url: href, location: where}); return; }
+    if (/\/cases?(\.html)?(\/|$|#)|\/cases\//.test(href)) { send('case_click', {link_url: href, label: label(el), location: where}); }
+    if (el.matches('.btn, button, [role=button], .nav-cta')) { send('button_click', {label: label(el), location: where, link_url: href}); }
+    else if (/\/(contact|services|platforms|about|partners|addons|try-on)(\.html)?/.test(href)) { send('nav_click', {label: label(el), link_url: href, location: where}); }
+  }, true);
+  document.addEventListener('submit', function(e){
+    var f = e.target; send('form_submit', {form: f.id || f.className.split(' ')[0] || 'form'});
+  }, true);
+  var marks = {25:0,50:0,75:0,90:0};
+  function onScroll(){
+    var h = document.documentElement.scrollHeight - window.innerHeight;
+    if (h <= 0) return;
+    var p = Math.round(window.scrollY / h * 100);
+    Object.keys(marks).forEach(function(k){ if (!marks[k] && p >= +k) { marks[k] = 1; send('scroll_depth', {percent: +k}); } });
+  }
+  window.addEventListener('scroll', onScroll, {passive:true});
+})();
