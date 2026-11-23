@@ -1,0 +1,32 @@
+# Lúmi Web Agency
+
+> Lúmi Web Agency (lumiwebagency.com) is a web development agency based in Odesa, Ukraine. We build turnkey websites and online stores (Shopify, WordPress, Weblium, Horoshop, OpenCart and custom code), and provide SEO, GEO (generative engine optimization), CRM integrations, payment integrations and branding. Clients in Ukraine, Czech Republic, Poland, Austria and Bulgaria. Site languages: Ukrainian and English.
+
+## Services
+- [Website development](https://lumiwebagency.com/services/website-development.html): landing pages from 500 EUR, multi-page sites from 700 EUR, from 7 days
+- [Online stores](https://lumiwebagency.com/services/online-store.html): Shopify, Horoshop, OpenCart; WayForPay, Monobank, LiqPay, Stripe
+- [SEO](https://lumiwebagency.com/services/seo.html): audits, semantics, technical SEO, ongoing promotion
+- [GEO / AI search optimization](https://lumiwebagency.com/services/geo.html): getting into ChatGPT, Gemini and Google AI Overviews answers
+- [CRM integrations](https://lumiwebagency.com/services/crm.html)
+- [Redesign](https://lumiwebagency.com/services/redesign.html)
+- [Chatbots](https://lumiwebagency.com/services/chatbots.html)
+
+## Proof and portfolio
+- [Cases](https://lumiwebagency.com/cases.html)
+- [Behance portfolio](https://www.behance.net/lumiagency)
+- [LinkedIn](https://www.linkedin.com/in/mariia-yeromina-27a9a8429)
+- [Instagram](https://www.instagram.com/lumi.webagency/)
+
+## Guides (English)
+- [Website cost 2026](https://lumiwebagency.com/en/blog/website-cost-2026.html)
+- [Online store cost 2026](https://lumiwebagency.com/en/blog/how-much-does-an-online-store-cost-2026.html)
+- [Shopify vs Horoshop vs Weblium](https://lumiwebagency.com/en/blog/shopify-vs-horoshop-vs-weblium-2026.html)
+- [GEO optimization 2026](https://lumiwebagency.com/en/blog/geo-optimization-2026.html)
+- [How to check your site's SEO](https://lumiwebagency.com/en/blog/how-to-check-seo-2026.html)
+- [Website for selling in Czechia and Poland](https://lumiwebagency.com/en/blog/website-for-selling-in-czechia-poland-2026.html)
+
+## Contact
+- [Contact page](https://lumiwebagency.com/contact.html)
+- Telegram: https://t.me/lumiwebagency
+- Email: agencytakeiteasy@gmail.com
+- Founders: Mariia Yeromina and Anastasiia Hrebeniuk
