@@ -489,17 +489,19 @@ if (document.readyState === 'loading') {
   const COOKIE_KEY = 'lumi_cookie_consent';
 
   if (!localStorage.getItem(COOKIE_KEY)) {
-    setTimeout(() => banner.classList.add('is-visible'), 800);
+    banner.classList.add('is-visible');
   }
 
   document.getElementById('cookieAccept')?.addEventListener('click', () => {
     localStorage.setItem(COOKIE_KEY, 'accepted');
     banner.classList.remove('is-visible');
+    document.documentElement.classList.remove('cookie-pending');
   });
 
   document.getElementById('cookieDecline')?.addEventListener('click', () => {
     localStorage.setItem(COOKIE_KEY, 'declined');
     banner.classList.remove('is-visible');
+    document.documentElement.classList.remove('cookie-pending');
   });
 })();
 

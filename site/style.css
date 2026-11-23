@@ -3768,10 +3768,11 @@ body {
   box-shadow: 0 8px 40px rgba(var(--sh),calc(0.4*var(--shk)));
   display: none;
 }
-.cookie-banner.is-visible {
+.cookie-banner.is-visible,
+.cookie-pending .cookie-banner {
   display: block;
-  animation: cookieSlideUp 0.4s cubic-bezier(0.2,0.8,0.2,1) both;
 }
+.cookie-banner.is-visible { animation: none; }
 @keyframes cookieSlideUp {
   from { opacity: 0; transform: translateX(-50%) translateY(20px); }
   to   { opacity: 1; transform: translateX(-50%) translateY(0); }
