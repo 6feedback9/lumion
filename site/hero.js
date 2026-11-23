@@ -34,7 +34,7 @@
   if('IntersectionObserver' in window)new IntersectionObserver(function(e){vis=e[0].isIntersecting}).observe(hero);
   document.addEventListener('visibilitychange',function(){run=!document.hidden});
   new MutationObserver(function(){draw(performance.now())}).observe(root,{attributes:true,attributeFilter:['data-theme']});
-  window.addEventListener('resize',size);size();requestAnimationFrame(loop);
+  window.addEventListener('resize',size);document.addEventListener('DOMContentLoaded',size);window.addEventListener('load',size);size();requestAnimationFrame(loop);
 })();
 
 (function(){function s(){var h=document.querySelector('.site-header');if(h)document.documentElement.style.setProperty('--hh',(h.offsetHeight+parseFloat(getComputedStyle(h).marginTop||0)+(parseFloat(getComputedStyle(h).top)||0)-0)+'px')}s();addEventListener('resize',s);addEventListener('load',s)})();
